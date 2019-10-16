@@ -1,9 +1,9 @@
 # Google
 
-variable "project_id" {}
-variable "region" {}
-variable "zone" {}
-variable "project_number" {}
+variable "google_project_id" {}
+variable "google_region" {}
+variable "google_zone" {}
+variable "google_project_number" {}
 
 # IAM
 
@@ -35,13 +35,17 @@ variable "k8s_namespaces" {
 
 # HELM
 
-variable "tiller_version" {}
+variable "tiller_version" {
+    default = "v2.14.1"
+}
 
 # FLUX
 
 variable "flux_repository_name" {}
 
-variable "flux_version" {}
+variable "flux_version" {
+    default = "1.14.2"
+}
 
 variable "flux_enabled" {
     default = false
@@ -50,7 +54,9 @@ variable "flux_enabled" {
 
 # POSTGRES
 
-variable "postgres_machine_type" {}
+variable "postgres_machine_type" {
+    default = "db-f1-micro"
+}
 
 variable "postgres_database_version" {
     default = "POSTGRES_11" # Postgres version
@@ -64,7 +70,7 @@ variable "postgres_enabled" {
 # MYSQL
 
 variable "mysql_machine_type" {
-    # Mysql machine type
+    default = "db-f1-micro"
 }
 
 variable "mysql_database_version" {

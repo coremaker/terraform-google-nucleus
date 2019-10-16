@@ -24,7 +24,6 @@ resource "google_sql_user" "mysql_root_user" {
   count      = "${var.mysql_enabled ? 1 : 0}"
 
   instance = "${google_sql_database_instance.mysql_db.0.name}"
-  project  = "${var.project_id}"
 
   name     = "root"
   password = "${random_password.mysql_root_user_pass.0.result}"
@@ -57,11 +56,8 @@ resource "kubernetes_config_map" "mysql_config" {
 resource "google_sql_database_instance" "mysql_db" {
   count      = "${var.mysql_enabled ? 1 : 0}"
 
-  name             = "${var.project_id}-mysql-${random_string.mysql_db_name.0.result}"
+  name             = "${var.google_project_id}-mysql-${random_string.mysql_db_name.0.result}"
   database_version = "${var.mysql_database_version}"
-
-  project = "${var.project_id}"
-  region  = "${var.region}"
 
   settings {
     tier = "${var.mysql_machine_type}"

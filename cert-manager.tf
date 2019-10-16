@@ -1,7 +1,6 @@
 resource "google_project_iam_member" "cert_manager_account_dns_admin" {
   count      = "${var.cert_manager_enabled ? 1 : 0}"
 
-  project = "${var.project_id}"
   role    = "roles/dns.admin"
   member  = "serviceAccount:${google_service_account.cert_manager_account.0.email}"
 }
@@ -14,7 +13,7 @@ resource "helm_release" "cert_manager_lentsencrypt" {
 
   set {
     name = "clouddns.projectId"
-    value = "${var.project_id}"
+    value = "${var.google_project_id}"
   }
 
   depends_on = ["kubernetes_cluster_role_binding.tiller_cluster_admin", "kubernetes_namespace.cert_manager", "helm_release.cert_manager"]
@@ -71,7 +70,6 @@ resource "google_service_account_key" "cert_manager_account_key" {
 resource "google_service_account" "cert_manager_account" {
   count      = "${var.cert_manager_enabled ? 1 : 0}"
 
-  project      = "${var.project_id}"
   account_id   = "${var.k8s_cluster_name}-cert-manager"
   display_name = "Cert manager service accountfor the ${var.k8s_cluster_name} kube cluster"
 

@@ -24,7 +24,6 @@ resource "google_sql_user" "postgres_root_user" {
   count      = "${var.postgres_enabled ? 1 : 0}"
 
   instance = "${google_sql_database_instance.postgres_db.0.name}"
-  project  = "${var.project_id}"
 
   name     = "root"
   password = "${random_password.postgres_root_user_pass.0.result}"
@@ -57,11 +56,8 @@ resource "kubernetes_config_map" "postgres_config" {
 resource "google_sql_database_instance" "postgres_db" {
   count      = "${var.postgres_enabled ? 1 : 0}"
 
-  name             = "${var.project_id}-postgres-${random_string.postgres_db_name.0.result}"
+  name             = "${var.google_project_id}-postgres-${random_string.postgres_db_name.0.result}"
   database_version = "${var.postgres_database_version}"
-
-  project = "${var.project_id}"
-  region  = "${var.region}"
 
   settings {
     tier = "${var.postgres_machine_type}"

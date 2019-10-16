@@ -8,8 +8,6 @@ locals {
 
 resource "google_compute_network" "vpc" {
 
-  project = "${var.project_id}"
-
   name = "vpc"
   auto_create_subnetworks = true
 
@@ -19,14 +17,10 @@ resource "google_compute_network" "vpc" {
 resource "google_compute_global_address" "namespace_public_ip" {
   for_each = local.public_ip_namespaces
 
-  project = "${var.project_id}"
-
   name = "${each.key}-public-ip"
 }
 
 resource "google_compute_global_address" "private_ip_network" {
-  project = "${var.project_id}"
-
   name          = "private-ip-network"
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"

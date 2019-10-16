@@ -1,5 +1,5 @@
 output "project_id" {
-  value = "${var.project_id}"
+  value = "${var.google_project_id}"
 }
 
 output "dns_name_servers" {

@@ -15,9 +15,8 @@ resource "kubernetes_namespace" "k8s_namespace" {
 }
 
 resource "google_container_cluster" "kube" {
-  project  = "${var.project_id}"
   name     = "${var.k8s_cluster_name}"
-  location = "${var.region}"
+  location = "${var.google_region}"
 
   node_locations = ["europe-west2-a"]
   network = "${google_compute_network.vpc.self_link}"
@@ -55,7 +54,6 @@ resource "google_container_cluster" "kube" {
 }
 
 resource "google_container_node_pool" "kube_nodes" {
-  project = "${var.project_id}"
   location   = "${var.region}"
 
   name       = "${google_container_cluster.kube.name}-nodes"

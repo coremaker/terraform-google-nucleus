@@ -1,5 +1,4 @@
 resource "google_project_iam_binding" "editors" {
-  project = var.project_id
   role    = "roles/editor"
 
   members = [
@@ -12,7 +11,6 @@ resource "google_project_iam_binding" "editors" {
 }
 
 resource "google_project_iam_binding" "project_viewers" {
-  project = var.project_id
   role    = "roles/viewer"
 
   members = [
@@ -25,7 +23,6 @@ resource "google_project_iam_binding" "project_viewers" {
 }
 
 resource "google_project_iam_member" "cloudsql_editors_member" {
-  project = var.project_id
   role    = "roles/cloudsql.client"
   member  = var.project_editors
 
@@ -33,7 +30,6 @@ resource "google_project_iam_member" "cloudsql_editors_member" {
 }
 
 resource "google_project_iam_member" "cloudsql_readers_member" {
-  project = var.project_id
   role    = "roles/cloudsql.client"
   member  = var.project_readers
 
@@ -41,7 +37,6 @@ resource "google_project_iam_member" "cloudsql_readers_member" {
 }
 
 resource "google_project_iam_binding" "container_admins" {
-  project = var.project_id
   role    = "roles/container.admin"
 
   members = var.project_admins
@@ -50,7 +45,6 @@ resource "google_project_iam_binding" "container_admins" {
 }
 
 resource "google_project_iam_binding" "container_editors" {
-  project = var.project_id
   role    = "roles/container.developer"
 
   members = ["${var.project_editors}"]
@@ -59,7 +53,6 @@ resource "google_project_iam_binding" "container_editors" {
 }
 
 resource "google_project_iam_binding" "container_readers" {
-  project = var.project_id
   role    = "roles/container.viewer"
 
   members = ["${var.project_readers}"]
