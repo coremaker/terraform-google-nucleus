@@ -1,8 +1,16 @@
 locals {
-  dns_records = {
-    for namespace in var.k8s_namespaces:
-      namespace.dns_records => namespace.name
+  dns_record_pairs = flatten([for namespace in var.k8s_namespaces: [
+      for dns_record in namespace.dns_records: {
+        dns_record = dns_record 
+        namespace = namespace.name
+      }
+    ]
     if namespace.has_public_ip
+  ])
+
+  dns_records = {
+    for dns_record in local.dns_record_pairs:
+    dns_record.dns_record => dns_record.namespace
   }
 }
 

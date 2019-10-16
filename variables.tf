@@ -30,7 +30,7 @@ variable "k8s_namespaces" {
     type    = list(object({
     name = string # Name of the namespace
     has_public_ip = bool
-    dns_records = string
+    dns_records = set(string)
     uses_postgres = bool # If set true postgres_enabled should be true
     uses_mysql = bool # If set true mysql_enabled should be true
   }))

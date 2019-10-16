@@ -1,27 +1,5 @@
-# locals {
-#   services = toset([
-#     # "bigquery-json.googleapis.com",
-#     # "bigquerystorage.googleapis.com",
-#     # "compute.googleapis.com",
-#     # "container.googleapis.com",
-#     # "storage-component.googleapis.com",
-#     # "storage-api.googleapis.com",
-#     # "iam.googleapis.com",
-#     # "oslogin.googleapis.com",
-#     # "sqladmin.googleapis.com",
-#     # "containerregistry.googleapis.com",
-#     # "pubsub.googleapis.com",
-#     # "logging.googleapis.com",
-#     # "monitoring.googleapis.com",
-#     # "dns.googleapis.com",
-#     # "places-backend.googleapis.com",
-#     # "maps-backend.googleapis.com",
-#     # "iamcredentials.googleapis.com",
-#     # "cloudkms.googleapis.com",
-#     # "servicenetworking.googleapis.com"
-#   ])
-# }
 data "google_project" "project" {}
+
 resource "google_project_service" "compute" {
   project = var.google_project_id
   service = "compute.googleapis.com"
