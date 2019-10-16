@@ -1,0 +1,7 @@
+name: cert-manager-letsencrypt
+version: v0.1.0
+description: A Helm chart for the cert-manager letsencrypt clusterissuer.
+appVersion: v0.10.1
+maintainers:
+  - name: cosmin
+    email: cosmin@coremaker.io
