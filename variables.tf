@@ -3,17 +3,20 @@
 variable "google_project_id" {}
 variable "google_region" {}
 variable "google_zone" {}
-variable "google_project_number" {}
 
 # IAM
 
 variable "project_admins" {
-  type = "list"
+    type = set(string)
 }
 
-variable "project_editors" {}
+variable "project_editors" {
+    type = set(string)
+}
 
-variable "project_readers" {}
+variable "project_viewers" {
+    type = set(string)
+}
 
 # Kubernetes - K8S
 

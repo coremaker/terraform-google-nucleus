@@ -1,11 +1,11 @@
 resource "google_project_iam_binding" "editors" {
   role    = "roles/editor"
 
-  members = [
-    "serviceAccount:${var.project_number}-compute@developer.gserviceaccount.com",
-    "serviceAccount:${var.project_number}@cloudservices.gserviceaccount.com",
-    "serviceAccount:service-${var.project_number}@containerregistry.iam.gserviceaccount.com"
-  ]
+  members = concat([
+    "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com",
+    "serviceAccount:${data.google_project.project.number}@cloudservices.gserviceaccount.com",
+    "serviceAccount:service-${data.google_project.project.number}@containerregistry.iam.gserviceaccount.com"
+  ], tolist(var.project_editors))
 
   depends_on = ["google_project_service.iam"]
 }
@@ -13,25 +13,30 @@ resource "google_project_iam_binding" "editors" {
 resource "google_project_iam_binding" "project_viewers" {
   role    = "roles/viewer"
 
-  members = [
-    "serviceAccount:${var.project_number}-compute@developer.gserviceaccount.com",
-    "serviceAccount:${var.project_number}@cloudservices.gserviceaccount.com",
-    "serviceAccount:service-${var.project_number}@containerregistry.iam.gserviceaccount.com"
-  ]
+  members = concat([
+    "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com",
+    "serviceAccount:${data.google_project.project.number}@cloudservices.gserviceaccount.com",
+    "serviceAccount:service-${data.google_project.project.number}@containerregistry.iam.gserviceaccount.com"
+  ], tolist(var.project_viewers))
 
   depends_on = ["google_project_service.iam"]
 }
 
 resource "google_project_iam_member" "cloudsql_editors_member" {
+  for_each = var.project_editors
+
   role    = "roles/cloudsql.client"
-  member  = var.project_editors
+  member  = each.key
 
   depends_on = ["google_project_service.iam"]
 }
 
 resource "google_project_iam_member" "cloudsql_readers_member" {
+  for_each = var.project_viewers
+
   role    = "roles/cloudsql.client"
-  member  = var.project_readers
+
+  member  = each.key
 
   depends_on = ["google_project_service.iam"]
 }
@@ -47,7 +52,7 @@ resource "google_project_iam_binding" "container_admins" {
 resource "google_project_iam_binding" "container_editors" {
   role    = "roles/container.developer"
 
-  members = ["${var.project_editors}"]
+  members = var.project_editors
 
   depends_on = ["google_project_service.iam"]
 }
@@ -55,7 +60,7 @@ resource "google_project_iam_binding" "container_editors" {
 resource "google_project_iam_binding" "container_readers" {
   role    = "roles/container.viewer"
 
-  members = ["${var.project_readers}"]
+  members = var.project_viewers
 
   depends_on = ["google_project_service.iam"]
 }

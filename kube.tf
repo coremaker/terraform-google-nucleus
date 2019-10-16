@@ -54,7 +54,7 @@ resource "google_container_cluster" "kube" {
 }
 
 resource "google_container_node_pool" "kube_nodes" {
-  location   = "${var.region}"
+  location   = "${var.google_region}"
 
   name       = "${google_container_cluster.kube.name}-nodes"
   cluster    = "${google_container_cluster.kube.name}"

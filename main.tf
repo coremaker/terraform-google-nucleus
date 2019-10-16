@@ -1,13 +1,3 @@
-/*
-resource "google_project" "project" {
-  name            = "${var.project_id}"
-  project_id      = "${var.project_id}"
-  billing_account = "${var.billing_account}"
-  org_id          = "${var.org_id}"
-  skip_delete     = true
-}
-*/
-
 # locals {
 #   services = toset([
 #     # "bigquery-json.googleapis.com",
@@ -31,7 +21,7 @@ resource "google_project" "project" {
 #     # "servicenetworking.googleapis.com"
 #   ])
 # }
-
+data "google_project" "project" {}
 resource "google_project_service" "compute" {
   project = var.google_project_id
   service = "compute.googleapis.com"
