@@ -44,7 +44,9 @@ variable "tiller_version" {
 
 # FLUX
 
-variable "flux_repository_name" {}
+variable "flux_git_url" {}
+
+variable "flux_git_path" {}
 
 variable "flux_version" {
     default = "1.14.2"

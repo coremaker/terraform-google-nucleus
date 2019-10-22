@@ -20,14 +20,14 @@ resource "google_dns_record_set" "dns_record" {
   name = "${each.key}."
   type = "A"
   ttl = 1800
-  managed_zone = "${google_dns_managed_zone.dns_zone.0.name}"
+  managed_zone = google_dns_managed_zone.dns_zone.0.name
   rrdatas = ["${google_compute_global_address.namespace_public_ip[each.value].address}"]
 
   depends_on = ["google_dns_managed_zone.dns_zone"]
 }
 
 resource "google_dns_managed_zone" "dns_zone" {
-  count      = "${var.dns_enabled ? 1 : 0}"
+  count      = var.dns_enabled ? 1 : 0
 
   name = "${replace(var.dns_domain,".","-")}"
   dns_name = "${var.dns_domain}."

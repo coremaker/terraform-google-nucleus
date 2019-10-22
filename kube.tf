@@ -15,11 +15,11 @@ resource "kubernetes_namespace" "k8s_namespace" {
 }
 
 resource "google_container_cluster" "kube" {
-  name     = "${var.k8s_cluster_name}"
-  location = "${var.google_region}"
+  name     = var.k8s_cluster_name
+  location = var.google_region
 
   node_locations = ["europe-west2-a"]
-  network = "${google_compute_network.vpc.self_link}"
+  network = google_compute_network.vpc.self_link
 
   remove_default_node_pool = true
   initial_node_count = 1
@@ -54,15 +54,15 @@ resource "google_container_cluster" "kube" {
 }
 
 resource "google_container_node_pool" "kube_nodes" {
-  location   = "${var.google_region}"
+  location   = var.google_region
 
   name       = "${google_container_cluster.kube.name}-nodes"
-  cluster    = "${google_container_cluster.kube.name}"
+  cluster    = google_container_cluster.kube.name
 
-  node_count = "${var.k8s_node_count}"
+  node_count = var.k8s_node_count
 
   node_config {
-    machine_type = "${var.k8s_node_type}"
+    machine_type = var.k8s_node_type
 
     metadata = {
       disable-legacy-endpoints = "true"

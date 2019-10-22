@@ -1,16 +1,21 @@
 resource "helm_release" "flux" {
-  count      = "${var.flux_enabled ? 1 : 0}"
+  count      = var.flux_enabled ? 1 : 0
 
   name       = "flux"
   version    = "0.14.1"
-  namespace  = "${kubernetes_namespace.flux.0.metadata.0.name}"
+  namespace  = kubernetes_namespace.flux.0.metadata.0.name
 
   chart      = "fluxcd/flux"
-  repository = "${data.helm_repository.fluxcd.0.metadata.0.name}"
+  repository = data.helm_repository.fluxcd.0.metadata.0.name
 
   set {
     name  = "git.url"
-    value = "${var.flux_repository_name}"
+    value = var.flux_git_url
+  }
+
+  set {
+    name = "git.path"
+    value = var.flux_git_path
   }
 
   set {
@@ -30,21 +35,21 @@ resource "helm_release" "flux" {
 
   set {
     name = "image.tag"
-    value = "${var.flux_version}"
+    value = var.flux_version
   }
 
   depends_on = ["kubernetes_cluster_role_binding.tiller_cluster_admin"]
 }
 
 data "helm_repository" "fluxcd" {
-  count      = "${var.flux_enabled ? 1 : 0}"
+  count      = var.flux_enabled ? 1 : 0
 
     name = "fluxcd"
     url  = "https://charts.fluxcd.io"
 }
 
 resource "kubernetes_namespace" "flux" {
-  count      = "${var.flux_enabled ? 1 : 0}"
+  count      = var.flux_enabled ? 1 : 0
 
   metadata {
     name = "flux"
