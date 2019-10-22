@@ -1,4 +1,7 @@
-data "google_project" "project" {}
+data "google_project" "project" {
+
+  depends_on = ["google_project_service.cloudresourcemanager"]
+}
 
 resource "google_project_service" "compute" {
   service = "compute.googleapis.com"
@@ -47,4 +50,8 @@ resource "google_project_service" "dns" {
 
 resource "google_project_service" "network" {
   service = "servicenetworking.googleapis.com"
+}
+
+resource "google_project_service" "cloudresourcemanager" {
+  service = "cloudresourcemanager.googleapis.com"
 }
