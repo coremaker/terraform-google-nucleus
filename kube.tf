@@ -50,7 +50,8 @@ resource "google_container_cluster" "kube" {
     "google_project_service.storage_api",
     "google_project_service.storage_component",
     "google_project_service.monitoring",
-    "google_project_service.logging"]
+    "google_project_service.logging"
+  ]
 }
 
 resource "google_container_node_pool" "kube_nodes" {
