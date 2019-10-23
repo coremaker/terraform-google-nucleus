@@ -3,6 +3,8 @@ data "google_project" "project" {
   depends_on = ["google_project_service.cloudresourcemanager"]
 }
 
+data "google_client_config" "default" {}
+
 resource "google_project_service" "serviceusage" {
   service = "serviceusage.googleapis.com"
 }
