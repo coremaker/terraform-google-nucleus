@@ -5,8 +5,8 @@ resource "helm_release" "flux" {
   version    = "0.14.1"
   namespace  = kubernetes_namespace.flux.0.metadata.0.name
 
-  chart      = "fluxcd/flux"
-  repository = data.helm_repository.fluxcd.0.metadata.0.name
+  chart      = "flux"
+  repository = "https://charts.fluxcd.io"
 
   set {
     name  = "git.url"
@@ -39,13 +39,6 @@ resource "helm_release" "flux" {
   }
 
   depends_on = ["kubernetes_cluster_role_binding.tiller_cluster_admin"]
-}
-
-data "helm_repository" "fluxcd" {
-  count      = var.flux_enabled ? 1 : 0
-
-    name = "fluxcd"
-    url  = "https://charts.fluxcd.io"
 }
 
 resource "kubernetes_namespace" "flux" {
