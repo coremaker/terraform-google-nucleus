@@ -7,5 +7,5 @@ output "dns_name_servers" {
 }
 
 output "postgres_instance_name" {
-  value = google_sql_database_instance.postgres_db.0.name
+  value = var.postgres_enabled ? google_sql_database_instance.postgres_db.0.name : ""
 }
