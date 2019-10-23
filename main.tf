@@ -81,3 +81,9 @@ resource "google_project_service" "cloudresourcemanager" {
 
   depends_on = ["google_project_service.serviceusage"]
 }
+
+resource "google_project_service" "sqladmin" {
+  service = "sqladmin.googleapis.com"
+
+  depends_on = ["google_project_service.serviceusage"]
+}
