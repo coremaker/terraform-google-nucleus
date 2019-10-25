@@ -2,7 +2,7 @@ resource "helm_release" "flux" {
   count      = var.flux_enabled ? 1 : 0
 
   name       = "flux"
-  version    = "0.14.1"
+  version    = "0.15.0"
   namespace  = kubernetes_namespace.flux.0.metadata.0.name
 
   chart      = "flux"

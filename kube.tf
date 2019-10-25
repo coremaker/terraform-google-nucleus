@@ -30,12 +30,6 @@ resource "google_container_cluster" "kube" {
     }
   }
 
-  addons_config {
-    kubernetes_dashboard {
-      disabled = true
-    }
-  }
-
   ip_allocation_policy {
     use_ip_aliases = true
   }
