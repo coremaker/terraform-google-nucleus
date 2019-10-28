@@ -39,7 +39,7 @@ variable "k8s_namespaces" {
 # HELM
 
 variable "tiller_version" {
-    default = "v2.14.1"
+    default = "v2.15.1"
 }
 
 # FLUX
@@ -49,11 +49,11 @@ variable "flux_git_url" {}
 variable "flux_git_path" {}
 
 variable "flux_version" {
-    default = "1.14.2"
+    default = "1.15.0"
 }
 
 variable "flux_enabled" {
-    default = false
+    default = true
     type = bool
 }
 
@@ -103,6 +103,17 @@ variable "cert_manager_helm_version" {
 }
 
 variable "cert_manager_enabled" {
-    default = false
+    default = true
     type = bool
+}
+
+# Sealed secrets
+
+variable "sealed_secrets_enabled" {
+    default = true
+    type = bool
+}
+
+variable "sealed_secrets_version" {
+    default = "v0.9.1"
 }
