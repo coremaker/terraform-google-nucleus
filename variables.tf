@@ -53,7 +53,7 @@ variable "flux_version" {
 }
 
 variable "flux_enabled" {
-    default = false
+    default = true
     type = bool
 }
 
@@ -103,14 +103,14 @@ variable "cert_manager_helm_version" {
 }
 
 variable "cert_manager_enabled" {
-    default = false
+    default = true
     type = bool
 }
 
 # Sealed secrets
 
 variable "sealed_secrets_enabled" {
-    default = false
+    default = true
     type = bool
 }
 
