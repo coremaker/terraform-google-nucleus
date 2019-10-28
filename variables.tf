@@ -106,3 +106,14 @@ variable "cert_manager_enabled" {
     default = false
     type = bool
 }
+
+# Sealed secrets
+
+variable "sealed_secrets_enabled" {
+    default = false
+    type = bool
+}
+
+variable "sealed_secrets_version" {
+    default = "v0.9.1"
+}
