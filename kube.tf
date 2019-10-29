@@ -15,7 +15,7 @@ resource "kubernetes_namespace" "k8s_namespace" {
 }
 
 resource "google_container_cluster" "kube" {
-  name     = var.k8s_cluster_name
+  name     = "${var.k8s_cluster_name}-${random_string.tag_name.result}"
   location = var.google_region
 
   node_locations = ["europe-west2-a"]
