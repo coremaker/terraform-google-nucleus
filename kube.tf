@@ -15,7 +15,7 @@ resource "kubernetes_namespace" "k8s_namespace" {
 }
 
 resource "google_container_cluster" "kube" {
-  name     = "${var.k8s_cluster_name}-${random_string.tag_name.result}"
+  name     = var.k8s_cluster_name
   location = var.google_region
 
   node_locations = ["europe-west2-a"]
@@ -70,6 +70,8 @@ resource "google_container_node_pool" "kube_nodes" {
       "https://www.googleapis.com/auth/monitoring",
     ]
   }
+
+  depends_on = ["google_container_cluster.kube"]
 }
 
 resource "kubernetes_storage_class" "ssd" {
