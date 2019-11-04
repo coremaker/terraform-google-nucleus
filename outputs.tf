@@ -3,7 +3,7 @@ output "project_id" {
 }
 
 output "dns_name_servers" {
-  value = var.dns_enabled ? google_dns_managed_zone.dns_zone.0.name_servers : ""
+  value = var.dns_enabled ? ["google_dns_managed_zone.dns_zone.0.name_servers"] : []
 }
 
 output "postgres_instance_name" {
