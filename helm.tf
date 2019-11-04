@@ -1,6 +1,6 @@
 resource "kubernetes_cluster_role_binding" "tiller_cluster_admin" {
   metadata {
-    name = "tiller-${random_id.cluster.hex}"
+    name = "tiller"
   }
 
   subject {
@@ -19,19 +19,9 @@ resource "kubernetes_cluster_role_binding" "tiller_cluster_admin" {
 
 resource "kubernetes_service_account" "tiller" {
   metadata {
-    name      = "tiller-${random_id.cluster.hex}"
+    name      = "tiller"
     namespace = "kube-system"
   }
 
   depends_on = ["google_container_cluster.kube", "google_container_node_pool.kube_nodes"]
-}
-
-resource "random_id" "cluster" {
-  keepers = {
-      name = google_container_cluster.kube.name
-      location = google_container_cluster.kube.location
-  }
-  byte_length = 4
-
-  # depends_on = ["google_container_cluster.kube"]
 }
