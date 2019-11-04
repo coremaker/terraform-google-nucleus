@@ -57,6 +57,11 @@ variable "flux_enabled" {
     type = bool
 }
 
+variable "flux_manifest_generation" {
+    default = true
+    type = bool
+}
+
 # POSTGRES
 
 variable "postgres_machine_type" {

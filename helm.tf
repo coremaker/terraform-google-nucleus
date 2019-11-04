@@ -5,7 +5,7 @@ resource "kubernetes_cluster_role_binding" "tiller_cluster_admin" {
 
   subject {
     kind = "User"
-    name = "system:serviceaccount:kube-system:tiller"
+    name = "system:serviceaccount:kube-system:${kubernetes_service_account.tiller.metadata.0.name}"
   }
 
   role_ref {

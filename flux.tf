@@ -38,6 +38,11 @@ resource "helm_release" "flux" {
     value = var.flux_version
   }
 
+  set {
+    name = "manifest-generation"
+    value = var.flux_manifest_generation
+  }
+
   depends_on = ["kubernetes_cluster_role_binding.tiller_cluster_admin"]
 }
 

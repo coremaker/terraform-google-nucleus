@@ -70,6 +70,8 @@ resource "google_container_node_pool" "kube_nodes" {
       "https://www.googleapis.com/auth/monitoring",
     ]
   }
+
+  depends_on = ["google_container_cluster.kube"]
 }
 
 resource "kubernetes_storage_class" "ssd" {
