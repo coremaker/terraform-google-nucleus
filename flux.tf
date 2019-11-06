@@ -39,7 +39,7 @@ resource "helm_release" "flux" {
   }
 
   set {
-    name = "manifest-generation"
+    name = "manifestGeneration"
     value = var.flux_manifest_generation
   }
 
