@@ -1,7 +1,7 @@
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  name: certificates.certmanager.k8s.io
+  name: certificates.cert-manager.io
   labels:
     app: cert-manager
 spec:
@@ -27,8 +27,8 @@ spec:
       Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
     name: Age
     type: date
-  group: certmanager.k8s.io
-  version: v1alpha1
+  group: cert-manager.io
+  version: v1alpha2
   scope: Namespaced
   names:
     kind: Certificate
@@ -42,12 +42,50 @@ spec:
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  name: issuers.certmanager.k8s.io
+  name: certificaterequests.cert-manager.io
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.conditions[?(@.type=="Ready")].status
+    name: Ready
+    type: string
+  - JSONPath: .spec.issuerRef.name
+    name: Issuer
+    priority: 1
+    type: string
+  - JSONPath: .status.conditions[?(@.type=="Ready")].message
+    name: Status
+    priority: 1
+    type: string
+  - JSONPath: .metadata.creationTimestamp
+    description: CreationTimestamp is a timestamp representing the server time when
+      this object was created. It is not guaranteed to be set in happens-before order
+      across separate operations. Clients may not set this value. It is represented
+      in RFC3339 form and is in UTC.
+    name: Age
+    type: date
+  group: cert-manager.io
+  version: v1alpha2
+  scope: Namespaced
+  names:
+    kind: CertificateRequest
+    listKind: CertificateRequestList
+    plural: certificaterequests
+    shortNames:
+    - cr
+    - crs
+    singular: certificaterequest
+
+---
+
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: issuers.cert-manager.io
   labels:
     app: cert-manager
 spec:
-  group: certmanager.k8s.io
-  version: v1alpha1
+  group: cert-manager.io
+  version: v1alpha2
   names:
     kind: Issuer
     plural: issuers
@@ -58,12 +96,12 @@ spec:
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  name: clusterissuers.certmanager.k8s.io
+  name: clusterissuers.cert-manager.io
   labels:
     app: cert-manager
 spec:
-  group: certmanager.k8s.io
-  version: v1alpha1
+  group: cert-manager.io
+  version: v1alpha2
   names:
     kind: ClusterIssuer
     plural: clusterissuers
@@ -74,7 +112,7 @@ spec:
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  name: orders.certmanager.k8s.io
+  name: orders.acme.cert-manager.io
   labels:
     app: cert-manager
 spec:
@@ -97,8 +135,8 @@ spec:
       Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
     name: Age
     type: date
-  group: certmanager.k8s.io
-  version: v1alpha1
+  group: acme.cert-manager.io
+  version: v1alpha2
   names:
     kind: Order
     plural: orders
@@ -109,7 +147,7 @@ spec:
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  name: challenges.certmanager.k8s.io
+  name: challenges.acme.cert-manager.io
   labels:
     app: cert-manager
 spec:
@@ -130,8 +168,8 @@ spec:
       Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
     name: Age
     type: date
-  group: certmanager.k8s.io
-  version: v1alpha1
+  group: acme.cert-manager.io
+  version: v1alpha2
   names:
     kind: Challenge
     plural: challenges

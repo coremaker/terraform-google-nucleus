@@ -104,7 +104,7 @@ variable "dns_enabled" {
 # CERT-MANAGER
 
 variable "cert_manager_helm_version" {
-    default = "v0.10.1"
+    default = "v0.11.0"
 }
 
 variable "cert_manager_enabled" {
