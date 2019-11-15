@@ -14,7 +14,7 @@ resource "kubernetes_cluster_role_binding" "tiller_cluster_admin" {
     name = "cluster-admin"
   }
 
-  depends_on = ["kubernetes_service_account.tiller"]
+  depends_on = [kubernetes_service_account.tiller]
 }
 
 resource "kubernetes_service_account" "tiller" {
@@ -23,5 +23,5 @@ resource "kubernetes_service_account" "tiller" {
     namespace = "kube-system"
   }
 
-  depends_on = ["google_container_cluster.kube", "google_container_node_pool.kube_nodes"]
+  depends_on = [google_container_cluster.kube, google_container_node_pool.kube_nodes]
 }

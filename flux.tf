@@ -43,7 +43,7 @@ resource "helm_release" "flux" {
     value = var.flux_manifest_generation
   }
 
-  depends_on = ["kubernetes_cluster_role_binding.tiller_cluster_admin"]
+  depends_on = [kubernetes_cluster_role_binding.tiller_cluster_admin]
 }
 
 resource "kubernetes_namespace" "flux" {
@@ -52,5 +52,5 @@ resource "kubernetes_namespace" "flux" {
   metadata {
     name = "flux"
   }
-  depends_on = ["google_container_cluster.kube", "google_container_node_pool.kube_nodes"]
+  depends_on = [google_container_cluster.kube, google_container_node_pool.kube_nodes]
 }

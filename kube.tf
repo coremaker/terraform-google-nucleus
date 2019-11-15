@@ -11,7 +11,7 @@ resource "kubernetes_namespace" "k8s_namespace" {
   metadata {
     name = each.key
   }
-  depends_on = ["google_container_cluster.kube", "google_container_node_pool.kube_nodes"]
+  depends_on = [google_container_cluster.kube, google_container_node_pool.kube_nodes]
 }
 
 resource "google_container_cluster" "kube" {
@@ -35,16 +35,16 @@ resource "google_container_cluster" "kube" {
   }
 
   lifecycle {
-    ignore_changes = ["node_pool", "master_auth"]
+    ignore_changes = [node_pool, master_auth]
   }
 
   depends_on = [
-    "google_project_service.container",
-    "google_project_service.compute",
-    "google_project_service.storage_api",
-    "google_project_service.storage_component",
-    "google_project_service.monitoring",
-    "google_project_service.logging"
+    google_project_service.container,
+    google_project_service.compute,
+    google_project_service.storage_api,
+    google_project_service.storage_component,
+    google_project_service.monitoring,
+    google_project_service.logging
   ]
 }
 
@@ -71,7 +71,7 @@ resource "google_container_node_pool" "kube_nodes" {
     ]
   }
 
-  depends_on = ["google_container_cluster.kube"]
+  depends_on = [google_container_cluster.kube]
 }
 
 resource "kubernetes_storage_class" "ssd" {
