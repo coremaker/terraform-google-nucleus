@@ -10,10 +10,10 @@ output "postgres_instance_name" {
   value = var.postgres_enabled ? google_sql_database_instance.postgres_db.0.name : ""
 }
 
-output "postgres_instance_connection_name" {
+output "postgres_connection_name" {
   value = var.postgres_enabled ? google_sql_database_instance.postgres_db.0.connection_name : ""
 }
 
-output "postgres_instance_private_ip_address" {
+output "postgres_private_ip_address" {
   value = var.postgres_enabled ? google_sql_database_instance.postgres_db.0.private_ip_address : ""
 }
