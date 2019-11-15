@@ -30,10 +30,6 @@ resource "google_container_cluster" "kube" {
     }
   }
 
-  ip_allocation_policy {
-    use_ip_aliases = true
-  }
-
   lifecycle {
     ignore_changes = [node_pool, master_auth]
   }
