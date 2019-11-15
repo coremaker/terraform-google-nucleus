@@ -75,7 +75,7 @@ resource "google_sql_database_instance" "mysql_db" {
   }
 
   lifecycle {
-    ignore_changes = ["project", "region"]
+    ignore_changes = [project, region]
   }
 
   timeouts {
@@ -83,8 +83,8 @@ resource "google_sql_database_instance" "mysql_db" {
   }
 
   depends_on = [
-    "google_project_service.sqladmin",
-    "google_service_networking_connection.private_vpc_connection"
+    google_project_service.sqladmin,
+    google_service_networking_connection.private_vpc_connection
     ]
 }
 

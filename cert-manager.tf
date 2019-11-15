@@ -16,7 +16,7 @@ resource "helm_release" "cert_manager_lentsencrypt" {
     value = var.google_project_id
   }
 
-  depends_on = ["kubernetes_cluster_role_binding.tiller_cluster_admin", "kubernetes_namespace.cert_manager", "helm_release.cert_manager"]
+  depends_on = [kubernetes_cluster_role_binding.tiller_cluster_admin, kubernetes_namespace.cert_manager, helm_release.cert_manager]
 }
 
 resource "helm_release" "cert_manager" {
@@ -41,7 +41,7 @@ resource "helm_release" "cert_manager" {
 
   timeout    = "60"
 
-  depends_on = ["kubernetes_cluster_role_binding.tiller_cluster_admin", "kubernetes_namespace.cert_manager", "kubernetes_secret.cert_manager_service_key", "helm_release.cert_manager_crds"]
+  depends_on = [kubernetes_cluster_role_binding.tiller_cluster_admin, kubernetes_namespace.cert_manager, kubernetes_secret.cert_manager_service_key, helm_release.cert_manager_crds]
 }
 
 resource "kubernetes_secret" "cert_manager_service_key" {
@@ -56,7 +56,7 @@ resource "kubernetes_secret" "cert_manager_service_key" {
     "cert-manager-service.private-key.json" = base64decode(google_service_account_key.cert_manager_account_key.0.private_key)
   }
 
-  depends_on = ["kubernetes_namespace.cert_manager"]
+  depends_on = [kubernetes_namespace.cert_manager]
 }
 
 resource "google_service_account_key" "cert_manager_account_key" {
@@ -73,7 +73,7 @@ resource "google_service_account" "cert_manager_account" {
   account_id   = "${var.k8s_cluster_name}-cert-manager"
   display_name = "Cert manager service accountfor the ${var.k8s_cluster_name} kube cluster"
 
-  depends_on = ["google_project_service.iam"]
+  depends_on = [google_project_service.iam]
 }
 
 resource "helm_release" "cert_manager_crds" {
@@ -82,7 +82,7 @@ resource "helm_release" "cert_manager_crds" {
   name       = "cert-managers-crds"
   chart      = format("%s/helm-charts/cert-manager-crds", path.module)
 
-  depends_on = ["kubernetes_cluster_role_binding.tiller_cluster_admin", "kubernetes_namespace.cert_manager"]
+  depends_on = [kubernetes_cluster_role_binding.tiller_cluster_admin, kubernetes_namespace.cert_manager]
 }
 
 resource "kubernetes_namespace" "cert_manager" {

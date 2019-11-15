@@ -43,7 +43,7 @@ resource "helm_release" "sealed_secrets" {
     value = "true"
   }
 
-  depends_on = ["kubernetes_cluster_role_binding.tiller_cluster_admin"]
+  depends_on = [kubernetes_cluster_role_binding.tiller_cluster_admin]
 }
 
 resource "kubernetes_namespace" "sealed_secrets" {
@@ -52,5 +52,5 @@ resource "kubernetes_namespace" "sealed_secrets" {
   metadata {
     name = "sealed-secrets"
   }
-  depends_on = ["google_container_cluster.kube", "google_container_node_pool.kube_nodes"]
+  depends_on = [google_container_cluster.kube, google_container_node_pool.kube_nodes]
 }

@@ -11,7 +11,7 @@ resource "google_compute_network" "vpc" {
   name = "vpc"
   auto_create_subnetworks = true
 
-  depends_on = ["google_project_service.compute"]
+  depends_on = [google_project_service.compute]
 }
 
 resource "google_compute_global_address" "namespace_public_ip" {
@@ -19,7 +19,7 @@ resource "google_compute_global_address" "namespace_public_ip" {
 
   name = "${each.key}-public-ip"
 
-  depends_on = ["google_project_service.compute"]
+  depends_on = [google_project_service.compute]
 }
 
 resource "google_compute_global_address" "private_ip_network" {
@@ -29,7 +29,7 @@ resource "google_compute_global_address" "private_ip_network" {
   prefix_length = 16
   network       = google_compute_network.vpc.self_link
 
-  depends_on = ["google_project_service.compute"]
+  depends_on = [google_project_service.compute]
 }
 
 resource "google_service_networking_connection" "private_vpc_connection" {
@@ -37,5 +37,5 @@ resource "google_service_networking_connection" "private_vpc_connection" {
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = ["${google_compute_global_address.private_ip_network.name}"]
 
-  depends_on = ["google_project_service.dns", "google_project_service.network"]
+  depends_on = [google_project_service.dns, google_project_service.network]
 }

@@ -7,7 +7,7 @@ resource "google_project_iam_binding" "editors" {
     "serviceAccount:service-${data.google_project.project.number}@containerregistry.iam.gserviceaccount.com"
   ], tolist(var.project_editors))
 
-  depends_on = ["google_project_service.iam"]
+  depends_on = [google_project_service.iam]
 }
 
 resource "google_project_iam_binding" "project_viewers" {
@@ -19,7 +19,7 @@ resource "google_project_iam_binding" "project_viewers" {
     "serviceAccount:service-${data.google_project.project.number}@containerregistry.iam.gserviceaccount.com"
   ], tolist(var.project_viewers))
 
-  depends_on = ["google_project_service.iam"]
+  depends_on = [google_project_service.iam]
 }
 
 resource "google_project_iam_member" "cloudsql_editors_member" {
@@ -28,7 +28,7 @@ resource "google_project_iam_member" "cloudsql_editors_member" {
   role    = "roles/cloudsql.client"
   member  = each.key
 
-  depends_on = ["google_project_service.iam"]
+  depends_on = [google_project_service.iam]
 }
 
 resource "google_project_iam_member" "cloudsql_readers_member" {
@@ -38,7 +38,7 @@ resource "google_project_iam_member" "cloudsql_readers_member" {
 
   member  = each.key
 
-  depends_on = ["google_project_service.iam"]
+  depends_on = [google_project_service.iam]
 }
 
 resource "google_project_iam_binding" "container_admins" {
@@ -46,7 +46,7 @@ resource "google_project_iam_binding" "container_admins" {
 
   members = var.project_admins
 
-  depends_on = ["google_project_service.iam"]
+  depends_on = [google_project_service.iam]
 }
 
 resource "google_project_iam_binding" "container_editors" {
@@ -54,7 +54,7 @@ resource "google_project_iam_binding" "container_editors" {
 
   members = var.project_editors
 
-  depends_on = ["google_project_service.iam"]
+  depends_on = [google_project_service.iam]
 }
 
 resource "google_project_iam_binding" "container_readers" {
@@ -62,5 +62,5 @@ resource "google_project_iam_binding" "container_readers" {
 
   members = var.project_viewers
 
-  depends_on = ["google_project_service.iam"]
+  depends_on = [google_project_service.iam]
 }
