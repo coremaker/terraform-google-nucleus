@@ -2,7 +2,7 @@ resource "helm_release" "sealed_secrets" {
   count      = var.sealed_secrets_enabled ? 1 : 0
 
   name       = "sealed-secrets"
-  version    = "1.4.3"
+  version    = "1.5.0"
   namespace  = kubernetes_namespace.sealed_secrets.0.metadata.0.name
 
   chart      = "sealed-secrets"

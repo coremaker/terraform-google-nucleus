@@ -120,5 +120,5 @@ variable "sealed_secrets_enabled" {
 }
 
 variable "sealed_secrets_version" {
-    default = "v0.9.1"
+    default = "v0.9.5"
 }
