@@ -19,6 +19,11 @@ resource "helm_release" "flux" {
   }
 
   set {
+    name  = "git.secretName"
+    value = kubernetes_secret.flux_secret.0.metadata.0.name
+  }
+
+  set {
     name  = "rbac.create"
     value = "true"
   }
@@ -44,6 +49,26 @@ resource "helm_release" "flux" {
   }
 
   depends_on = [kubernetes_cluster_role_binding.tiller_cluster_admin]
+}
+
+resource "kubernetes_secret" "flux_secret" {
+  count      = var.flux_enabled ? 1 : 0
+  
+  metadata {
+    name      = "flux-secret"
+    namespace = kubernetes_namespace.flux.0.metadata.0.name
+  }
+
+  data = {
+    "identity" = tls_private_key.flux_secret.0.private_key_pem
+  }
+}
+
+resource "tls_private_key" "flux_secret" {
+  count      = var.flux_enabled ? 1 : 0
+
+  algorithm = "RSA"
+  rsa_bits  = "2048"
 }
 
 resource "kubernetes_namespace" "flux" {
