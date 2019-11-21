@@ -10,15 +10,9 @@ spec:
     privateKeySecretRef:
       name: letsencrypt
     solvers:
-    - http01:
-        ingress:
-          class: nginx
-      selector: {}
-    dns01:
-      providers:
-        - name: clouddns
-          clouddns:
-            serviceAccountSecretRef:
-              name: cert-manager-secrets
-              key: cert-manager-service.private-key.json
-            project: {{ .Values.clouddns.projectId }}
+    - dns01:
+        clouddns:
+          serviceAccountSecretRef:
+            name: cert-manager-secrets
+            key: cert-manager-service.private-key.json
+          project: {{ .Values.clouddns.projectId }}
