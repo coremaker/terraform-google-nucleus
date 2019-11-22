@@ -20,9 +20,15 @@ resource "google_container_cluster" "kube" {
 
   node_locations = ["europe-west2-a"]
   network = google_compute_network.vpc.self_link
+  subnetwork = google_compute_subnetwork.container_subnetwork.name
 
   remove_default_node_pool = true
   initial_node_count = 1
+
+  ip_allocation_policy {
+    cluster_ipv4_cidr_block  = "10.0.0.0/16"
+    services_ipv4_cidr_block = "10.1.0.0/16"
+  }
 
   master_auth {
     client_certificate_config {
