@@ -41,10 +41,12 @@ resource "google_project_iam_member" "cloudsql_readers_member" {
   depends_on = [google_project_service.iam]
 }
 
-resource "google_project_iam_binding" "container_admins" {
+resource "google_project_iam_member" "container_admins" {
+  for_each = var.project_admins
+
   role    = "roles/container.admin"
 
-  members = var.project_admins
+  member = each.key
 
   depends_on = [google_project_service.iam]
 }
