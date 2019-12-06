@@ -27,6 +27,8 @@ resource "google_sql_user" "mysql_root_user" {
 
   name     = "root"
   password = random_password.mysql_root_user_pass.0.result
+
+  depends_on = [google_sql_database_instance.mysql_db]
 }
 
 resource "random_password" "mysql_root_user_pass" {
