@@ -6,30 +6,30 @@ locals {
   }
 }
 
-resource "kubernetes_secret" "mysql_root_user_secret" {
-  for_each = local.mysql_namespaces
+# resource "kubernetes_secret" "mysql_root_user_secret" {
+#   for_each = local.mysql_namespaces
 
-  metadata {
-    name = "mysql-root"
-    namespace = kubernetes_namespace.k8s_namespace[each.key].metadata.0.name
-  }
+#   metadata {
+#     name = "mysql-root"
+#     namespace = kubernetes_namespace.k8s_namespace[each.key].metadata.0.name
+#   }
 
-  data = {
-    username = google_sql_user.mysql_root_user.0.name
-    password = google_sql_user.mysql_root_user.0.password
-  }
-}
+#   data = {
+#     username = google_sql_user.mysql_root_user.0.name
+#     password = google_sql_user.mysql_root_user.0.password
+#   }
+# }
 
-resource "google_sql_user" "mysql_root_user" {
-  count      = var.mysql_enabled ? 1 : 0
+# resource "google_sql_user" "mysql_root_user" {
+#   count      = var.mysql_enabled ? 1 : 0
 
-  instance = google_sql_database_instance.mysql_db.0.name
+#   instance = google_sql_database_instance.mysql_db.0.name
 
-  name     = "root"
-  password = random_password.mysql_root_user_pass.0.result
+#   name     = "root"
+#   password = random_password.mysql_root_user_pass.0.result
 
-  depends_on = [google_sql_database_instance.mysql_db]
-}
+#   depends_on = [google_sql_database_instance.mysql_db]
+# }
 
 resource "random_password" "mysql_root_user_pass" {
   count      = var.mysql_enabled ? 1 : 0

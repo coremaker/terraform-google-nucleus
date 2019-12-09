@@ -6,30 +6,30 @@ locals {
   }
 }
 
-resource "kubernetes_secret" "postgres_root_user_secret" {
- for_each = local.postgres_namespaces
+# resource "kubernetes_secret" "postgres_root_user_secret" {
+#  for_each = local.postgres_namespaces
 
-  metadata {
-    name = "postgres-root"
-    namespace = kubernetes_namespace.k8s_namespace[each.key].metadata.0.name
-  }
+#   metadata {
+#     name = "postgres-root"
+#     namespace = kubernetes_namespace.k8s_namespace[each.key].metadata.0.name
+#   }
 
-  data = {
-    username = google_sql_user.postgres_root_user.0.name
-    password = google_sql_user.postgres_root_user.0.password
-  }
-}
+#   data = {
+#     username = google_sql_user.postgres_root_user.0.name
+#     password = google_sql_user.postgres_root_user.0.password
+#   }
+# }
 
-resource "google_sql_user" "postgres_root_user" {
-  count      = var.postgres_enabled ? 1 : 0
+# resource "google_sql_user" "postgres_root_user" {
+#   count      = var.postgres_enabled ? 1 : 0
 
-  instance = google_sql_database_instance.postgres_db.0.name
+#   instance = google_sql_database_instance.postgres_db.0.name
 
-  name     = "root"
-  password = random_password.postgres_root_user_pass.0.result
+#   name     = "root"
+#   password = random_password.postgres_root_user_pass.0.result
 
-  depends_on = [google_sql_database_instance.postgres_db]
-}
+#   depends_on = [google_sql_database_instance.postgres_db]
+# }
 
 resource "random_password" "postgres_root_user_pass" {
   count      = var.postgres_enabled ? 1 : 0
