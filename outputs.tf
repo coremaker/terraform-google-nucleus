@@ -21,3 +21,7 @@ output "postgres_private_ip_address" {
 output "flux_deploy_key" {
   value = var.flux_enabled ? tls_private_key.flux_secret.0.public_key_openssh : ""
 }
+
+output "cluster_name" {
+  value = google_container_cluster.kube.name
+}
