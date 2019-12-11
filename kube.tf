@@ -3,6 +3,11 @@ locals {
     for namespace in var.k8s_namespaces:
     namespace.name => namespace
   }
+
+  k8s_node_pools = {
+    for node in var.k8s_node_pools:
+    node.name => node
+  }
 }
 
 resource "kubernetes_namespace" "k8s_namespace" {
@@ -51,15 +56,17 @@ resource "google_container_cluster" "kube" {
 }
 
 resource "google_container_node_pool" "kube_nodes" {
+  for_each = local.k8s_node_pools
+
   location   = var.google_region
 
-  name       = "${google_container_cluster.kube.name}-nodes"
+  name       = each.key
   cluster    = google_container_cluster.kube.name
 
-  node_count = var.k8s_node_count
+  node_count = each.value.node_count
 
   node_config {
-    machine_type = var.k8s_node_type
+    machine_type = each.value.machine_type
 
     metadata = {
       disable-legacy-endpoints = "true"
