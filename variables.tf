@@ -22,9 +22,13 @@ variable "project_viewers" {
 
 variable "k8s_cluster_name" {}
 
-variable "k8s_node_count" {}
-
-variable "k8s_node_type" {}
+variable "k8s_node_pools" {
+    type    = list(object({
+    name = string
+    node_count = number
+    machine_type = string
+  }))
+}
 
 variable "k8s_namespaces" {
     type    = list(object({
