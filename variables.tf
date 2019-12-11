@@ -28,6 +28,12 @@ variable "k8s_node_pools" {
     node_count = number
     machine_type = string
   }))
+
+  default = [{
+      name = "nodes"
+      node_count = 1
+      machine_type = "n1-standard-1"
+  }]
 }
 
 variable "k8s_namespaces" {
