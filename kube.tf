@@ -72,9 +72,9 @@ resource "google_container_node_pool" "kube_nodes" {
       for_each = each.value.taints
 
       content {
-        key    = taint.key
-        value  = taint.value
-        effect = taint.effect
+        key    = taint.value.key
+        value  = taint.value.value
+        effect = taint.value.effect
       }
     }
 
