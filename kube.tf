@@ -68,6 +68,16 @@ resource "google_container_node_pool" "kube_nodes" {
   node_config {
     machine_type = each.value.machine_type
 
+    dynamic "taint" {
+      for_each = each.value.taints
+
+      content {
+        key    = taint.value.key
+        value  = taint.value.value
+        effect = taint.value.effect
+      }
+    }
+
     metadata = {
       disable-legacy-endpoints = "true"
     }
