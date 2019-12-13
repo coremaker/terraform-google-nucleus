@@ -8,6 +8,19 @@ locals {
     for node in var.k8s_node_pools:
     node.name => node
   }
+
+  k8s_node_pools_taints_pairs = flatten([for node in var.k8s_node_pools: [
+      for taint in node.taints: {
+        taint = taint 
+        node = node.name
+      }
+    ]
+  ])
+
+  k8s_node_pools_taints = {
+    for taint in local.k8s_node_pools_taints_pairs:
+    taint.taint => taint.node
+  }
 }
 
 resource "kubernetes_namespace" "k8s_namespace" {
@@ -67,6 +80,16 @@ resource "google_container_node_pool" "kube_nodes" {
 
   node_config {
     machine_type = each.value.machine_type
+
+    dynamic "taint" {
+      for_each = local.k8s_node_pools_taints
+
+      content {
+        key    = each.value.key
+        value  = each.value.value
+        effect = each.value.effect
+      }
+    }
 
     metadata = {
       disable-legacy-endpoints = "true"

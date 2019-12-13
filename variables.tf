@@ -27,12 +27,17 @@ variable "k8s_node_pools" {
     name = string
     node_count = number
     machine_type = string
+    taints = list(object({
+        key = string
+        value = string
+        effect = string
+    }))
   }))
-
   default = [{
       name = "nodes"
       node_count = 1
       machine_type = "n1-standard-1"
+      taints = []
   }]
 }
 
