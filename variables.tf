@@ -48,6 +48,7 @@ variable "k8s_namespaces" {
         dns_records = set(string)
         uses_postgres = bool # If set true postgres_enabled should be true
         uses_mysql = bool # If set true mysql_enabled should be true
+        uses_slack_alert = bool # If true you have to manually create the slack channel on slack
   }))
 }
 
@@ -137,3 +138,5 @@ variable "sealed_secrets_enabled" {
 variable "sealed_secrets_version" {
     default = "v0.9.5"
 }
+
+variable "slack_auth_token" {}
