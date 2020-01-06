@@ -8,7 +8,7 @@ locals {
 
 resource "google_monitoring_alert_policy" "kube_event" {
   for_each = local.k8s_namespaces_slack
-  display_name = "${google_container_cluster.kube.name} - ${each.key} - Failed Services"
+  display_name = "${google_container_cluster.kube.name} - ${each.key} - Alerts"
 
   combiner     = "OR"
   notification_channels = [
@@ -57,6 +57,6 @@ resource "google_monitoring_notification_channel" "slack" {
   type = "slack"
   labels = {
     auth_token = var.slack_auth_token
-    channel_name = "${each.key}-alert"
+    channel_name = "${each.key}-alerts"
   }
 }

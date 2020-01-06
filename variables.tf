@@ -139,4 +139,6 @@ variable "sealed_secrets_version" {
     default = "v0.9.5"
 }
 
-variable "slack_auth_token" {}
+variable "slack_auth_token" {
+    default = "token" # Needs to be replaced with a working token
+}
