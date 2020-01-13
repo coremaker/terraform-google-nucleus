@@ -46,13 +46,11 @@ resource "mongodbatlas_cluster" "mongodb" {
 
   project_id   = mongodbatlas_project.mongodb.0.id
   name         = "mongodb-${random_string.mongodb_random_name.0.result}"
-  num_shards   = 1
-  replication_factor           = 3
-  backup_enabled               = true
-  auto_scaling_disk_gb_enabled = true
+  auto_scaling_disk_gb_enabled = false
   mongo_db_major_version       = "4.0"
   //Provider Settings "block"
-  provider_name               = "GCP"
+  provider_name               = "TENANT"
+  backing_provider_name       = "GCP"
   provider_instance_size_name = var.mongodbatlas_instance_size_name
   disk_size_gb                = var.mongodbatlas_disk_size
   provider_region_name        = var.mongodbatlas_region

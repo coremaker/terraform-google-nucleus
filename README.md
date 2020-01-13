@@ -3,3 +3,4 @@
 # Terraform Google Nucleus
 
 This repository contains a [Terraform](https://www.terraform.io) module for running the main services on Google Cloud Platform.
+This module if fully configurable !

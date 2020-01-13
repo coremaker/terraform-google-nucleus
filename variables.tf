@@ -153,11 +153,11 @@ variable "mongodb_enabled" {
 }
 
 variable "mongodbatlas_instance_size_name" {
-    default = "M10"
+    default = "M2"
 }
 
 variable "mongodbatlas_disk_size" {
-    default = 10
+    default = 2
 }
 
 variable "mongodbatlas_region" {
