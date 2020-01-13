@@ -87,7 +87,7 @@ resource "google_sql_database_instance" "mysql_db" {
   depends_on = [
     google_project_service.sqladmin,
     google_service_networking_connection.private_vpc_connection
-    ]
+  ]
 }
 
 resource "random_string" "mysql_db_name" {

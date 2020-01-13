@@ -48,6 +48,7 @@ variable "k8s_namespaces" {
         dns_records = set(string)
         uses_postgres = bool # If set true postgres_enabled should be true
         uses_mysql = bool # If set true mysql_enabled should be true
+        uses_mongodb = bool
         uses_slack_alert = bool # If true you have to manually create the slack channel on slack
   }))
 }
@@ -139,6 +140,38 @@ variable "sealed_secrets_version" {
     default = "v0.9.5"
 }
 
+# Slack alert channel
 variable "slack_auth_token" {
     default = "token" # Needs to be replaced with a working token
+}
+
+# MongoDB Atlas
+
+variable "mongodb_enabled" {
+    default = false
+    type = bool
+}
+
+variable "mongodbatlas_instance_size_name" {
+    default = "M10"
+}
+
+variable "mongodbatlas_disk_size" {
+    default = 10
+}
+
+variable "mongodbatlas_region" {
+    default = "WESTERN_EUROPE"
+}
+
+variable "mongodbatlas_public_key" {
+    default = "public_key"
+}
+
+variable "mongodbatlas_private_key" {
+    default = "private_key"
+}
+
+variable "mongodbatlas_org_id" {
+    default = "org_id"
 }

@@ -19,3 +19,8 @@ provider "helm" {
   tiller_image = "gcr.io/kubernetes-helm/tiller:${var.tiller_version}"
   service_account = kubernetes_service_account.tiller.metadata.0.name
 }
+
+provider "mongodbatlas" {
+  public_key = var.mongodbatlas_public_key
+  private_key  = var.mongodbatlas_private_key
+}

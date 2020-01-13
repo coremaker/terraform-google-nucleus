@@ -84,10 +84,10 @@ resource "google_sql_database_instance" "postgres_db" {
     create = "20m"
   }
 
- depends_on = [
-   google_project_service.sqladmin,
-   google_service_networking_connection.private_vpc_connection
-   ]
+  depends_on = [
+    google_project_service.sqladmin,
+    google_service_networking_connection.private_vpc_connection
+  ]
 }
 
 resource "random_string" "postgres_db_name" {
