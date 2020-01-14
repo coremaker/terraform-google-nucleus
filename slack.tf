@@ -57,6 +57,6 @@ resource "google_monitoring_notification_channel" "slack" {
   type = "slack"
   labels = {
     auth_token = var.slack_auth_token
-    channel_name = "${each.key}-alerts"
+    channel_name = "${each.key}-${var.environment_name}-alerts"
   }
 }
