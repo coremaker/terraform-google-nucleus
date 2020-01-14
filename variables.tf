@@ -175,3 +175,7 @@ variable "mongodb_atlas_private_key" {
 variable "mongodb_atlas_org_id" {
     default = "org_id"
 }
+
+variable "environment_name" {
+    default = "dev"
+}
