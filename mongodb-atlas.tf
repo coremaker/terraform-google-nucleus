@@ -47,7 +47,7 @@ resource "mongodbatlas_cluster" "mongodb_atlas_tenant" {
   count      = var.mongodb_atlas_enabled && local.mongodb_atlas_is_tenant ? 1 : 0
 
   project_id   = mongodbatlas_project.mongodb.0.id
-  name         = "mongodb-${random_string.mongodb_random_name.0.result}"
+  name         = "mongodb-${random_string.mongodb_atlas_random_name.0.result}"
   auto_scaling_disk_gb_enabled = false
   mongo_db_major_version       = "4.0"
   //Provider Settings "block"
@@ -62,7 +62,7 @@ resource "mongodbatlas_cluster" "mongodb_atlas" {
   count      = var.mongodb_atlas_enabled && !local.mongodb_atlas_is_tenant ? 1 : 0
 
   project_id   = mongodbatlas_project.mongodb.0.id
-  name         = "mongodb-${random_string.mongodb_random_name.0.result}"
+  name         = "mongodb-${random_string.mongodb_atlas_random_name.0.result}"
   auto_scaling_disk_gb_enabled = false
   mongo_db_major_version       = "4.0"
   //Provider Settings "block"
