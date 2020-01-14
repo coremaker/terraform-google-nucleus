@@ -17,8 +17,8 @@ resource "kubernetes_secret" "mongodb_atlas_root_user_secret" {
   }
 
   data = {
-    username = mongodbatlas_database_user.mongodb_user.0.username
-    password = mongodbatlas_database_user.mongodb_user.0.password
+    username = mongodbatlas_database_user.mongodb_atlas_user.0.username
+    password = mongodbatlas_database_user.mongodb_atlas_user.0.password
   }
 }
 
@@ -26,8 +26,8 @@ resource "mongodbatlas_database_user" "mongodb_atlas_user" {
   count      = var.mongodb_atlas_enabled ? 1 : 0
 
   username = "root"
-  password = random_password.mongodb_root_user_pass.0.result
-  project_id = mongodbatlas_project.mongodb.0.id
+  password = random_password.mongodb_atlas_root_user_pass.0.result
+  project_id = mongodbatlas_project.mongodb_atlas.0.id
   database_name  = "admin"
 
   roles {
@@ -46,7 +46,7 @@ resource "random_password" "mongodb_atlas_root_user_pass" {
 resource "mongodbatlas_cluster" "mongodb_atlas_tenant" {
   count      = var.mongodb_atlas_enabled && local.mongodb_atlas_is_tenant ? 1 : 0
 
-  project_id   = mongodbatlas_project.mongodb.0.id
+  project_id   = mongodbatlas_project.mongodb_atlas.0.id
   name         = "mongodb-${random_string.mongodb_atlas_random_name.0.result}"
   auto_scaling_disk_gb_enabled = false
   mongo_db_major_version       = "4.0"
@@ -61,7 +61,7 @@ resource "mongodbatlas_cluster" "mongodb_atlas_tenant" {
 resource "mongodbatlas_cluster" "mongodb_atlas" {
   count      = var.mongodb_atlas_enabled && !local.mongodb_atlas_is_tenant ? 1 : 0
 
-  project_id   = mongodbatlas_project.mongodb.0.id
+  project_id   = mongodbatlas_project.mongodb_atlas.0.id
   name         = "mongodb-${random_string.mongodb_atlas_random_name.0.result}"
   auto_scaling_disk_gb_enabled = false
   mongo_db_major_version       = "4.0"
