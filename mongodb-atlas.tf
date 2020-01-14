@@ -79,7 +79,7 @@ resource "mongodbatlas_project" "mongodb_atlas" {
   org_id = var.mongodb_atlas_org_id
 }
 
-resource "random_string" "mongodb_random_name" {
+resource "random_string" "mongodb_atlas_random_name" {
   count      = var.mongodb_atlas_enabled ? 1 : 0
 
   length = 4
