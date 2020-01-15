@@ -3,7 +3,7 @@
 variable "google_project_id" {}
 variable "google_region" {}
 variable "google_zone" {}
-
+variable "environment_name" {}
 # IAM
 
 variable "project_admins" {
@@ -48,6 +48,8 @@ variable "k8s_namespaces" {
         dns_records = set(string)
         uses_postgres = bool # If set true postgres_enabled should be true
         uses_mysql = bool # If set true mysql_enabled should be true
+        uses_mongodb_atlas = bool
+        uses_slack_alert = bool # If true you have to manually create the slack channel on slack
   }))
 }
 
@@ -136,4 +138,33 @@ variable "sealed_secrets_enabled" {
 
 variable "sealed_secrets_version" {
     default = "v0.9.5"
+}
+
+# Slack alert channel
+variable "slack_auth_token" {
+    default = "token" # Needs to be replaced with a working token
+}
+
+# MongoDB Atlas
+
+variable "mongodb_atlas_enabled" {
+    default = false
+    type = bool
+}
+
+variable "mongodb_atlas_instance_size_name" {
+    default = "M2"
+    description = "The mongodbatlas instance size. Possible values are: M2, M5, M10, M20, M30 etc. IMPORTANT: Upgrading from M2/M5 to M10 and above will recreate the cluster and the data will be lost so a data migration must be planned ahead."
+}
+
+variable "mongodb_atlas_disk_size" {
+    default = 2
+}
+
+variable "mongodb_atlas_region" {
+    default = "WESTERN_EUROPE"
+}
+
+variable "mongodb_atlas_org_id" {
+    default = ""
 }
