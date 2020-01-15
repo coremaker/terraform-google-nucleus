@@ -3,7 +3,7 @@
 variable "google_project_id" {}
 variable "google_region" {}
 variable "google_zone" {}
-
+variable "environment_name" {}
 # IAM
 
 variable "project_admins" {
@@ -154,6 +154,7 @@ variable "mongodb_atlas_enabled" {
 
 variable "mongodb_atlas_instance_size_name" {
     default = "M2"
+    description = "The mongodbatlas instance size. Possible values are: M2, M5, M10, M20, M30 etc. IMPORTANT: Upgrading from M2/M5 to M10 and above will recreate the cluster and the data will be lost so a data migration must be planned ahead."
 }
 
 variable "mongodb_atlas_disk_size" {
@@ -164,18 +165,6 @@ variable "mongodb_atlas_region" {
     default = "WESTERN_EUROPE"
 }
 
-variable "mongodb_atlas_public_key" {
-    default = "public_key"
-}
-
-variable "mongodb_atlas_private_key" {
-    default = "private_key"
-}
-
 variable "mongodb_atlas_org_id" {
-    default = "org_id"
-}
-
-variable "environment_name" {
-    default = "dev"
+    default = ""
 }
