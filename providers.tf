@@ -10,6 +10,8 @@ provider "kubernetes" {
 }
 
 provider "helm" {
+  version = var.helm_version
+
   kubernetes {
     host = google_container_cluster.kube.endpoint
     token = data.google_client_config.default.access_token
