@@ -59,10 +59,6 @@ variable "tiller_version" {
     default = "v2.15.1"
 }
 
-variable "helm_version" {
-    default = "0.10.4"
-}
-
 # FLUX
 
 variable "flux_git_url" {}

@@ -10,7 +10,7 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  version = var.helm_version
+  version = "0.10.4"
 
   kubernetes {
     host = google_container_cluster.kube.endpoint
