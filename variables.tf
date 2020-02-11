@@ -66,7 +66,7 @@ variable "flux_git_url" {}
 variable "flux_git_path" {}
 
 variable "flux_version" {
-    default = "1.15.0"
+    default = "1.18.0"
 }
 
 variable "flux_enabled" {
