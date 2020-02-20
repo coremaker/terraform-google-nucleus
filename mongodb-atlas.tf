@@ -28,7 +28,7 @@ resource "mongodbatlas_database_user" "mongodb_atlas_user" {
   username = "root"
   password = random_password.mongodb_atlas_root_user_pass.0.result
   project_id = mongodbatlas_project.mongodb_atlas.0.id
-  database_name  = "admin"
+  auth_database_name  = "admin"
 
   roles {
     role_name = "readWrite"
