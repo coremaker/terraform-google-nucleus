@@ -32,7 +32,7 @@ EOT
     }
   }
 
-  depends_on = [google_logging_metric.kube_event, google_monitoring_notification_channel.slack]
+  depends_on = [google_logging_metric.kube_event, google_monitoring_notification_channel.slack, google_project_service.serviceusage]
 }
 
 resource "google_logging_metric" "kube_event" {
@@ -48,6 +48,8 @@ EOT
     metric_kind = "DELTA"
     value_type  = "INT64"
   }
+
+  depends_on = [google_project_service.serviceusage]
 }
 
 resource "google_monitoring_notification_channel" "slack" {
@@ -59,4 +61,6 @@ resource "google_monitoring_notification_channel" "slack" {
     auth_token = var.slack_auth_token
     channel_name = "${each.key}-${var.environment_name}-alerts"
   }
+
+  depends_on = [google_project_service.serviceusage]
 }
