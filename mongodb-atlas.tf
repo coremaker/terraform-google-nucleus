@@ -34,8 +34,6 @@ resource "mongodbatlas_database_user" "mongodb_atlas_user" {
     role_name = "readWrite"
     database_name = "admin"
   }
-
-  depends_on = [google_project_service.serviceusage]
 }
 
 resource "random_password" "mongodb_atlas_root_user_pass" {
@@ -58,8 +56,6 @@ resource "mongodbatlas_cluster" "mongodb_atlas_tenant" {
   provider_instance_size_name = var.mongodb_atlas_instance_size_name
   disk_size_gb                = var.mongodb_atlas_disk_size
   provider_region_name        = var.mongodb_atlas_region
-
-  depends_on = [google_project_service.serviceusage]
 }
 
 resource "mongodbatlas_cluster" "mongodb_atlas" {
@@ -74,8 +70,6 @@ resource "mongodbatlas_cluster" "mongodb_atlas" {
   provider_instance_size_name = var.mongodb_atlas_instance_size_name
   disk_size_gb                = var.mongodb_atlas_disk_size
   provider_region_name        = var.mongodb_atlas_region
-
-  depends_on = [google_project_service.serviceusage]
 }
 
 resource "mongodbatlas_project" "mongodb_atlas" {
@@ -83,8 +77,6 @@ resource "mongodbatlas_project" "mongodb_atlas" {
 
   name   = var.environment_name
   org_id = var.mongodb_atlas_org_id
-
-  depends_on = [google_project_service.serviceusage]
 }
 
 resource "random_string" "mongodb_atlas_random_name" {
