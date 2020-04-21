@@ -43,7 +43,7 @@ resource "helm_release" "sealed_secrets" {
     value = "true"
   }
 
-  depends_on = [kubernetes_cluster_role_binding.tiller_cluster_admin]
+  # depends_on = [kubernetes_cluster_role_binding.tiller_cluster_admin]
 }
 
 resource "kubernetes_secret" "sealed_secrets_tls" {
