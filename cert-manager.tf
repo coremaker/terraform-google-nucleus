@@ -29,16 +29,6 @@ resource "helm_release" "cert_manager" {
   version    = var.cert_manager_helm_version
   namespace  = kubernetes_namespace.cert_manager.0.metadata.0.name
 
-  set {
-    name = "webhook.enabled"
-    value = "false"
-  }
-
-  set {
-    name = "cainjector.enabled"
-    value = "false"
-  }
-
   timeout    = "60"
 
   depends_on = [kubernetes_namespace.cert_manager, kubernetes_secret.cert_manager_service_key, helm_release.cert_manager_crds]
