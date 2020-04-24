@@ -22,6 +22,15 @@ resource "kubernetes_secret" "mongodb_atlas_root_user_secret" {
   }
 }
 
+resource "mongodbatlas_project_ip_whitelist" "mongodb_atlas_services_whitelist" {
+  count      = var.mongodb_atlas_enabled ? 1 : 0
+
+  project_id = mongodbatlas_project.mongodb_atlas.0.id
+  cidr_block = "0.0.0.0/0"
+  comment    = "Allow services to connect"
+}
+
+
 resource "mongodbatlas_database_user" "mongodb_atlas_user" {
   count      = var.mongodb_atlas_enabled ? 1 : 0
 
@@ -31,7 +40,7 @@ resource "mongodbatlas_database_user" "mongodb_atlas_user" {
   auth_database_name  = "admin"
 
   roles {
-    role_name = "readWrite"
+    role_name = "atlasAdmin"
     database_name = "admin"
   }
 }
