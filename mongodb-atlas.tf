@@ -58,7 +58,7 @@ resource "mongodbatlas_cluster" "mongodb_atlas_tenant" {
   project_id   = mongodbatlas_project.mongodb_atlas.0.id
   name         = "mongodb-${random_string.mongodb_atlas_random_name.0.result}"
   auto_scaling_disk_gb_enabled = false
-  mongo_db_major_version       = "4.0"
+  mongo_db_major_version       = var.mongodb_atlas_version
   //Provider Settings "block"
   provider_name               = "TENANT"
   backing_provider_name       = "GCP"
@@ -73,7 +73,7 @@ resource "mongodbatlas_cluster" "mongodb_atlas" {
   project_id   = mongodbatlas_project.mongodb_atlas.0.id
   name         = "mongodb-${random_string.mongodb_atlas_random_name.0.result}"
   auto_scaling_disk_gb_enabled = false
-  mongo_db_major_version       = "4.0"
+  mongo_db_major_version       = var.mongodb_atlas_version
   //Provider Settings "block"
   provider_name               = "GCP"
   provider_instance_size_name = var.mongodb_atlas_instance_size_name
