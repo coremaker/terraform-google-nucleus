@@ -157,6 +157,10 @@ variable "mongodb_atlas_instance_size_name" {
     description = "The mongodbatlas instance size. Possible values are: M2, M5, M10, M20, M30 etc. IMPORTANT: Upgrading from M2/M5 to M10 and above will recreate the cluster and the data will be lost so a data migration must be planned ahead."
 }
 
+variable "mongodb_atlas_version" {
+    default = "4.0"
+}
+
 variable "mongodb_atlas_disk_size" {
     default = 2
 }
