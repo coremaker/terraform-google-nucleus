@@ -158,7 +158,7 @@ variable "mongodb_atlas_instance_size_name" {
 }
 
 variable "mongodb_atlas_version" {
-    default = "4.0"
+    default = "4.2"
 }
 
 variable "mongodb_atlas_disk_size" {
