@@ -53,12 +53,6 @@ variable "k8s_namespaces" {
   }))
 }
 
-# HELM
-
-variable "tiller_version" {
-    default = "v2.15.1"
-}
-
 # FLUX
 
 variable "flux_git_url" {}
@@ -66,7 +60,7 @@ variable "flux_git_url" {}
 variable "flux_git_path" {}
 
 variable "flux_version" {
-    default = "1.18.0"
+    default = "1.19.0"
 }
 
 variable "flux_enabled" {
