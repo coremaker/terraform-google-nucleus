@@ -17,6 +17,11 @@ resource "helm_release" "helm_operator" {
     name = "image.tag"
     value = var.helm_operator
   }
+
+  set {
+    name = "helm.versions"
+    value = "v3"
+  }
 }
 
 resource "helm_release" "flux" {
