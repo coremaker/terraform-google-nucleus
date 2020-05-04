@@ -73,6 +73,10 @@ variable "flux_manifest_generation" {
     type = bool
 }
 
+variable "helm_operator" {
+    default = "1.0.1"
+}
+
 # POSTGRES
 
 variable "postgres_machine_type" {
