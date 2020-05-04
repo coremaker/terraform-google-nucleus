@@ -1,8 +1,29 @@
+resource "helm_release" "helm_operator" {
+  count      = var.flux_enabled ? 1 : 0
+
+  name       = "helm-operator"
+  version    = "1.0.1"
+  namespace  = kubernetes_namespace.flux.0.metadata.0.name
+
+  chart      = "helm-operator"
+  repository = "https://charts.fluxcd.io"
+
+  set {
+    name  = "git.ssh.secretName"
+    value = kubernetes_secret.flux_secret.0.metadata.0.name
+  }
+
+  set {
+    name = "image.tag"
+    value = var.helm_operator
+  }
+}
+
 resource "helm_release" "flux" {
   count      = var.flux_enabled ? 1 : 0
 
   name       = "flux"
-  version    = "0.16.0"
+  version    = "1.3.0"
   namespace  = kubernetes_namespace.flux.0.metadata.0.name
 
   chart      = "flux"
@@ -25,16 +46,6 @@ resource "helm_release" "flux" {
 
   set {
     name  = "rbac.create"
-    value = "true"
-  }
-
-  set {
-    name  = "helmOperator.create"
-    value = "true"
-  }
-
-  set {
-    name  = "helmOperator.createCRD"
     value = "true"
   }
 
