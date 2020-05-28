@@ -49,7 +49,7 @@ resource "random_password" "mongodb_atlas_root_user_pass" {
   count      = var.mongodb_atlas_enabled ? 1 : 0
 
   length = 24
-  special = true
+  special = false
 }
 
 resource "mongodbatlas_cluster" "mongodb_atlas_tenant" {
