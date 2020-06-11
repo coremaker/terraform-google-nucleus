@@ -50,6 +50,7 @@ variable "k8s_namespaces" {
         uses_mysql = bool # If set true mysql_enabled should be true
         uses_mongodb_atlas = bool
         uses_slack_alert = bool # If true you have to manually create the slack channel on slack
+        uses_redis = bool
   }))
 }
 
