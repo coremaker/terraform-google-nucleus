@@ -182,3 +182,22 @@ variable "mongodb_atlas_region" {
 variable "mongodb_atlas_org_id" {
     default = ""
 }
+
+# Reddis
+
+variable "redis_enabled" {
+    type = bool
+    default = false
+}
+
+variable "redis_tier" {
+    default = "STANDARD_HA"
+}
+
+variable "redis_version" {
+    default = "REDIS_4_0"
+}
+
+variable "redis_memory_size" {
+    default = 1
+}
