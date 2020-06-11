@@ -138,6 +138,10 @@ variable "sealed_secrets_enabled" {
     type = bool
 }
 
+variable "sealed_secrets_chart_version" {
+    default = "1.5.0"
+}
+
 variable "sealed_secrets_version" {
     default = "v0.9.5"
 }
