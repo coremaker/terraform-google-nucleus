@@ -52,6 +52,16 @@ variable "k8s_namespaces" {
         uses_slack_alert = bool # If true you have to manually create the slack channel on slack
         uses_redis = bool
   }))
+    default = [{
+        name = ""
+        has_public_ip = false
+        dns_records = []
+        uses_postgres = false
+        uses_mysql = false
+        uses_mongodb_atlas = false
+        uses_slack_alert = false
+        uses_redis = false
+    }]
 }
 
 # FLUX
