@@ -2,7 +2,7 @@ resource "helm_release" "helm_operator" {
   count      = var.flux_enabled ? 1 : 0
 
   name       = "helm-operator"
-  version    = "1.0.1"
+  version    = var.helm_operator_chart_version
   namespace  = kubernetes_namespace.flux.0.metadata.0.name
 
   chart      = "helm-operator"
@@ -28,7 +28,7 @@ resource "helm_release" "flux" {
   count      = var.flux_enabled ? 1 : 0
 
   name       = "flux"
-  version    = "1.3.0"
+  version    = var.flux_chart_version
   namespace  = kubernetes_namespace.flux.0.metadata.0.name
 
   chart      = "flux"

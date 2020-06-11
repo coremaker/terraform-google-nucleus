@@ -50,6 +50,7 @@ variable "k8s_namespaces" {
         uses_mysql = bool # If set true mysql_enabled should be true
         uses_mongodb_atlas = bool
         uses_slack_alert = bool # If true you have to manually create the slack channel on slack
+        uses_redis = bool
   }))
 }
 
@@ -58,6 +59,10 @@ variable "k8s_namespaces" {
 variable "flux_git_url" {}
 
 variable "flux_git_path" {}
+
+variable "flux_chart_version" {
+    default = "1.3.0"
+}
 
 variable "flux_version" {
     default = "1.19.0"
@@ -71,6 +76,10 @@ variable "flux_enabled" {
 variable "flux_manifest_generation" {
     default = true
     type = bool
+}
+
+variable "helm_operator_chart_version" {
+    default = "1.0.1"
 }
 
 variable "helm_operator" {
@@ -134,6 +143,10 @@ variable "sealed_secrets_enabled" {
     type = bool
 }
 
+variable "sealed_secrets_chart_version" {
+    default = "1.5.0"
+}
+
 variable "sealed_secrets_version" {
     default = "v0.9.5"
 }
@@ -169,4 +182,23 @@ variable "mongodb_atlas_region" {
 
 variable "mongodb_atlas_org_id" {
     default = ""
+}
+
+# Reddis
+
+variable "redis_enabled" {
+    type = bool
+    default = false
+}
+
+variable "redis_tier" {
+    default = "STANDARD_HA"
+}
+
+variable "redis_version" {
+    default = "REDIS_4_0"
+}
+
+variable "redis_memory_size" {
+    default = 1
 }
