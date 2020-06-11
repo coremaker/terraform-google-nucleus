@@ -59,6 +59,10 @@ variable "flux_git_url" {}
 
 variable "flux_git_path" {}
 
+variable "flux_chart_version" {
+    default = "1.3.0"
+}
+
 variable "flux_version" {
     default = "1.19.0"
 }
