@@ -77,6 +77,10 @@ variable "flux_manifest_generation" {
     type = bool
 }
 
+variable "helm_operator_chart_version" {
+    default = "1.0.1"
+}
+
 variable "helm_operator" {
     default = "1.0.1"
 }
