@@ -18,6 +18,18 @@ output "postgres_private_ip_address" {
   value = var.postgres_enabled ? google_sql_database_instance.postgres_db.0.private_ip_address : ""
 }
 
+output "mysql_instance_name" {
+  value = var.mysql_enabled ? google_sql_database_instance.mysql_db.0.name : ""
+}
+
+output "mysql_connection_name" {
+  value = var.mysql_enabled ? google_sql_database_instance.mysql_db.0.connection_name : ""
+}
+
+output "mysql_private_ip_address" {
+  value = var.mysql_enabled ? google_sql_database_instance.mysql_db.0.private_ip_address : ""
+}
+
 output "flux_deploy_key" {
   value = var.flux_enabled ? tls_private_key.flux_secret.0.public_key_openssh : ""
 }
