@@ -25,7 +25,8 @@ variable "k8s_cluster_name" {}
 variable "k8s_node_pools" {
     type    = list(object({
         name = string
-        node_count = number
+        min_node_count = number
+        max_node_count = number
         machine_type = string
         taints = list(object({
             key = string
@@ -35,7 +36,8 @@ variable "k8s_node_pools" {
     }))
     default = [{
         name = "nodes"
-        node_count = 1
+        min_node_count = 1
+        max_node_count = 3
         machine_type = "n1-standard-1"
         taints = []
     }]
