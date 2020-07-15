@@ -63,9 +63,9 @@ resource "google_container_node_pool" "kube_nodes" {
   name       = each.key
   cluster    = google_container_cluster.kube.name
 
-  autoscaling {
-    min_node_count = 0
-    max_node_count = 3
+  autoscaling = {
+    min_node_count = each.value.min_node_count
+    max_node_count = each.value.max_node_count
   }
 
   node_config {
