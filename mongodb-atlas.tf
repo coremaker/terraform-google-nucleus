@@ -86,6 +86,11 @@ resource "mongodbatlas_project" "mongodb_atlas" {
 
   name   = var.environment_name
   org_id = var.mongodb_atlas_org_id
+
+  teams {
+    team_id = "5e820320f9bdb5069a375b54"
+    role_names = ["GROUP_DATA_ACCESS_READ_ONLY"]
+  }
 }
 
 resource "random_string" "mongodb_atlas_random_name" {
