@@ -63,11 +63,11 @@ variable "flux_git_url" {}
 variable "flux_git_path" {}
 
 variable "flux_chart_version" {
-    default = "1.3.0"
+    default = "1.4.0"
 }
 
 variable "flux_version" {
-    default = "1.19.0"
+    default = "1.20.1"
 }
 
 variable "flux_enabled" {
@@ -81,11 +81,11 @@ variable "flux_manifest_generation" {
 }
 
 variable "helm_operator_chart_version" {
-    default = "1.0.1"
+    default = "1.2.0"
 }
 
 variable "helm_operator" {
-    default = "1.0.1"
+    default = "1.2.0"
 }
 
 # POSTGRES
@@ -154,11 +154,11 @@ variable "sealed_secrets_enabled" {
 }
 
 variable "sealed_secrets_chart_version" {
-    default = "1.5.0"
+    default = "1.10.3"
 }
 
 variable "sealed_secrets_version" {
-    default = "v0.9.5"
+    default = "v0.12.4"
 }
 
 # Slack alert channel

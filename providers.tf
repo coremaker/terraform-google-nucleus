@@ -4,7 +4,7 @@ provider "google" {
 }
 
 provider "kubernetes" {
-  version = "v1.9.0"
+  version = "v1.12.0"
 
   host = google_container_cluster.kube.endpoint
   token = data.google_client_config.default.access_token
@@ -12,7 +12,7 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  version = "v1.1.1"
+  version = "v1.2.4"
 
   kubernetes {
     load_config_file = false
