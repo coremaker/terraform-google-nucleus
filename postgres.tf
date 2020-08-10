@@ -63,7 +63,7 @@ resource "google_sql_database_instance" "postgres_db" {
 
   settings {
     tier = var.postgres_machine_type
-    disk_size = "10"
+    disk_size = var.postgres_disk_size
 
     ip_configuration {
       ipv4_enabled = "true"

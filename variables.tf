@@ -94,6 +94,10 @@ variable "postgres_machine_type" {
     default = "db-f1-micro"
 }
 
+variable "postgres_disk_size" {
+    default = "10"
+}
+
 variable "postgres_database_version" {
     default = "POSTGRES_11" # Postgres version
 }
@@ -107,6 +111,10 @@ variable "postgres_enabled" {
 
 variable "mysql_machine_type" {
     default = "db-f1-micro"
+}
+
+variable "mysql_disk_size" {
+    default = "10"
 }
 
 variable "mysql_database_version" {

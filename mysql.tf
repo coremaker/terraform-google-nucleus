@@ -63,7 +63,7 @@ resource "google_sql_database_instance" "mysql_db" {
 
   settings {
     tier = var.mysql_machine_type
-    disk_size = "10"
+    disk_size = var.mysql_disk_size
 
     ip_configuration {
       ipv4_enabled = "true"
