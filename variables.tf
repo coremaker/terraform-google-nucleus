@@ -81,11 +81,11 @@ variable "flux_manifest_generation" {
 }
 
 variable "helm_operator_chart_version" {
-    default = "1.0.1"
+    default = "1.2.0"
 }
 
 variable "helm_operator" {
-    default = "1.0.1"
+    default = "1.2.0"
 }
 
 # POSTGRES
