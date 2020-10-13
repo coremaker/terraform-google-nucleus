@@ -1,11 +1,33 @@
+terraform {
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+      version = "3.43.0"
+    }
+
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "1.13.2"
+    }
+
+    helm = {
+      source = "hashicorp/helm"
+      version = "1.3.2"
+    }
+
+    mongodbatlas = {
+      source = "mongodb/mongodbatlas"
+      version = "0.6.5"
+    }
+  }
+}
+
 provider "google" {
   project = var.google_project_id
   region = var.google_region
 }
 
 provider "kubernetes" {
-  version = "v1.12.0"
-
   load_config_file = false
   host = google_container_cluster.kube.endpoint
   token = data.google_client_config.default.access_token
@@ -13,8 +35,6 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  version = "v1.2.4"
-
   kubernetes {
     load_config_file = false
     host = google_container_cluster.kube.endpoint
