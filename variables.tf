@@ -154,7 +154,7 @@ variable "sealed_secrets_enabled" {
 }
 
 variable "sealed_secrets_chart_version" {
-    default = "1.12.2"
+    default = "1.12.1"
 }
 
 variable "sealed_secrets_version" {
