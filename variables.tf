@@ -154,11 +154,11 @@ variable "sealed_secrets_enabled" {
 }
 
 variable "sealed_secrets_chart_version" {
-    default = "1.10.3"
+    default = "1.12.2"
 }
 
 variable "sealed_secrets_version" {
-    default = "v0.12.4"
+    default = "v0.13.1"
 }
 
 # Slack alert channel
