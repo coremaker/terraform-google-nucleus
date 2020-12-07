@@ -63,11 +63,11 @@ variable "flux_git_url" {}
 variable "flux_git_path" {}
 
 variable "flux_chart_version" {
-    default = "1.4.0"
+    default = "1.6.0"
 }
 
 variable "flux_version" {
-    default = "1.20.1"
+    default = "1.21.0"
 }
 
 variable "flux_enabled" {
