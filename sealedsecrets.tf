@@ -6,7 +6,7 @@ resource "helm_release" "sealed_secrets" {
   namespace  = kubernetes_namespace.sealed_secrets.0.metadata.0.name
 
   chart      = "sealed-secrets"
-  repository = "https://kubernetes-charts.storage.googleapis.com/"
+  repository = "https://charts.helm.sh/stable"
 
   set {
     name = "image.repository"
