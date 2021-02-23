@@ -2,22 +2,22 @@ terraform {
   required_providers {
     google = {
       source = "hashicorp/google"
-      version = "3.49.0"
+      version = "3.57.0"
     }
 
     kubernetes = {
       source = "hashicorp/kubernetes"
-      version = "1.13.3"
+      version = "2.0.2"
     }
 
     helm = {
       source = "hashicorp/helm"
-      version = "1.3.2"
+      version = "2.0.2"
     }
 
     mongodbatlas = {
       source = "mongodb/mongodbatlas"
-      version = "0.7.0"
+      version = "0.8.2"
     }
   }
 }
