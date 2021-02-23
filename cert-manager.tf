@@ -35,7 +35,7 @@ resource "helm_release" "cert_manager" {
     value = "true"
   }
 
-  depends_on = [kubernetes_namespace.cert_manager, kubernetes_secret.cert_manager_service_key, helm_release.cert_manager_crds]
+  depends_on = [kubernetes_namespace.cert_manager, kubernetes_secret.cert_manager_service_key]
 }
 
 resource "kubernetes_secret" "cert_manager_service_key" {
