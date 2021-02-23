@@ -138,7 +138,7 @@ variable "dns_enabled" {
 # CERT-MANAGER
 
 variable "cert_manager_helm_version" {
-    default = "v0.14.2"
+    default = "v1.2.0"
 }
 
 variable "cert_manager_enabled" {
@@ -179,7 +179,7 @@ variable "mongodb_atlas_instance_size_name" {
 }
 
 variable "mongodb_atlas_version" {
-    default = "4.2"
+    default = "4.4"
 }
 
 variable "mongodb_atlas_disk_size" {

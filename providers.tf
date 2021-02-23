@@ -2,22 +2,22 @@ terraform {
   required_providers {
     google = {
       source = "hashicorp/google"
-      version = "3.49.0"
+      version = "3.57.0"
     }
 
     kubernetes = {
       source = "hashicorp/kubernetes"
-      version = "1.13.3"
+      version = "2.0.2"
     }
 
     helm = {
       source = "hashicorp/helm"
-      version = "1.3.2"
+      version = "2.0.2"
     }
 
     mongodbatlas = {
       source = "mongodb/mongodbatlas"
-      version = "0.7.0"
+      version = "0.8.2"
     }
   }
 }
@@ -28,7 +28,6 @@ provider "google" {
 }
 
 provider "kubernetes" {
-  load_config_file = false
   host = google_container_cluster.kube.endpoint
   token = data.google_client_config.default.access_token
   cluster_ca_certificate = base64decode(google_container_cluster.kube.master_auth.0.cluster_ca_certificate)
@@ -36,7 +35,6 @@ provider "kubernetes" {
 
 provider "helm" {
   kubernetes {
-    load_config_file = false
     host = google_container_cluster.kube.endpoint
     token = data.google_client_config.default.access_token
     cluster_ca_certificate = base64decode(google_container_cluster.kube.master_auth.0.cluster_ca_certificate)

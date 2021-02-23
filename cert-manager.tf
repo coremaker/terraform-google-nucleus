@@ -24,14 +24,18 @@ resource "helm_release" "cert_manager" {
 
   chart      = "cert-manager"
   repository = "https://charts.jetstack.io"
-
   name       = "cert-manager"
+  
   version    = var.cert_manager_helm_version
   namespace  = kubernetes_namespace.cert_manager.0.metadata.0.name
-
   timeout    = "60"
 
-  depends_on = [kubernetes_namespace.cert_manager, kubernetes_secret.cert_manager_service_key, helm_release.cert_manager_crds]
+  set {
+    name = "installCRDs"
+    value = "true"
+  }
+
+  depends_on = [kubernetes_namespace.cert_manager, kubernetes_secret.cert_manager_service_key]
 }
 
 resource "kubernetes_secret" "cert_manager_service_key" {
@@ -64,15 +68,6 @@ resource "google_service_account" "cert_manager_account" {
   display_name = "Cert manager service accountfor the ${var.k8s_cluster_name} kube cluster"
 
   depends_on = [google_project_service.iam]
-}
-
-resource "helm_release" "cert_manager_crds" {
-  count      = var.cert_manager_enabled ? 1 : 0
-
-  name       = "cert-managers-crds"
-  chart      = format("%s/helm-charts/cert-manager-crds", path.module)
-
-  depends_on = [kubernetes_namespace.cert_manager]
 }
 
 resource "kubernetes_namespace" "cert_manager" {
