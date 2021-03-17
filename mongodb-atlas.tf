@@ -72,7 +72,7 @@ resource "mongodbatlas_cluster" "mongodb_atlas" {
 
   project_id   = mongodbatlas_project.mongodb_atlas.0.id
   name         = "mongodb-${random_string.mongodb_atlas_random_name.0.result}"
-  auto_scaling_disk_gb_enabled = var.auto_scaling_disk_gb_enabled
+  auto_scaling_disk_gb_enabled = var.mongodb_auto_scaling_disk_gb_enabled
   mongo_db_major_version       = var.mongodb_atlas_version
   //Provider Settings "block"
   provider_backup_enabled = var.mongodb_provider_backup_enabled
