@@ -194,6 +194,17 @@ variable "mongodb_atlas_org_id" {
     default = ""
 }
 
+variable "mongodb_ip_whitelist" {
+    default = "0.0.0.0/0"
+}
+
+variable "mongodb_provider_backup_enabled" {
+    default = "true"
+}
+
+variable "mongodb_auto_scaling_disk_gb_enabled" {
+    default = "false"
+}
 # Reddis
 
 variable "redis_enabled" {
