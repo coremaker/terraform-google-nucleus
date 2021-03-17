@@ -26,7 +26,7 @@ resource "mongodbatlas_project_ip_whitelist" "mongodb_atlas_services_whitelist" 
   count      = var.mongodb_atlas_enabled ? 1 : 0
 
   project_id = mongodbatlas_project.mongodb_atlas.0.id
-  cidr_block = "0.0.0.0/0"
+  cidr_block = var.mongodb_ip_whitelist
   comment    = "Allow services to connect"
 }
 
@@ -57,7 +57,7 @@ resource "mongodbatlas_cluster" "mongodb_atlas_tenant" {
 
   project_id   = mongodbatlas_project.mongodb_atlas.0.id
   name         = "mongodb-${random_string.mongodb_atlas_random_name.0.result}"
-  auto_scaling_disk_gb_enabled = false
+  auto_scaling_disk_gb_enabled = var.auto_scaling_disk_gb_enabled
   mongo_db_major_version       = var.mongodb_atlas_version
   //Provider Settings "block"
   provider_name               = "TENANT"
@@ -72,9 +72,10 @@ resource "mongodbatlas_cluster" "mongodb_atlas" {
 
   project_id   = mongodbatlas_project.mongodb_atlas.0.id
   name         = "mongodb-${random_string.mongodb_atlas_random_name.0.result}"
-  auto_scaling_disk_gb_enabled = false
+  auto_scaling_disk_gb_enabled = var.auto_scaling_disk_gb_enabled
   mongo_db_major_version       = var.mongodb_atlas_version
   //Provider Settings "block"
+  provider_backup_enabled = var.provider_backup_enabled
   provider_name               = "GCP"
   provider_instance_size_name = var.mongodb_atlas_instance_size_name
   disk_size_gb                = var.mongodb_atlas_disk_size
