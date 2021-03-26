@@ -166,7 +166,7 @@ variable "slack_auth_token" {
     default = "token" # Needs to be replaced with a working token
 }
 
-variable "slack_alert_threshold_duration" {
+variable "alert_policy_threshold_duration" {
     default = "86400s"
 }
 

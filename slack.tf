@@ -22,7 +22,7 @@ resource "google_monitoring_alert_policy" "kube_event" {
 metric.type="logging.googleapis.com/user/${google_logging_metric.kube_event[each.key].name}" AND
 resource.type="k8s_container"
 EOT
-      duration        = var.slack_alert_threshold_duration
+      duration        = var.alert_policy_threshold_duration
       threshold_value = 0
       comparison      = "COMPARISON_GT"
       aggregations {
