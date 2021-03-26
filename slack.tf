@@ -22,7 +22,7 @@ resource "google_monitoring_alert_policy" "kube_event" {
 metric.type="logging.googleapis.com/user/${google_logging_metric.kube_event[each.key].name}" AND
 resource.type="k8s_container"
 EOT
-      duration        = "60s"
+      duration        = var.slack_alert_threshold_duration
       threshold_value = 0
       comparison      = "COMPARISON_GT"
       aggregations {
@@ -58,8 +58,11 @@ resource "google_monitoring_notification_channel" "slack" {
   display_name = "${each.key}-Services Alert"
   type = "slack"
   labels = {
-    auth_token = var.slack_auth_token
     channel_name = "${each.key}-${var.environment_name}-alerts"
+  }
+
+  sensitive_labels {
+    auth_token = var.slack_auth_token
   }
 
   depends_on = [google_project_service.serviceusage]
