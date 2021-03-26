@@ -166,6 +166,10 @@ variable "slack_auth_token" {
     default = "token" # Needs to be replaced with a working token
 }
 
+variable "alert_policy_threshold_duration" {
+    default = "86400s"
+}
+
 # MongoDB Atlas
 
 variable "mongodb_atlas_enabled" {
