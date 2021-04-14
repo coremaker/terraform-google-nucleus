@@ -73,6 +73,7 @@ resource "google_container_node_pool" "kube_nodes" {
   }
 
   management {
+    auto_repair = var.k8s_node_auto_repair
     auto_upgrade = var.k8s_node_auto_upgrade
   }
 
