@@ -27,8 +27,8 @@ variable "k8s_release_channel" {
 }
 
 variable "k8s_node_auto_upgrade" {
+    type = bool
     default = false
-    type bool
 }
 
 variable "k8s_node_pools" {
@@ -80,13 +80,13 @@ variable "flux_version" {
 }
 
 variable "flux_enabled" {
-    default = true
     type = bool
+    default = true
 }
 
 variable "flux_manifest_generation" {
-    default = true
     type = bool
+    default = true
 }
 
 variable "helm_operator_chart_version" {
@@ -112,8 +112,8 @@ variable "postgres_database_version" {
 }
 
 variable "postgres_enabled" {
-    default = false # Enable and disable postgres
     type = bool
+    default = false # Enable and disable postgres
 }
 
 # MYSQL
@@ -131,8 +131,8 @@ variable "mysql_database_version" {
 }
 
 variable "mysql_enabled" {
-    default = false # Enable and disable mysql
     type = bool
+    default = false # Enable and disable mysql
 }
 
 # DNS
@@ -140,8 +140,8 @@ variable "mysql_enabled" {
 variable "dns_domain" {}
 
 variable "dns_enabled" {
-    default = false
     type = bool
+    default = false
 }
 
 # CERT-MANAGER
@@ -151,15 +151,15 @@ variable "cert_manager_helm_version" {
 }
 
 variable "cert_manager_enabled" {
-    default = true
     type = bool
+    default = true
 }
 
 # Sealed secrets
 
 variable "sealed_secrets_enabled" {
-    default = true
     type = bool
+    default = true
 }
 
 variable "sealed_secrets_chart_version" {
@@ -182,8 +182,8 @@ variable "alert_policy_threshold_duration" {
 # MongoDB Atlas
 
 variable "mongodb_atlas_enabled" {
-    default = false
     type = bool
+    default = false
 }
 
 variable "mongodb_atlas_instance_size_name" {
