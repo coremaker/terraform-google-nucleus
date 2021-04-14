@@ -23,15 +23,7 @@ variable "project_viewers" {
 variable "k8s_cluster_name" {}
 
 variable "k8s_release_channel" {
-    default = "UNSPECIFIED"
-}
-
-variable "k8s_master_version" {
-    default = "1.18.16-gke.502"
-}
-
-variable "k8s_node_version" {
-    default = "1.18.16-gke.502"
+    default = "REGULAR"
 }
 
 variable "k8s_node_auto_upgrade" {
