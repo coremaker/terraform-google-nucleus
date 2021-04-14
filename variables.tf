@@ -23,17 +23,17 @@ variable "project_viewers" {
 variable "k8s_cluster_name" {}
 
 variable "k8s_release_channel" {
-    default = "REGULAR"
+    default = "UNSPECIFIED"
+}
+
+variable "k8s_node_auto_upgrade" {
+    type = bool
+    default = false // false only works with UNSPECIFIED release channel 
 }
 
 variable "k8s_node_auto_repair" {
     type = bool
     default = true
-}
-
-variable "k8s_node_auto_upgrade" {
-    type = bool
-    default = false
 }
 
 variable "k8s_node_pools" {
