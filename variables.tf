@@ -27,7 +27,7 @@ variable "k8s_release_channel" {
 }
 
 variable "k8s_node_auto_repair" {
-    type bool
+    type = bool
     default = true
 }
 
