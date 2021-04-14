@@ -23,6 +23,9 @@ resource "google_container_cluster" "kube" {
   name     = var.k8s_cluster_name
   location = var.google_region
 
+  release_channel = var.k8s_release_channel
+  master_version = k8s_master_version
+
   node_locations = ["europe-west2-a"]
   network = google_compute_network.vpc.self_link
   subnetwork = google_compute_subnetwork.container_subnetwork.name
@@ -62,10 +65,15 @@ resource "google_container_node_pool" "kube_nodes" {
 
   name       = each.key
   cluster    = google_container_cluster.kube.name
+  version = var.k8s_node_version
 
   autoscaling {
     min_node_count = each.value.min_node_count
     max_node_count = each.value.max_node_count
+  }
+
+  management {
+    auto_upgrade = var.k8s_node_auto_upgrade
   }
 
   node_config {
