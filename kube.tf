@@ -23,7 +23,9 @@ resource "google_container_cluster" "kube" {
   name     = var.k8s_cluster_name
   location = var.google_region
 
-  release_channel = var.k8s_release_channel
+  release_channel {
+    channel = var.k8s_release_channel
+  }
 
   node_locations = ["europe-west2-a"]
   network = google_compute_network.vpc.self_link
