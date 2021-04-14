@@ -26,6 +26,11 @@ variable "k8s_release_channel" {
     default = "REGULAR"
 }
 
+variable "k8s_node_auto_repair" {
+    type bool
+    default = true
+}
+
 variable "k8s_node_auto_upgrade" {
     type = bool
     default = false
