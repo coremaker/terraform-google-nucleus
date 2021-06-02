@@ -79,6 +79,7 @@ resource "google_container_node_pool" "kube_nodes" {
 
   node_config {
     machine_type = each.value.machine_type
+    image_type = each.value.image_type
 
     dynamic "taint" {
       for_each = each.value.taints
