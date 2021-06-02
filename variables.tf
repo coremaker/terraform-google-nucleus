@@ -42,6 +42,7 @@ variable "k8s_node_pools" {
         min_node_count = number
         max_node_count = number
         machine_type = string
+        image_type = string
         taints = list(object({
             key = string
             value = string
@@ -53,6 +54,7 @@ variable "k8s_node_pools" {
         min_node_count = 1
         max_node_count = 3
         machine_type = "n1-standard-1"
+        image_type = "cos_containerd"
         taints = []
     }]
 }
