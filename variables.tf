@@ -66,7 +66,6 @@ variable "k8s_namespaces" {
         dns_records = set(string)
         uses_postgres = bool # If set true postgres_enabled should be true
         uses_mysql = bool # If set true mysql_enabled should be true
-        uses_mongodb_atlas = bool
         uses_slack_alert = bool # If true you have to manually create the slack channel on slack
         uses_redis = bool
   }))
@@ -184,46 +183,6 @@ variable "slack_auth_token" {
 
 variable "alert_policy_threshold_duration" {
     default = "86400s"
-}
-
-# MongoDB Atlas
-
-variable "mongodb_atlas_enabled" {
-    type = bool
-    default = false
-}
-
-variable "mongodb_atlas_instance_size_name" {
-    default = "M2"
-    description = "The mongodbatlas instance size. Possible values are: M2, M5, M10, M20, M30 etc. IMPORTANT: Upgrading from M2/M5 to M10 and above will recreate the cluster and the data will be lost so a data migration must be planned ahead."
-}
-
-variable "mongodb_atlas_version" {
-    default = "4.4"
-}
-
-variable "mongodb_atlas_disk_size" {
-    default = 2
-}
-
-variable "mongodb_atlas_region" {
-    default = "WESTERN_EUROPE"
-}
-
-variable "mongodb_atlas_org_id" {
-    default = ""
-}
-
-variable "mongodb_ip_whitelist" {
-    default = "0.0.0.0/0"
-}
-
-variable "mongodb_provider_backup_enabled" {
-    default = "true"
-}
-
-variable "mongodb_auto_scaling_disk_gb_enabled" {
-    default = "false"
 }
 # Reddis
 
