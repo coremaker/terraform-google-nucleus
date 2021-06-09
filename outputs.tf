@@ -40,3 +40,8 @@ output "flux_deploy_key" {
 output "cluster_name" {
   value = google_container_cluster.kube.name
 }
+
+output "google_compute_network_vpc_id" {
+  value = google_compute_network.vpc.id
+  sensitive = true
+}
