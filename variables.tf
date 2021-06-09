@@ -67,7 +67,6 @@ variable "k8s_namespaces" {
         uses_postgres = bool # If set true postgres_enabled should be true
         uses_mysql = bool # If set true mysql_enabled should be true
         uses_slack_alert = bool # If true you have to manually create the slack channel on slack
-        uses_redis = bool
   }))
 }
 
@@ -183,22 +182,4 @@ variable "slack_auth_token" {
 
 variable "alert_policy_threshold_duration" {
     default = "86400s"
-}
-# Reddis
-
-variable "redis_enabled" {
-    type = bool
-    default = false
-}
-
-variable "redis_tier" {
-    default = "STANDARD_HA"
-}
-
-variable "redis_version" {
-    default = "REDIS_4_0"
-}
-
-variable "redis_memory_size" {
-    default = 1
 }
