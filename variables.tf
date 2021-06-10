@@ -64,8 +64,6 @@ variable "k8s_namespaces" {
         name = string # Name of the namespace
         has_public_ip = bool
         dns_records = set(string)
-        uses_postgres = bool # If set true postgres_enabled should be true
-        uses_mysql = bool # If set true mysql_enabled should be true
         uses_slack_alert = bool # If true you have to manually create the slack channel on slack
   }))
 }
@@ -100,44 +98,6 @@ variable "helm_operator_chart_version" {
 
 variable "helm_operator" {
     default = "1.2.0"
-}
-
-# POSTGRES
-
-variable "postgres_machine_type" {
-    default = "db-f1-micro"
-}
-
-variable "postgres_disk_size" {
-    default = "10"
-}
-
-variable "postgres_database_version" {
-    default = "POSTGRES_11" # Postgres version
-}
-
-variable "postgres_enabled" {
-    type = bool
-    default = false # Enable and disable postgres
-}
-
-# MYSQL
-
-variable "mysql_machine_type" {
-    default = "db-f1-micro"
-}
-
-variable "mysql_disk_size" {
-    default = "10"
-}
-
-variable "mysql_database_version" {
-    default = "MYSQL_5_7" # Mysql database version
-}
-
-variable "mysql_enabled" {
-    type = bool
-    default = false # Enable and disable mysql
 }
 
 # DNS
