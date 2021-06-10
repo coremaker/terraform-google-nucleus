@@ -60,6 +60,7 @@ resource "google_sql_database_instance" "postgres_db" {
 
   name             = "${var.google_project_id}-postgres-${random_string.postgres_db_name.0.result}"
   database_version = var.postgres_database_version
+  deletion_protection = false
 
   settings {
     tier = var.postgres_machine_type

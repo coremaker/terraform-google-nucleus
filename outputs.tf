@@ -45,3 +45,8 @@ output "google_compute_network_vpc_id" {
   value = google_compute_network.vpc.id
   sensitive = true
 }
+
+output "google_compute_network_vpc_self_link" {
+  value = google_compute_network.vpc.self_link
+  sensitive = true
+}

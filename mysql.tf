@@ -60,6 +60,7 @@ resource "google_sql_database_instance" "mysql_db" {
 
   name             = "${var.google_project_id}-mysql-${random_string.mysql_db_name.0.result}"
   database_version = var.mysql_database_version
+  deletion_protection = false
 
   settings {
     tier = var.mysql_machine_type
