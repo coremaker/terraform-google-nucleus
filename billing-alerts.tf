@@ -40,7 +40,7 @@ resource "google_billing_budget" "project_service_budget" {
 
   budget_filter {
     projects = ["projects/${data.google_project.project.number}"]
-    services = ["services/${each.value.service_id"]
+    services = ["services/${each.value.service_id}"]
   }
 
   amount {
