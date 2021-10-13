@@ -18,12 +18,12 @@ resource "google_billing_budget" "project_budget" {
   amount {
     specified_amount {
       currency_code = var.billing_currency_code
-      units         = var.billing_units_amount
+      units         = var.billing_project_units_amount
     }
   }
 
   dynamic "threshold_rules" {
-    for_each = var.billing_threshold_rules
+    for_each = var.billing_project_threshold_rules
     content {
       threshold_percent = threshold_rules.value.threshold
       spend_basis       = threshold_rules.value.spend_type
@@ -40,7 +40,7 @@ resource "google_billing_budget" "project_budget" {
 }
 
 resource "google_billing_budget" "project_service_budget" {
-  for_each = local.billing_budget_per_service
+  for_each = var.enable_billing_alerts ? local.billing_budget_per_service : []
 
   billing_account = var.google_billing_account_id
   display_name    = "Billing Budget-${each.value.name}"

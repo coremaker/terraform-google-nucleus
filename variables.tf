@@ -158,11 +158,11 @@ variable "billing_currency_code" {
     default = "GBP"
 }
 
-variable "billing_units_amount" {
+variable "billing_project_units_amount" {
     default = "500"
 }
 
-variable "billing_threshold_rules" {
+variable "billing_project_threshold_rules" {
     type    = list(object({
         threshold = number
         spend_type = string
