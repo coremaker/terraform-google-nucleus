@@ -150,6 +150,10 @@ variable "enable_billing_alerts" {
     default = false
 }
 
+variable "google_billing_account_id" {
+    default = ""
+}
+
 variable "billing_currency_code" {
     default = "GBP"
 }
