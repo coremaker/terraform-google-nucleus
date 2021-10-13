@@ -192,4 +192,5 @@ variable "billing_budgets_per_service" {
         threshold_percent = string
         spend_basis = string
     }))
+    default = []
 }
