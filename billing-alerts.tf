@@ -1,3 +1,10 @@
+locals {
+  service_billing_alerts = {
+    for service_id in var.billing_budgets_services:
+    service_id.name => service_id
+  }
+}
+
 resource "google_billing_budget" "project_budget" {
   count = var.enable_billing_alerts ? 1 : 0
 
@@ -33,7 +40,7 @@ resource "google_billing_budget" "project_budget" {
 }
 
 resource "google_billing_budget" "project_service_budget" {
-  for_each = var.billing_budgets_services
+  for_each = local.service_billing_alerts
 
   billing_account = var.google_billing_account_id
   display_name    = "Billing Budget-${each.value.name}"
