@@ -143,3 +143,39 @@ variable "slack_auth_token" {
 variable "alert_policy_threshold_duration" {
     default = "86400s"
 }
+
+# GCP Billing Alerts
+variable "enable_billing_alerts" {
+    type = bool
+    default = false
+}
+
+variable "billing_currency_code" {
+    default = "GBP"
+}
+
+variable "billing_units_amount" {
+    default = "500"
+}
+
+variable "billing_threshold_rules" {
+    type    = list(object({
+        threshold = number
+        spend_type = string
+    }))
+    default = [
+        {
+            threshold = 1.0
+            spend_type = "FORECASTED_SPEND"
+        },
+        {
+            threshold = 1.2
+            spend_type = "FORECASTED_SPEND"
+        }
+    ]
+}
+
+variable "billing_email_address" {
+    type = list(string)
+    default = ["address@example.com"]
+}
