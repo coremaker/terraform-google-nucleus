@@ -184,10 +184,12 @@ variable "billing_email_address" {
     default = ["address@example.com"]
 }
 
-variable "billing_budgets_services" {
+variable "billing_budgets_per_service" {
     type    = list(object({
         name = string
         service_id = string
         amount = number
+        threshold_percent = string
+        spend_basis = string
     }))
 }
