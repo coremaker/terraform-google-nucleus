@@ -40,7 +40,7 @@ resource "google_billing_budget" "project_budget" {
 }
 
 resource "google_billing_budget" "project_service_budget" {
-  for_each = var.enable_billing_alerts ? local.billing_budget_per_service : []
+  for_each = var.enable_billing_alerts ? local.billing_budget_per_service : {}
 
   billing_account = var.google_billing_account_id
   display_name    = "Billing Budget-${each.value.name}"
