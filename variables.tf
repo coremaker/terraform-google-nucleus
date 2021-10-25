@@ -278,7 +278,7 @@ variable "k8s_containers_alerts_restarts_alignment_period" {
 
 variable "k8s_containers_alerts_restarts_per_series_aligner" {
     type = string
-    default = "ALIGN_SUM"
+    default = "ALIGN_DELTA"
 }
 
 #Pod warnings and errors
