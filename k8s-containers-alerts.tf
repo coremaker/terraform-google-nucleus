@@ -5,23 +5,23 @@ resource "google_monitoring_alert_policy" "kube_event" {
   combiner     = "OR"
   notification_channels = var.k8s_containers_alerts_type == "slack" ? [google_monitoring_notification_channel.kube_event_slack_channel[each.key].name] : google_monitoring_notification_channel.kube_event_email_channel.*.id
 
-  conditions {
-    display_name = "K8S Container Error Log(ENV: ${var.environment_name}, Namespace: ${each.key})"
-    condition_threshold {
-      filter          = <<EOT
-metric.type="logging.googleapis.com/user/${google_logging_metric.kube_event[each.key].name}" AND
-resource.type="k8s_container"
-EOT
-      duration        = var.k8s_containers_alerts_logs_duration
-      threshold_value = var.k8s_containers_alerts_logs_threshold_value
-      comparison      = "COMPARISON_GT"
-      aggregations {
-          alignment_period   = var.k8s_containers_alerts_logs_alignment_period
-          per_series_aligner = var.k8s_containers_alerts_logs_per_series_aligner
-          group_by_fields = ["resource.label.container_name"]
-      }
-    }
-  }
+#   conditions {
+#     display_name = "K8S Container Error Log(ENV: ${var.environment_name}, Namespace: ${each.key})"
+#     condition_threshold {
+#       filter          = <<EOT
+# metric.type="logging.googleapis.com/user/${google_logging_metric.kube_event[each.key].name}" AND
+# resource.type="k8s_container"
+# EOT
+#       duration        = var.k8s_containers_alerts_logs_duration
+#       threshold_value = var.k8s_containers_alerts_logs_threshold_value
+#       comparison      = "COMPARISON_GT"
+#       aggregations {
+#           alignment_period   = var.k8s_containers_alerts_logs_alignment_period
+#           per_series_aligner = var.k8s_containers_alerts_logs_per_series_aligner
+#           group_by_fields = ["resource.label.container_name"]
+#       }
+#     }
+#   }
 
   conditions {
     display_name = "K8S Container CPU Limit Utilization reached ${var.k8s_containers_alerts_cpu_memory_threshold_value}(ENV: ${var.environment_name}, Namespace: ${each.key})"
@@ -81,23 +81,23 @@ EOT
     }
   }
 
-  conditions {
-    display_name = "K8S Pod Error Log(ENV: ${var.environment_name}, Namespace: ${each.key})"
-    condition_threshold {
-      filter          = <<EOT
-metric.type="logging.googleapis.com/user/${google_logging_metric.kube_pod_event[each.key].name}" AND
-resource.type="k8s_pod"
-EOT
-      duration        = var.k8s_containers_alerts_pod_logs_duration
-      threshold_value = var.k8s_containers_alerts_pod_logs_threshold_value
-      comparison      = "COMPARISON_GT"
-      aggregations {
-          alignment_period   = var.k8s_containers_alerts_pod_logs_alignment_period
-          per_series_aligner = var.k8s_containers_alerts_pod_logs_per_series_aligner
-          group_by_fields = ["resource.label.pod_name"]
-      }
-    }
-  }
+#   conditions {
+#     display_name = "K8S Pod Error Log(ENV: ${var.environment_name}, Namespace: ${each.key})"
+#     condition_threshold {
+#       filter          = <<EOT
+# metric.type="logging.googleapis.com/user/${google_logging_metric.kube_pod_event[each.key].name}" AND
+# resource.type="k8s_pod"
+# EOT
+#       duration        = var.k8s_containers_alerts_pod_logs_duration
+#       threshold_value = var.k8s_containers_alerts_pod_logs_threshold_value
+#       comparison      = "COMPARISON_GT"
+#       aggregations {
+#           alignment_period   = var.k8s_containers_alerts_pod_logs_alignment_period
+#           per_series_aligner = var.k8s_containers_alerts_pod_logs_per_series_aligner
+#           group_by_fields = ["resource.label.pod_name"]
+#       }
+#     }
+#   }
 
   lifecycle {
     create_before_destroy = true
