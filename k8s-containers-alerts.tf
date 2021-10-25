@@ -108,7 +108,7 @@ EOT
 
 resource "google_logging_metric" "kube_event" {
   for_each = var.enable_k8s_containers_alerts ? var.k8s_containers_namespaces : []
-  name   = "Container Errors - ${each.key}"
+  name   = "containers/${each.key}/errors"
 
   filter = <<EOT
 resource.type="k8s_container"
@@ -123,7 +123,7 @@ EOT
 
 resource "google_logging_metric" "kube_pod_event" {
   for_each = var.enable_k8s_containers_alerts ? var.k8s_containers_namespaces : []
-  name   = "Pods Errors - ${each.key}"
+  name   = "pods/${each.key}/errors"
 
   filter = <<EOT
 resource.type="k8s_pod"
