@@ -1,19 +1,19 @@
 resource "google_monitoring_alert_policy" "kube_event" {
   for_each = var.enable_k8s_containers_alerts ? var.k8s_containers_namespaces : []
-  display_name = "${var.environment_name} - ${each.key} - K8S Container Alerts"
+  display_name = "K8S Container Alerts - ${var.environment_name} - ${each.key}"
 
   combiner     = "OR"
   notification_channels = var.k8s_containers_alerts_type == "slack" ? [google_monitoring_notification_channel.kube_event_slack_channel[each.key].name] : google_monitoring_notification_channel.kube_event_email_channel.*.id
 
   conditions {
-    display_name = "K8S Container Error Log(${var.environment_name}, ${each.key})"
+    display_name = "K8S Container Error Log(ENV: ${var.environment_name}, Namespace: ${each.key})"
     condition_threshold {
       filter          = <<EOT
 metric.type="logging.googleapis.com/user/${google_logging_metric.kube_event[each.key].name}" AND
 resource.type="k8s_container"
 EOT
-      duration        = "60s"
-      threshold_value = 0
+      duration        = var.k8s_containers_alerts_logs_duration
+      threshold_value = var.k8s_containers_alerts_logs_threshold_value
       comparison      = "COMPARISON_GT"
       aggregations {
           alignment_period   = "60s"
@@ -23,15 +23,52 @@ EOT
   }
 
   conditions {
-    display_name = "K8S Container CPU Limit Utilization(${var.environment_name}, ${each.key})"
+    display_name = "K8S Container CPU Limit Utilization reached ${var.k8s_containers_alerts_cpu_memory_threshold_value}(ENV: ${var.environment_name}, Namespace: ${each.key})"
     condition_threshold {
       filter          = <<EOT
 metric.type="kubernetes.io/container/cpu/limit_utilization" AND
 resource.type="k8s_container" AND
 resource.labels.namespace_name="${each.key}"
 EOT
-      duration        = "60s"
-      threshold_value = 0
+      duration        = var.k8s_containers_alerts_cpu_memory_duration
+      threshold_value = var.k8s_containers_alerts_cpu_memory_threshold_value
+      comparison      = "COMPARISON_GT"
+      aggregations {
+          alignment_period   = "60s"
+          per_series_aligner = "ALIGN_SUM"
+       }
+    }
+  }
+
+  conditions {
+    display_name = "K8S Container Memory Limit Utilization reached ${var.k8s_containers_alerts_cpu_memory_threshold_value}(ENV: ${var.environment_name}, Namespace: ${each.key})"
+    condition_threshold {
+      filter          = <<EOT
+metric.type="kubernetes.io/container/memory/limit_utilization" AND
+resource.type="k8s_container" AND
+resource.labels.namespace_name="${each.key}"
+EOT
+      duration        = var.k8s_containers_alerts_cpu_memory_duration
+      threshold_value = var.k8s_containers_alerts_cpu_memory_threshold_value
+      comparison      = "COMPARISON_GT"
+      aggregations {
+          alignment_period   = "60s"
+          per_series_aligner = "ALIGN_SUM"
+       }
+    }
+  }
+
+  conditions {
+    display_name = "K8S Container Restarted(ENV: ${var.environment_name}, Namespace: ${each.key})"
+    condition_threshold {
+      filter          = <<EOT
+metric.type="kubernetes.io/container/restart_count" AND
+resource.type="k8s_container" AND
+resource.labels.namespace_name="${each.key}" AND
+resource.labels.state="ACTIVE"
+EOT
+      duration        = var.k8s_containers_alerts_restarts_duration
+      threshold_value = var.k8s_containers_alerts_restarts_threshold_value
       comparison      = "COMPARISON_GT"
       aggregations {
           alignment_period   = "60s"

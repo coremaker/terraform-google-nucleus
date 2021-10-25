@@ -217,3 +217,34 @@ variable "k8s_containers_alerts_email_address" {
     type = list(string)
     default = ["address@example.com"]
 }
+
+
+variable "k8s_containers_alerts_logs_duration" {
+    type = string
+    default = "60s"
+}
+
+variable "k8s_containers_alerts_logs_threshold_value" {
+    type = number
+    default = 0
+}
+
+variable "k8s_containers_alerts_cpu_memory_duration" {
+    type = string
+    default = "60s"
+}
+
+variable "k8s_containers_alerts_cpu_memory_threshold_value" {
+    type = number
+    default = 0.9
+}
+
+variable "k8s_containers_alerts_restarts_duration" {
+    type = string
+    default = "60s"
+}
+
+variable "k8s_containers_alerts_restarts_threshold_value" {
+    type = number
+    default = 0
+}
