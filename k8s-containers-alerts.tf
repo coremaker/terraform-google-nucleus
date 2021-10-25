@@ -28,7 +28,7 @@ EOT
       filter          = <<EOT
 metric.type="kubernetes.io/container/cpu/limit_utilization" AND
 resource.type="k8s_container" AND
-namespace_name="${each.key}"
+resource.labels.namespace_name="${each.key}"
 EOT
       duration        = "60s"
       threshold_value = 0
