@@ -61,25 +61,25 @@ EOT
     }
   }
 
-  conditions {
-    display_name = "K8S Container Restarted(ENV: ${var.environment_name}, Namespace: ${each.key})"
-    condition_threshold {
-      filter          = <<EOT
-metric.type="kubernetes.io/container/restart_count" AND
-resource.type="k8s_container" AND
-resource.labels.namespace_name="${each.key}" AND
-resource.labels.state="ACTIVE"
-EOT
-      duration        = var.k8s_containers_alerts_restarts_duration
-      threshold_value = var.k8s_containers_alerts_restarts_threshold_value
-      comparison      = "COMPARISON_GT"
-      aggregations {
-          alignment_period   = var.k8s_containers_alerts_restarts_alignment_period
-          per_series_aligner = var.k8s_containers_alerts_restarts_per_series_aligner
-          group_by_fields = ["resource.label.container_name"]
-      }
-    }
-  }
+#   conditions {
+#     display_name = "K8S Container Restarted(ENV: ${var.environment_name}, Namespace: ${each.key})"
+#     condition_threshold {
+#       filter          = <<EOT
+# metric.type="kubernetes.io/container/restart_count" AND
+# resource.type="k8s_container" AND
+# resource.labels.namespace_name="${each.key}" AND
+# resource.labels.state="ACTIVE"
+# EOT
+#       duration        = var.k8s_containers_alerts_restarts_duration
+#       threshold_value = var.k8s_containers_alerts_restarts_threshold_value
+#       comparison      = "COMPARISON_GT"
+#       aggregations {
+#           alignment_period   = var.k8s_containers_alerts_restarts_alignment_period
+#           per_series_aligner = var.k8s_containers_alerts_restarts_per_series_aligner
+#           group_by_fields = ["resource.label.container_name"]
+#       }
+#     }
+#   }
 
 #   conditions {
 #     display_name = "K8S Pod Error Log(ENV: ${var.environment_name}, Namespace: ${each.key})"
