@@ -204,6 +204,10 @@ variable "k8s_containers_alerts_type" {
     default = "slack"
 }
 
+variable "slack_auth_token" {
+    default = "token" # Needs to be replaced with a working token
+} 
+
 variable "k8s_container_alerts_slack_channel_name" {
     type = string
     default = ""
