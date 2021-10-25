@@ -218,7 +218,7 @@ variable "k8s_containers_alerts_email_address" {
     default = ["address@example.com"]
 }
 
-
+#Logs
 variable "k8s_containers_alerts_logs_duration" {
     type = string
     default = "60s"
@@ -229,6 +229,17 @@ variable "k8s_containers_alerts_logs_threshold_value" {
     default = 0
 }
 
+variable "k8s_containers_alerts_logs_alignment_period" {
+    type = string
+    default = "300s"
+}
+
+variable "k8s_containers_alerts_logs_per_series_aligner" {
+    type = string
+    default = "ALIGN_SUM"
+}
+
+#CPU and MEMORY utilization
 variable "k8s_containers_alerts_cpu_memory_duration" {
     type = string
     default = "60s"
@@ -239,6 +250,17 @@ variable "k8s_containers_alerts_cpu_memory_threshold_value" {
     default = 0.9
 }
 
+variable "k8s_containers_alerts_cpu_memory_alignment_period" {
+    type = string
+    default = "300s"  
+}
+
+variable "k8s_containers_alerts_cpu_memory_per_series_aligner" {
+    type = string
+    default = "ALIGN_SUM"
+}
+
+#Container restarts
 variable "k8s_containers_alerts_restarts_duration" {
     type = string
     default = "60s"
@@ -247,4 +269,35 @@ variable "k8s_containers_alerts_restarts_duration" {
 variable "k8s_containers_alerts_restarts_threshold_value" {
     type = number
     default = 0
+}
+
+variable "k8s_containers_alerts_restarts_alignment_period" {
+    type = string
+    default = "300s"  
+}
+
+variable "k8s_containers_alerts_restarts_per_series_aligner" {
+    type = string
+    default = "ALIGN_SUM"
+}
+
+#Pod warnings and errors
+variable "k8s_containers_alerts_pod_logs_duration" {
+    type = string
+    default = "60s"
+}
+
+variable "k8s_containers_alerts_pod_logs_threshold_value" {
+    type = number
+    default = 0
+}
+
+variable "k8s_containers_alerts_pod_logs_alignment_period" {
+    type = string
+    default = "300s"  
+}
+
+variable "k8s_containers_alerts_pod_logs_per_series_aligner" {
+    type = string
+    default = "ALIGN_SUM"
 }
