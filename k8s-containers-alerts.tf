@@ -18,6 +18,7 @@ EOT
       aggregations {
           alignment_period   = var.k8s_containers_alerts_logs_alignment_period
           per_series_aligner = var.k8s_containers_alerts_logs_per_series_aligner
+          group_by_fields = ["container_name"]
       }
     }
   }
@@ -36,6 +37,7 @@ EOT
       aggregations {
           alignment_period   = var.k8s_containers_alerts_cpu_memory_alignment_period
           per_series_aligner = var.k8s_containers_alerts_cpu_memory_per_series_aligner
+          group_by_fields = ["container_name"]
       }
     }
   }
@@ -54,6 +56,7 @@ EOT
       aggregations {
           alignment_period   = var.k8s_containers_alerts_cpu_memory_alignment_period
           per_series_aligner = var.k8s_containers_alerts_cpu_memory_per_series_aligner
+          group_by_fields = ["container_name"]
       }
     }
   }
@@ -73,6 +76,7 @@ EOT
       aggregations {
           alignment_period   = var.k8s_containers_alerts_restarts_alignment_period
           per_series_aligner = var.k8s_containers_alerts_restarts_per_series_aligner
+          group_by_fields = ["container_name"]
       }
     }
   }
@@ -90,6 +94,7 @@ EOT
       aggregations {
           alignment_period   = var.k8s_containers_alerts_pod_logs_alignment_period
           per_series_aligner = var.k8s_containers_alerts_pod_logs_per_series_aligner
+          group_by_fields = ["pod_name"]
       }
     }
   }
