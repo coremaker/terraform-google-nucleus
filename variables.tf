@@ -190,8 +190,12 @@ variable "billing_budgets_per_service" {
 ### These alerts are based on pod logs with severity ERROR
 variable "enable_k8s_containers_alerts" {
     type = bool
-    default = true
+    default = false
 }
+
+variable "slack_auth_token" {
+    default = "token" # Needs to be replaced with a working token
+} 
 
 variable "k8s_containers_namespaces" {
   type    = set(string)
@@ -203,10 +207,6 @@ variable "k8s_containers_alerts_type" {
     type = string
     default = "slack"
 }
-
-variable "slack_auth_token" {
-    default = "token" # Needs to be replaced with a working token
-} 
 
 variable "k8s_container_alerts_slack_channel_name" {
     type = string

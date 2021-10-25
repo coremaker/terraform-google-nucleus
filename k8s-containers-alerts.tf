@@ -1,5 +1,5 @@
 resource "google_monitoring_alert_policy" "kube_event" {
-  for_each = var.enable_k8s_containers_alerts ? var.k8s_container_namespaces : []
+  for_each = var.enable_k8s_containers_alerts ? var.k8s_containers_namespaces : []
   display_name = "${var.environment_name} - ${each.key} - K8S Container Alerts"
 
   combiner     = "OR"
@@ -48,7 +48,7 @@ EOT
 }
 
 resource "google_logging_metric" "kube_event" {
-  for_each = var.enable_k8s_containers_alerts ? var.k8s_container_namespaces : []
+  for_each = var.enable_k8s_containers_alerts ? var.k8s_containers_namespaces : []
   name   = each.key
 
   filter = <<EOT
@@ -63,7 +63,7 @@ EOT
 }
 
 resource "google_monitoring_notification_channel" "kube_event_slack_channel" {
-  for_each = var.enable_k8s_containers_alerts && var.k8s_containers_alerts_type == "slack" ? var.k8s_container_namespaces : []
+  for_each = var.enable_k8s_containers_alerts && var.k8s_containers_alerts_type == "slack" ? var.k8s_containers_namespaces : []
 
   display_name = "${each.key} Kubernetes Containers Alert"
   type = "slack"
