@@ -221,7 +221,7 @@ variable "k8s_containers_alerts_email_address" {
 #Logs
 variable "k8s_containers_alerts_logs_duration" {
     type = string
-    default = "60s"
+    default = "300s"
 }
 
 variable "k8s_containers_alerts_logs_threshold_value" {
@@ -257,7 +257,7 @@ variable "k8s_containers_alerts_cpu_memory_alignment_period" {
 
 variable "k8s_containers_alerts_cpu_memory_per_series_aligner" {
     type = string
-    default = "ALIGN_SUM"
+    default = "ALIGN_MEAN"
 }
 
 #Container restarts
@@ -284,7 +284,7 @@ variable "k8s_containers_alerts_restarts_per_series_aligner" {
 #Pod warnings and errors
 variable "k8s_containers_alerts_pod_logs_duration" {
     type = string
-    default = "60s"
+    default = "300s"
 }
 
 variable "k8s_containers_alerts_pod_logs_threshold_value" {

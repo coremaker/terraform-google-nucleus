@@ -113,6 +113,7 @@ resource "google_logging_metric" "kube_event" {
   filter = <<EOT
 resource.type="k8s_container"
 resource.labels.namespace_name="${each.key}"
+resource.labels.container_name!="cloudsql-proxy"
 severity>=ERROR
 EOT
   metric_descriptor {
