@@ -1,6 +1,6 @@
 resource "google_monitoring_alert_policy" "kube_event" {
   for_each = var.enable_k8s_containers_alerts ? var.k8s_containers_namespaces : []
-  display_name = "Kubernetes Alerts - ${var.environment_name} - ${each.key}"
+  display_name = "Kubernetes Alerts ${upper(var.environment_name)}"
 
   combiner     = "OR"
   notification_channels = var.k8s_containers_alerts_type == "slack" ? [google_monitoring_notification_channel.kube_event_slack_channel[each.key].name] : google_monitoring_notification_channel.kube_event_email_channel.*.id
