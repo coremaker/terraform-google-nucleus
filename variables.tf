@@ -64,7 +64,6 @@ variable "k8s_namespaces" {
         name = string # Name of the namespace
         has_public_ip = bool
         dns_records = set(string)
-        uses_slack_alert = bool # If true you have to manually create the slack channel on slack
   }))
 }
 
@@ -135,16 +134,8 @@ variable "sealed_secrets_version" {
     default = "v0.13.1"
 }
 
-# Slack alert channel
-variable "slack_auth_token" {
-    default = "token" # Needs to be replaced with a working token
-}
-
-variable "alert_policy_threshold_duration" {
-    default = "86400s"
-}
-
-# GCP Billing Alerts
+# Alerting
+## GCP Billing Alerts
 variable "enable_billing_alerts" {
     type = bool
     default = false
@@ -193,4 +184,120 @@ variable "billing_budgets_per_service" {
         spend_basis = string
     }))
     default = []
+}
+
+## Kubernetes Alerts
+### These alerts are based on pod logs with severity ERROR
+variable "enable_k8s_containers_alerts" {
+    type = bool
+    default = false
+}
+
+variable "slack_auth_token" {
+    default = "token" # Needs to be replaced with a working token
+} 
+
+variable "k8s_containers_namespaces" {
+  type    = set(string)
+  default = ["default"]
+}
+
+### slack or email supported only
+variable "k8s_containers_alerts_type" {
+    type = string
+    default = "slack"
+}
+
+variable "k8s_container_alerts_slack_channel_name" {
+    type = string
+    default = ""
+}
+
+variable "k8s_containers_alerts_email_address" {
+    type = list(string)
+    default = ["address@example.com"]
+}
+
+#Logs
+variable "k8s_containers_alerts_logs_duration" {
+    type = string
+    default = "300s"
+}
+
+variable "k8s_containers_alerts_logs_threshold_value" {
+    type = number
+    default = 0
+}
+
+variable "k8s_containers_alerts_logs_alignment_period" {
+    type = string
+    default = "300s"
+}
+
+variable "k8s_containers_alerts_logs_per_series_aligner" {
+    type = string
+    default = "ALIGN_SUM"
+}
+
+#CPU and MEMORY utilization
+variable "k8s_containers_alerts_cpu_memory_duration" {
+    type = string
+    default = "60s"
+}
+
+variable "k8s_containers_alerts_cpu_memory_threshold_value" {
+    type = number
+    default = 0.9
+}
+
+variable "k8s_containers_alerts_cpu_memory_alignment_period" {
+    type = string
+    default = "300s"  
+}
+
+variable "k8s_containers_alerts_cpu_memory_per_series_aligner" {
+    type = string
+    default = "ALIGN_MEAN"
+}
+
+#Container restarts
+variable "k8s_containers_alerts_restarts_duration" {
+    type = string
+    default = "60s"
+}
+
+variable "k8s_containers_alerts_restarts_threshold_value" {
+    type = number
+    default = 0
+}
+
+variable "k8s_containers_alerts_restarts_alignment_period" {
+    type = string
+    default = "300s"  
+}
+
+variable "k8s_containers_alerts_restarts_per_series_aligner" {
+    type = string
+    default = "ALIGN_DELTA"
+}
+
+#Pod warnings and errors
+variable "k8s_containers_alerts_pod_logs_duration" {
+    type = string
+    default = "300s"
+}
+
+variable "k8s_containers_alerts_pod_logs_threshold_value" {
+    type = number
+    default = 0
+}
+
+variable "k8s_containers_alerts_pod_logs_alignment_period" {
+    type = string
+    default = "300s"  
+}
+
+variable "k8s_containers_alerts_pod_logs_per_series_aligner" {
+    type = string
+    default = "ALIGN_SUM"
 }
