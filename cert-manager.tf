@@ -10,6 +10,7 @@ resource "helm_release" "cert_manager_lentsencrypt" {
 
   name       = "cert-managers-letsencrypt"
   chart      = format("%s/helm-charts/cert-manager-letsencrypt", path.module)
+  namespace = kubernetes_namespace.cert_manager.0.metadata.0.name
 
   set {
     name = "clouddns.projectId"
