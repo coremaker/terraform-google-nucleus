@@ -99,6 +99,52 @@ variable "helm_operator" {
     default = "1.2.0"
 }
 
+# Fluxv2
+
+variable "fluxv2_enabled" {
+    type = bool
+    default = false
+}
+
+variable "fluxv2_chart" {
+    type = string
+    default = "https://github.com/coremaker/helm-chart-fluxv2/releases/download/v0.0.4/fluxv2-0.0.4.tgz"
+}
+
+variable "fluxv2_git_url" {
+    type = string
+    default = ""
+}
+
+variable "fluxv2_git_branch" {
+    type = string
+    default = "main"
+}
+
+variable "fluxv2_git_path" {
+    type = string
+    default = ""
+}
+
+variable "fluxv2_gitRepository_interval" {
+    type = string
+    default = "5m"
+}
+
+variable "fluxv2_gitRepository_namespace" {
+    type = string
+    default = "flux-system"
+}
+
+variable "fluxv2_kustomization_namespace" {
+    type = string
+    default = "flux-system"
+}
+
+variable "fluxv2_kustomization_interval" {
+    type = string
+    default = "5m"
+}
 # DNS
 
 variable "dns_domain" {}
