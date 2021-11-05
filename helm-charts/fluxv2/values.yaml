@@ -1,0 +1,14 @@
+gitRepository:
+  enabled: true
+  namespace: ""
+  url: ""
+  branch: ""
+  interval: ""
+  secretName: ""
+
+kustomization:
+  enabled: true
+  namespace: ""
+  path: ""
+  prune: false
+  interval: 

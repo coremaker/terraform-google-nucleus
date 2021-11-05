@@ -3,7 +3,7 @@ resource "helm_release" "fluxv2" {
 
     name       = "fluxv2"
     namespace  = kubernetes_namespace.fluxv2.0.metadata.0.name
-    chart = var.fluxv2_chart
+    chart = format("%s/helm-charts/fluxv2", path.module)
 
     set {
         name = "gitRepository.url"
@@ -44,6 +44,16 @@ resource "helm_release" "fluxv2" {
         name = "kustomization.interval"
         value = var.fluxv2_kustomization_interval
     }
+
+    depends_on = [helm_release.fluxv2_controllers]
+}
+
+resource "helm_release" "fluxv2_controllers" {
+    count = var.fluxv2_enabled ? 1 : 0
+
+    name       = "fluxv2-controllers"
+    namespace  = kubernetes_namespace.fluxv2.0.metadata.0.name
+    chart = var.fluxv2_chart
 
     depends_on = [kubernetes_namespace.fluxv2, kubernetes_secret.flux_secret]
 }
