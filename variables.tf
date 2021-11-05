@@ -108,7 +108,7 @@ variable "fluxv2_enabled" {
 
 variable "fluxv2_chart" {
     type = string
-    default = "https://github.com/coremaker/helm-chart-fluxv2/releases/download/v0.0.4/fluxv2-0.0.4.tgz"
+    default = "https://github.com/coremaker/helm-chart-fluxv2/releases/download/v0.0.8/fluxv2-0.0.8.tgz"
 }
 
 variable "fluxv2_git_url" {
