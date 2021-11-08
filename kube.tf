@@ -34,6 +34,8 @@ resource "google_container_cluster" "kube" {
   remove_default_node_pool = true
   initial_node_count = 1
 
+  enable_shielded_nodes = var.k8s_enable_shielded_nodes
+
   ip_allocation_policy {
     cluster_ipv4_cidr_block  = "10.0.0.0/16"
     services_ipv4_cidr_block = "10.1.0.0/16"

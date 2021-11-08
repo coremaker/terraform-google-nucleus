@@ -26,6 +26,11 @@ variable "k8s_release_channel" {
     default = "UNSPECIFIED"
 }
 
+variable "k8s_enable_shielded_nodes" {
+    type = bool
+    default = false
+}
+
 variable "k8s_node_auto_upgrade" {
     type = bool
     default = false // false only works with UNSPECIFIED release channel 
