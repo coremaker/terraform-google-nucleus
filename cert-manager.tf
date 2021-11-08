@@ -1,4 +1,5 @@
 resource "google_project_iam_member" "cert_manager_account_dns_admin" {
+  project = var.google_project_id
   count      = var.cert_manager_enabled ? 1 : 0
 
   role    = "roles/dns.admin"
