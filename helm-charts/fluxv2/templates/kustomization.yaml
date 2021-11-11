@@ -1,14 +1,12 @@
-{{- if .Values.kustomization.enabled }}
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: k8s-repo
-  namespace: {{ .Values.kustomization.namespace }}
+  name: {{ .Values.kustomization.name }}
+  namespace: {{.Release.Namespace}}
 spec:
   interval: {{ .Values.kustomization.interval }}
   sourceRef:
     kind: GitRepository
-    name: k8s-repo
-  path: {{ .Values.kustomization.path }}
+    name: {{ .Values.gitRepository.name }}
+  path: {{ .Values.common.path }}
   prune: {{ .Values.kustomization.prune }}
-{{- end }}

@@ -1,9 +1,8 @@
-{{- if .Values.gitRepository.enabled }}
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: GitRepository
 metadata:
-  name: k8s-repo
-  namespace: {{ .Values.gitRepository.namespace }}
+  name: {{ .Values.gitRepository.name }}
+  namespace: {{.Release.Namespace}}
 spec:
   interval: {{ .Values.gitRepository.interval }}
   url: {{ .Values.gitRepository.url }}
@@ -11,4 +10,3 @@ spec:
     branch: {{ .Values.gitRepository.branch }}
   secretRef:
     name: {{ .Values.gitRepository.secretName }}
-{{- end }}

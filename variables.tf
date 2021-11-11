@@ -118,7 +118,7 @@ variable "fluxv2_git_url" {
 
 variable "fluxv2_git_branch" {
     type = string
-    default = "main"
+    default = "master"
 }
 
 variable "fluxv2_git_path" {
@@ -131,19 +131,24 @@ variable "fluxv2_gitRepository_interval" {
     default = "5m"
 }
 
-variable "fluxv2_gitRepository_namespace" {
-    type = string
-    default = "flux-system"
-}
-
-variable "fluxv2_kustomization_namespace" {
-    type = string
-    default = "flux-system"
-}
-
 variable "fluxv2_kustomization_interval" {
     type = string
     default = "5m"
+}
+
+variable "fluxv2_imageAutomation_interval" {
+    type = string
+    default = "5m"
+}
+
+variable "fluxv2_imageAutomation_checkout_branch" {
+    type = string
+    default = "master"
+}
+
+variable "fluxv2_imageAutomation_push_branch" {
+    type = string
+    default = "master"
 }
 # DNS
 
