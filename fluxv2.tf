@@ -32,7 +32,7 @@ resource "helm_release" "fluxv2" {
 
     set {
         name = "gitRepository.secretName"
-        value = kubernetes_secret.fluxv2_secret.0.metadata.0.name
+        value = kubernetes_secret.fluxv2_github_secret.0.metadata.0.name
     }
 
     set {
