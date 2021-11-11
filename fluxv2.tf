@@ -98,7 +98,8 @@ resource "kubernetes_secret" "fluxv2_gcr_secret" {
         ".dockerconfigjson" = jsonencode({
         auths = {
             "eu.gcr.io" = {
-            auth = "_json_key:${base64decode(google_service_account_key.fluxv2_container_registry.0.private_key)}"
+            username = "_json_key"
+            password = ${base64decode(google_service_account_key.fluxv2_container_registry.0.private_key)}
             }
         }
         })
