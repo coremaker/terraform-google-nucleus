@@ -7,7 +7,7 @@ gitRepository:
 
 kustomization:
   name: k8s-repo
-  prune: false
+  prune: true
   interval: 5m
 
 imageAutomation:
