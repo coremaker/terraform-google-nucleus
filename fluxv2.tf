@@ -50,7 +50,7 @@ resource "helm_release" "fluxv2" {
         value = var.fluxv2_imageAutomation_interval
     }
 
-    depends_on = [helm_release.fluxv2_controllers]
+    depends_on = [helm_release.fluxv2_controllers, kubernetes_secret.fluxv2_github_secret]
 }
 
 resource "helm_release" "fluxv2_controllers" {
@@ -60,7 +60,7 @@ resource "helm_release" "fluxv2_controllers" {
     namespace  = kubernetes_namespace.fluxv2.0.metadata.0.name
     chart = var.fluxv2_chart
 
-    depends_on = [kubernetes_namespace.fluxv2, kubernetes_secret.flux_secret]
+    depends_on = [kubernetes_namespace.fluxv2]
 }
 
 resource "kubernetes_secret" "fluxv2_github_secret" {
@@ -72,8 +72,8 @@ resource "kubernetes_secret" "fluxv2_github_secret" {
     }
 
     data = {
-        "identity" = tls_private_key.flux_secret.0.private_key_pem
-        "identity.pub" = tls_private_key.flux_secret.0.public_key_pem
+        "identity" = tls_private_key.fluxv2_secret.0.private_key_pem
+        "identity.pub" = tls_private_key.fluxv2_secret.0.public_key_pem
         "known_hosts" = file("${path.module}/github-known-hosts")
     }
 }
