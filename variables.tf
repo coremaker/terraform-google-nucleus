@@ -69,9 +69,15 @@ variable "k8s_namespaces" {
 
 # FLUX
 
-variable "flux_git_url" {}
+variable "flux_git_url" {
+    type = string
+    default = ""
+}
 
-variable "flux_git_path" {}
+variable "flux_git_path" {
+    type = string
+    default = "environments/dev"
+}
 
 variable "flux_chart_version" {
     default = "1.6.0"
