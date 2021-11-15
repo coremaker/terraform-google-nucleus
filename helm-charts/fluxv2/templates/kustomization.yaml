@@ -7,6 +7,6 @@ spec:
   interval: {{ .Values.kustomization.interval }}
   sourceRef:
     kind: GitRepository
-    name: {{ .Values.gitRepository.name }}
+    name: {{ .Values.common.resourcesName }}
   path: {{ .Values.common.path }}
   prune: {{ .Values.kustomization.prune }}

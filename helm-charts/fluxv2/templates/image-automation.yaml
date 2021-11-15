@@ -8,7 +8,7 @@ spec:
   suspend: {{ .Values.imageAutomation.suspend }}
   sourceRef:
     kind: GitRepository
-    name: {{ .Values.gitRepository.name }}
+    name: {{ .Values.common.resourcesName }}
   git:
     checkout:
       ref:
