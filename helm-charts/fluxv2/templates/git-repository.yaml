@@ -1,7 +1,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: GitRepository
 metadata:
-  name: {{ .Values.gitRepository.name }}
+  name: {{ .Values.common.resourcesName }}
   namespace: {{.Release.Namespace}}
 spec:
   interval: {{ .Values.gitRepository.interval }}

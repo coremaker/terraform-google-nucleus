@@ -1,20 +1,19 @@
 gitRepository:
-  name: k8s-repo
   url: ""
-  branch: master
-  interval: 5m
+  branch: ""
+  interval: ""
   secretName: ""
 
 kustomization:
-  name: k8s-repo
   prune: true
-  interval: 5m
+  interval: ""
 
 imageAutomation:
-  name: k8s-repo
-  checkoutBranch: master
-  pushBranch: master
-  interval: 5m
+  checkoutBranch: ""
+  pushBranch: ""
+  interval: ""
+  suspend: ""
 
 common:
+  resourcesName: ""
   path: ""

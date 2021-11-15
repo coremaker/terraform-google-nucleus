@@ -1,11 +1,11 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageUpdateAutomation
 metadata:
-  name: {{ .Values.imageAutomation.name }}
+  name: {{ .Values.common.resourcesName }}
   namespace: {{.Release.Namespace}}
 spec:
   interval: {{ .Values.imageAutomation.interval }}
-  suspend: false
+  suspend: {{ .Values.imageAutomation.suspend }}
   sourceRef:
     kind: GitRepository
     name: {{ .Values.gitRepository.name }}

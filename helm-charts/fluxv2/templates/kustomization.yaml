@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: {{ .Values.kustomization.name }}
+  name: {{ .Values.common.resourcesName }}
   namespace: {{.Release.Namespace}}
 spec:
   interval: {{ .Values.kustomization.interval }}

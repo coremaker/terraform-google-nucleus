@@ -124,7 +124,7 @@ variable "fluxv2_git_url" {
 
 variable "fluxv2_git_branch" {
     type = string
-    default = "master"
+    default = "main"
 }
 
 variable "fluxv2_git_path" {
@@ -132,9 +132,19 @@ variable "fluxv2_git_path" {
     default = ""
 }
 
+variable "fluxv2_resources_name" {
+    type = string
+    default = "k8s-repo"
+}
+
 variable "fluxv2_gitRepository_interval" {
     type = string
     default = "5m"
+}
+
+variable "fluxv2_kustomization_prune" {
+    type = bool
+    default = true
 }
 
 variable "fluxv2_kustomization_interval" {
@@ -147,14 +157,19 @@ variable "fluxv2_imageAutomation_interval" {
     default = "5m"
 }
 
+variable "fluxv2_imageAutomation_suspend" {
+    type = bool
+    default = false
+}
+
 variable "fluxv2_imageAutomation_checkout_branch" {
     type = string
-    default = "master"
+    default = "main"
 }
 
 variable "fluxv2_imageAutomation_push_branch" {
     type = string
-    default = "master"
+    default = "main"
 }
 # DNS
 

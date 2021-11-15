@@ -31,6 +31,11 @@ resource "helm_release" "fluxv2" {
     }
 
     set {
+        name = "common.resourcesName"
+        value = var.fluxv2_resources_name
+    }
+
+    set {
         name = "gitRepository.secretName"
         value = kubernetes_secret.fluxv2_github_secret.0.metadata.0.name
     }
@@ -41,6 +46,11 @@ resource "helm_release" "fluxv2" {
     }
 
     set {
+        name = "kustomization.prune"
+        value = var.fluxv2_kustomization_prune
+    }
+
+    set {
         name = "kustomization.interval"
         value = var.fluxv2_kustomization_interval
     }
@@ -48,6 +58,11 @@ resource "helm_release" "fluxv2" {
     set {
         name = "imageAutomation.interval"
         value = var.fluxv2_imageAutomation_interval
+    }
+
+    set {
+        name = "imageAutomation.suspend"
+        value = var.fluxv2_imageAutomation_suspend
     }
 
     depends_on = [helm_release.fluxv2_controllers, kubernetes_secret.fluxv2_github_secret]
