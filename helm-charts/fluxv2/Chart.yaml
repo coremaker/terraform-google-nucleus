@@ -1,4 +1,4 @@
 apiVersion: v1
-name: coremaker-fluxv2-repo
+name: fluxv2
 version: 0.0.1
-description: This is the coremaker helm chart used to deploy fluxv2 main two resources
+description: This is the coremaker helm chart used to deploy fluxv2 main resources
