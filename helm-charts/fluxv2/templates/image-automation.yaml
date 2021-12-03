@@ -1,0 +1,26 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: {{ .Values.common.resourcesName }}
+  namespace: {{.Release.Namespace}}
+spec:
+  interval: {{ .Values.imageAutomation.interval }}
+  suspend: {{ .Values.imageAutomation.suspend }}
+  sourceRef:
+    kind: GitRepository
+    name: {{ .Values.common.resourcesName }}
+  git:
+    checkout:
+      ref:
+        branch: {{ .Values.imageAutomation.checkoutBranch }}
+    commit:
+      author:
+        name: Fluxv2
+        email: fluxv2@coremaker.io
+      messageTemplate: |
+        An automated update from Flux
+    push:
+      branch: {{ .Values.imageAutomation.pushBranch }}
+  update:
+    strategy: Setters
+    path: {{ .Values.common.path }}

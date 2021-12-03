@@ -1,0 +1,19 @@
+gitRepository:
+  url: ""
+  branch: ""
+  interval: ""
+  secretName: ""
+
+kustomization:
+  prune: true
+  interval: ""
+
+imageAutomation:
+  checkoutBranch: ""
+  pushBranch: ""
+  interval: ""
+  suspend: ""
+
+common:
+  resourcesName: ""
+  path: ""

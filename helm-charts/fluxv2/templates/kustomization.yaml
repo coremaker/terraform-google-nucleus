@@ -1,0 +1,12 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: {{ .Values.common.resourcesName }}
+  namespace: {{.Release.Namespace}}
+spec:
+  interval: {{ .Values.kustomization.interval }}
+  sourceRef:
+    kind: GitRepository
+    name: {{ .Values.common.resourcesName }}
+  path: {{ .Values.common.path }}
+  prune: {{ .Values.kustomization.prune }}
