@@ -96,8 +96,8 @@ resource "kubernetes_secret" "fluxv2_github_secret" {
 resource "tls_private_key" "fluxv2_secret" {
     count = var.fluxv2_enabled ? 1 : 0
 
-    algorithm = "RSA"
-    rsa_bits  = "2048"
+    algorithm   = "ECDSA"
+    ecdsa_curve = "P384"
 }
 
 resource "kubernetes_secret" "fluxv2_gcr_secret" {
