@@ -72,53 +72,18 @@ variable "k8s_namespaces" {
   }))
 }
 
-# # FLUX
-
-# variable "flux_git_url" {
-#     type = string
-#     default = ""
-# }
-
-# variable "flux_git_path" {
-#     type = string
-#     default = "environments/dev"
-# }
-
-# variable "flux_chart_version" {
-#     default = "1.6.0"
-# }
-
-# variable "flux_version" {
-#     default = "1.21.0"
-# }
-
-# variable "flux_enabled" {
-#     type = bool
-#     default = true
-# }
-
-# variable "flux_manifest_generation" {
-#     type = bool
-#     default = true
-# }
-
-# variable "helm_operator_chart_version" {
-#     default = "1.2.0"
-# }
-
-# variable "helm_operator" {
-#     default = "1.2.0"
-# }
+# FLUX
+variable "flux_enabled" {
+    type = bool
+    default = true
+}
 
 # Fluxv2
-
 variable "fluxv2_enabled" {
     type = bool
     default = false
 }
-
 # DNS
-
 variable "dns_domain" {}
 
 variable "dns_enabled" {
@@ -127,26 +92,16 @@ variable "dns_enabled" {
 }
 
 # CERT-MANAGER
-
 variable "cert_manager_enabled" {
     type = bool
     default = true
 }
 
 # Sealed secrets
-
-# variable "sealed_secrets_enabled" {
-#     type = bool
-#     default = true
-# }
-
-# variable "sealed_secrets_chart_version" {
-#     default = "1.12.1"
-# }
-
-# variable "sealed_secrets_version" {
-#     default = "v0.13.1"
-# }
+variable "sealed_secrets_enabled" {
+    type = bool
+    default = true
+}
 
 # Alerting
 ## GCP Billing Alerts
