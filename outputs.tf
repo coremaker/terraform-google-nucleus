@@ -11,7 +11,7 @@ output "dns_name_servers" {
 #   sensitive   = true
 # }
 
-# kubernetes
+# GKE
 
 output "cluster_name" {
   value = google_container_cluster.kube.name
@@ -23,7 +23,7 @@ output "gke_endpoint" {
 }
 
 output "gke_certificate" {
-  value = base64decode(google_container_cluster.kube.master_auth.0.cluster_ca_certificate)
+  value = google_container_cluster.kube.master_auth.0.cluster_ca_certificate
   sensitive = true
 }
 
@@ -31,6 +31,15 @@ output "gke_token" {
   value = data.google_client_config.default.access_token
   sensitive = true
 }
+
+## kubernetes cert-manager
+
+output "k8s_cert_manager_account_key" {
+  value = var.cert_manager_enabled ? google_service_account_key.cert_manager_account_key.0.private_key : ""
+  sensitive = true
+}
+
+# vpc
 
 output "google_compute_network_vpc_id" {
   value = google_compute_network.vpc.id
