@@ -19,14 +19,17 @@ output "cluster_name" {
 
 output "gke_endpoint" {
   value = google_container_cluster.kube.endpoint
+  sensitive = true
 }
 
 output "gke_certificate" {
   value = base64decode(google_container_cluster.kube.master_auth.0.cluster_ca_certificate)
+  sensitive = true
 }
 
 output "gke_token" {
   value = data.google_client_config.default.access_token
+  sensitive = true
 }
 
 output "google_compute_network_vpc_id" {
