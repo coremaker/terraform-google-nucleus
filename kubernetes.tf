@@ -10,4 +10,6 @@ module "kubernetes" {
 
   fluxv2_enabled = var.fluxv2_enabled
   fluxv2_gcr_service_key = var.fluxv2_enabled ? base64decode(google_service_account_key.fluxv2_container_registry.0.private_key) : ""
+  fluxv2_private_key_pem = var.fluxv2_enabled ? tls_private_key.fluxv2_secret.0.private_key_pem : ""
+  fluxv2_public_key_pem = var.fluxv2_enabled ? tls_private_key.fluxv2_secret.0.public_key_pem : ""
 }
