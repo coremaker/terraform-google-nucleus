@@ -374,3 +374,8 @@ variable "k8s_containers_alerts_pod_logs_per_series_aligner" {
     type = string
     default = "ALIGN_SUM"
 }
+
+variable "kubernetes_enabled" {
+    type = bool
+    default = true
+}
