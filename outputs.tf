@@ -6,10 +6,10 @@ output "dns_name_servers" {
   value = var.dns_enabled ? google_dns_managed_zone.dns_zone.0.name_servers : []
 }
 
-output "flux_deploy_key" {
-  value = var.flux_enabled ? tls_private_key.flux_secret.0.public_key_openssh : ""
-  sensitive   = true
-}
+# output "flux_deploy_key" {
+#   value = var.flux_enabled ? tls_private_key.flux_secret.0.public_key_openssh : ""
+#   sensitive   = true
+# }
 
 # kubernetes
 

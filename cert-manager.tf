@@ -1,81 +1,81 @@
-resource "google_project_iam_member" "cert_manager_account_dns_admin" {
-  project = var.google_project_id
-  count      = var.cert_manager_enabled ? 1 : 0
+# resource "google_project_iam_member" "cert_manager_account_dns_admin" {
+#   project = var.google_project_id
+#   count      = var.cert_manager_enabled ? 1 : 0
 
-  role    = "roles/dns.admin"
-  member  = "serviceAccount:${google_service_account.cert_manager_account.0.email}"
-}
+#   role    = "roles/dns.admin"
+#   member  = "serviceAccount:${google_service_account.cert_manager_account.0.email}"
+# }
 
-resource "helm_release" "cert_manager_lentsencrypt" {
-  count      = var.cert_manager_enabled ? 1 : 0
+# resource "helm_release" "cert_manager_lentsencrypt" {
+#   count      = var.cert_manager_enabled ? 1 : 0
 
-  name       = "cert-managers-letsencrypt"
-  chart      = format("%s/helm-charts/cert-manager-letsencrypt", path.module)
-  namespace = kubernetes_namespace.cert_manager.0.metadata.0.name
+#   name       = "cert-managers-letsencrypt"
+#   chart      = format("%s/helm-charts/cert-manager-letsencrypt", path.module)
+#   namespace = kubernetes_namespace.cert_manager.0.metadata.0.name
 
-  set {
-    name = "clouddns.projectId"
-    value = var.google_project_id
-  }
+#   set {
+#     name = "clouddns.projectId"
+#     value = var.google_project_id
+#   }
 
-  depends_on = [kubernetes_namespace.cert_manager, helm_release.cert_manager]
-}
+#   depends_on = [kubernetes_namespace.cert_manager, helm_release.cert_manager]
+# }
 
-resource "helm_release" "cert_manager" {
-  count      = var.cert_manager_enabled ? 1 : 0
+# resource "helm_release" "cert_manager" {
+#   count      = var.cert_manager_enabled ? 1 : 0
 
-  chart      = "cert-manager"
-  repository = "https://charts.jetstack.io"
-  name       = "cert-manager"
+#   chart      = "cert-manager"
+#   repository = "https://charts.jetstack.io"
+#   name       = "cert-manager"
   
-  version    = var.cert_manager_helm_version
-  namespace  = kubernetes_namespace.cert_manager.0.metadata.0.name
-  timeout    = "60"
+#   version    = var.cert_manager_helm_version
+#   namespace  = kubernetes_namespace.cert_manager.0.metadata.0.name
+#   timeout    = "60"
 
-  set {
-    name = "installCRDs"
-    value = "true"
-  }
+#   set {
+#     name = "installCRDs"
+#     value = "true"
+#   }
 
-  depends_on = [kubernetes_namespace.cert_manager, kubernetes_secret.cert_manager_service_key]
-}
+#   depends_on = [kubernetes_namespace.cert_manager, kubernetes_secret.cert_manager_service_key]
+# }
 
-resource "kubernetes_secret" "cert_manager_service_key" {
-  count      = var.cert_manager_enabled ? 1 : 0
+# resource "kubernetes_secret" "cert_manager_service_key" {
+#   count      = var.cert_manager_enabled ? 1 : 0
 
-  metadata {
-    name = "cert-manager-secrets"
-    namespace = kubernetes_namespace.cert_manager.0.metadata.0.name
-  }
+#   metadata {
+#     name = "cert-manager-secrets"
+#     namespace = kubernetes_namespace.cert_manager.0.metadata.0.name
+#   }
 
-  data = {
-    "cert-manager-service.private-key.json" = base64decode(google_service_account_key.cert_manager_account_key.0.private_key)
-  }
+#   data = {
+#     "cert-manager-service.private-key.json" = base64decode(google_service_account_key.cert_manager_account_key.0.private_key)
+#   }
 
-  depends_on = [kubernetes_namespace.cert_manager]
-}
+#   depends_on = [kubernetes_namespace.cert_manager]
+# }
 
-resource "google_service_account_key" "cert_manager_account_key" {
-  count      = var.cert_manager_enabled ? 1 : 0
+# resource "google_service_account_key" "cert_manager_account_key" {
+#   count      = var.cert_manager_enabled ? 1 : 0
 
-  service_account_id = google_service_account.cert_manager_account.0.name
-  public_key_type    = "TYPE_X509_PEM_FILE"
-  private_key_type   = "TYPE_GOOGLE_CREDENTIALS_FILE"
-}
+#   service_account_id = google_service_account.cert_manager_account.0.name
+#   public_key_type    = "TYPE_X509_PEM_FILE"
+#   private_key_type   = "TYPE_GOOGLE_CREDENTIALS_FILE"
+# }
 
-resource "google_service_account" "cert_manager_account" {
-  count      = var.cert_manager_enabled ? 1 : 0
+# resource "google_service_account" "cert_manager_account" {
+#   count      = var.cert_manager_enabled ? 1 : 0
 
-  account_id   = "${var.k8s_cluster_name}-cert-manager"
-  display_name = "Cert manager service accountfor the ${var.k8s_cluster_name} kube cluster"
+#   account_id   = "${var.k8s_cluster_name}-cert-manager"
+#   display_name = "Cert manager service accountfor the ${var.k8s_cluster_name} kube cluster"
 
-  depends_on = [google_project_service.iam]
-}
+#   depends_on = [google_project_service.iam]
+# }
 
-resource "kubernetes_namespace" "cert_manager" {
-  count      = var.cert_manager_enabled ? 1 : 0
+# resource "kubernetes_namespace" "cert_manager" {
+#   count      = var.cert_manager_enabled ? 1 : 0
 
-  metadata {
-    name = "cert-manager"
-  }
-}
+#   metadata {
+#     name = "cert-manager"
+#   }
+# }
