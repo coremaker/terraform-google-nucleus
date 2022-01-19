@@ -93,13 +93,3 @@ resource "google_container_node_pool" "kube_nodes" {
 
   depends_on = [google_container_cluster.kube]
 }
-
-resource "kubernetes_storage_class" "ssd" {
-  metadata {
-    name = "ssd"
-  }
-  storage_provisioner = "kubernetes.io/gce-pd"
-  parameters = {
-    type = "pd-ssd"
-  }
-}
