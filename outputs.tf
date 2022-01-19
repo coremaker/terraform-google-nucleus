@@ -32,13 +32,6 @@ output "gke_token" {
   sensitive = true
 }
 
-## kubernetes cert-manager
-
-# output "k8s_cert_manager_account_key" {
-#   value = var.cert_manager_enabled ? google_service_account_key.cert_manager_account_key.0.private_key : ""
-#   sensitive = true
-# }
-
 # vpc
 
 output "google_compute_network_vpc_id" {

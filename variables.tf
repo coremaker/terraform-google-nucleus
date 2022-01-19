@@ -112,70 +112,11 @@ variable "k8s_namespaces" {
 
 # Fluxv2
 
-# variable "fluxv2_enabled" {
-#     type = bool
-#     default = false
-# }
+variable "fluxv2_enabled" {
+    type = bool
+    default = false
+}
 
-# variable "fluxv2_chart" {
-#     type = string
-#     default = "https://github.com/coremaker/helm-chart-fluxv2/releases/download/v0.0.9/fluxv2-0.0.9.tgz"
-# }
-
-# variable "fluxv2_git_url" {
-#     type = string
-#     default = ""
-# }
-
-# variable "fluxv2_git_branch" {
-#     type = string
-#     default = "main"
-# }
-
-# variable "fluxv2_git_path" {
-#     type = string
-#     default = ""
-# }
-
-# variable "fluxv2_resources_name" {
-#     type = string
-#     default = "k8s-repo"
-# }
-
-# variable "fluxv2_gitRepository_interval" {
-#     type = string
-#     default = "5m"
-# }
-
-# variable "fluxv2_kustomization_prune" {
-#     type = bool
-#     default = true
-# }
-
-# variable "fluxv2_kustomization_interval" {
-#     type = string
-#     default = "5m"
-# }
-
-# variable "fluxv2_imageAutomation_interval" {
-#     type = string
-#     default = "5m"
-# }
-
-# variable "fluxv2_imageAutomation_suspend" {
-#     type = bool
-#     default = false
-# }
-
-# variable "fluxv2_imageAutomation_checkout_branch" {
-#     type = string
-#     default = "main"
-# }
-
-# variable "fluxv2_imageAutomation_push_branch" {
-#     type = string
-#     default = "main"
-# }
 # DNS
 
 variable "dns_domain" {}
