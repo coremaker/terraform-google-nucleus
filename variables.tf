@@ -64,6 +64,14 @@ variable "k8s_node_pools" {
     }]
 }
 
+variable "k8s_namespaces" {
+    type    = list(object({
+        name = string
+        has_public_ip = bool
+        dns_records = set(string)
+  }))
+}
+
 # # FLUX
 
 # variable "flux_git_url" {
