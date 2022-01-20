@@ -1,16 +1,16 @@
 locals {
-  k8s_node_pools = {
-    for node in var.k8s_node_pools:
+  gke_node_pools = {
+    for node in var.gke_node_pools:
     node.name => node
   }
 }
 
 resource "google_container_cluster" "kube" {
-  name     = var.k8s_cluster_name
+  name     = var.gke_cluster_name
   location = var.google_region
 
   release_channel {
-    channel = var.k8s_release_channel
+    channel = var.gke_release_channel
   }
 
   node_locations = ["europe-west2-a"]
@@ -20,7 +20,7 @@ resource "google_container_cluster" "kube" {
   remove_default_node_pool = true
   initial_node_count = 1
 
-  enable_shielded_nodes = var.k8s_enable_shielded_nodes
+  enable_shielded_nodes = var.gke_enable_shielded_nodes
 
   ip_allocation_policy {
     cluster_ipv4_cidr_block  = "10.0.0.0/16"
@@ -48,7 +48,7 @@ resource "google_container_cluster" "kube" {
 }
 
 resource "google_container_node_pool" "kube_nodes" {
-  for_each = local.k8s_node_pools
+  for_each = local.gke_node_pools
 
   location   = var.google_region
 
@@ -61,8 +61,8 @@ resource "google_container_node_pool" "kube_nodes" {
   }
 
   management {
-    auto_repair = var.k8s_node_auto_repair
-    auto_upgrade = var.k8s_node_auto_upgrade
+    auto_repair = var.gke_node_auto_repair
+    auto_upgrade = var.gke_node_auto_upgrade
   }
 
   node_config {

@@ -18,30 +18,30 @@ variable "project_viewers" {
     type = set(string)
 }
 
-# Kubernetes - K8S
+# Google Kubernetes Engine
 
-variable "k8s_cluster_name" {}
+variable "gke_cluster_name" {}
 
-variable "k8s_release_channel" {
+variable "gke_release_channel" {
     default = "UNSPECIFIED"
 }
 
-variable "k8s_enable_shielded_nodes" {
+variable "gke_enable_shielded_nodes" {
     type = bool
     default = false
 }
 
-variable "k8s_node_auto_upgrade" {
+variable "gke_node_auto_upgrade" {
     type = bool
     default = false // false only works with UNSPECIFIED release channel 
 }
 
-variable "k8s_node_auto_repair" {
+variable "gke_node_auto_repair" {
     type = bool
     default = true
 }
 
-variable "k8s_node_pools" {
+variable "gke_node_pools" {
     type    = list(object({
         name = string
         min_node_count = number

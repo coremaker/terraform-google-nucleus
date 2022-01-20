@@ -1,12 +1,10 @@
 [![Maintained by coremaker.io](https://img.shields.io/badge/maintained%20by-coremaker.io-green)](https://coremaker.io/)
+[![Coremaker Docs](https://img.shields.io/badge/coremaker-docs-green)](https://coremaker.io/)
 
 # Terraform Google Nucleus
 
 This repository contains a [Terraform](https://www.terraform.io) module for running the main services on Google Cloud Platform.
 This module is fully configurable !
-
-[![Maintained by coremaker.io](https://img.shields.io/badge/maintained%20by-coremaker.io-green)](https://coremaker.io/)
-[![Coremaker Docs](https://img.shields.io/badge/coremaker-docs-green)](https://coremaker.io/)
 
 ## Kubernetes - k8s-coremaker
 
@@ -21,53 +19,6 @@ Flux is a tool that automates the deployment of containers to Kubernetes. It fil
 Flux’s main feature is the automated synchronisation between a version control repository and a cluster. If you make any changes to your repository, those changes are automatically deployed to your cluster.
 
 More information about [`flux`].
-
-### Kustomize
-
-kustomize lets you customize raw, template-free YAML files for multiple purposes, leaving the original YAML untouched and usable as is.
-
-
-kustomize targets kubernetes; it understands and can
-patch [kubernetes style] API objects.  It's like
-[`make`], in that what it does is declared in a file,
-and it's like [`sed`], in that it emits edited text.
-
-More information about [`kustomize`].
-
-The repository structure:
-
-```bash
-base
-    namespace
-        kustomization.yaml
-        exemple-service-helmrelease.yaml
-environments
-    dev
-        namespace
-            kustomization.yaml
-            exemple-service-helmrelease-patch.yaml
-        flux-patch.yaml
-        kustomization.yaml
-    prod
-        namespace
-            kustomization.yaml
-            exemple-service-helmrelease-patch.yaml
-        flux-patch.yaml
-        kustomization.yaml
-    qa
-        namespace
-            kustomization.yaml
-            exemple-service-helmrelease-patch.yaml
-        flux-patch.yaml
-        kustomization.yaml
-helm-charts
-    example-service-chart
-sealedsecret-keys
-    dev.pem
-    prod.pem
-    qa.pem
-.flux.yaml
-```
 
 ### Sealed-secrets
 
