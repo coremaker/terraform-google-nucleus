@@ -1,14 +1,14 @@
 locals {
   public_ip_namespaces = {
-    for namespace in var.k8s_namespaces:
-      namespace.name => namespace
+    for namespace in var.k8s_namespaces :
+    namespace.name => namespace
     if namespace.has_public_ip
   }
 }
 
 resource "google_compute_network" "vpc" {
 
-  name = "vpc"
+  name                    = "vpc"
   auto_create_subnetworks = false
 
   depends_on = [google_project_service.compute]

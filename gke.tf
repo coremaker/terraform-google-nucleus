@@ -1,6 +1,6 @@
 locals {
   gke_node_pools = {
-    for node in var.gke_node_pools:
+    for node in var.gke_node_pools :
     node.name => node
   }
 }
@@ -14,11 +14,11 @@ resource "google_container_cluster" "kube" {
   }
 
   node_locations = ["europe-west2-a"]
-  network = google_compute_network.vpc.self_link
-  subnetwork = google_compute_subnetwork.container_subnetwork.name
+  network        = google_compute_network.vpc.self_link
+  subnetwork     = google_compute_subnetwork.container_subnetwork.name
 
   remove_default_node_pool = true
-  initial_node_count = 1
+  initial_node_count       = 1
 
   enable_shielded_nodes = var.gke_enable_shielded_nodes
 
@@ -50,10 +50,10 @@ resource "google_container_cluster" "kube" {
 resource "google_container_node_pool" "kube_nodes" {
   for_each = local.gke_node_pools
 
-  location   = var.google_region
+  location = var.google_region
 
-  name       = each.key
-  cluster    = google_container_cluster.kube.name
+  name    = each.key
+  cluster = google_container_cluster.kube.name
 
   autoscaling {
     min_node_count = each.value.min_node_count
@@ -61,13 +61,13 @@ resource "google_container_node_pool" "kube_nodes" {
   }
 
   management {
-    auto_repair = var.gke_node_auto_repair
+    auto_repair  = var.gke_node_auto_repair
     auto_upgrade = var.gke_node_auto_upgrade
   }
 
   node_config {
     machine_type = each.value.machine_type
-    image_type = each.value.image_type
+    image_type   = each.value.image_type
 
     dynamic "taint" {
       for_each = each.value.taints

@@ -1,11 +1,11 @@
 resource "tls_self_signed_cert" "sealed_secrets" {
-  count      = var.sealed_secrets_enabled ? 1 : 0
+  count = var.sealed_secrets_enabled ? 1 : 0
 
   key_algorithm   = tls_private_key.sealed_secrets.0.algorithm
   private_key_pem = tls_private_key.sealed_secrets.0.private_key_pem
 
   validity_period_hours = 210240
-  early_renewal_hours = 48
+  early_renewal_hours   = 48
 
   allowed_uses = [
     "encipher_only"
@@ -20,7 +20,7 @@ resource "tls_self_signed_cert" "sealed_secrets" {
 }
 
 resource "tls_private_key" "sealed_secrets" {
-  count      = var.sealed_secrets_enabled ? 1 : 0
+  count = var.sealed_secrets_enabled ? 1 : 0
 
   algorithm = "RSA"
   rsa_bits  = "2048"

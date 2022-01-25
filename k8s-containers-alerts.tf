@@ -1,8 +1,8 @@
 resource "google_monitoring_alert_policy" "kube_event" {
-  for_each = var.enable_k8s_containers_alerts ? var.k8s_containers_namespaces : []
+  for_each     = var.enable_k8s_containers_alerts ? var.k8s_containers_namespaces : []
   display_name = "Kubernetes Alerts ${upper(var.environment_name)}"
 
-  combiner     = "OR"
+  combiner              = "OR"
   notification_channels = var.k8s_containers_alerts_type == "slack" ? [google_monitoring_notification_channel.kube_event_slack_channel[each.key].name] : google_monitoring_notification_channel.kube_event_email_channel.*.id
 
   conditions {
@@ -16,9 +16,9 @@ EOT
       threshold_value = var.k8s_containers_alerts_logs_threshold_value
       comparison      = "COMPARISON_GT"
       aggregations {
-          alignment_period   = var.k8s_containers_alerts_logs_alignment_period
-          per_series_aligner = var.k8s_containers_alerts_logs_per_series_aligner
-          group_by_fields = ["resource.label.container_name"]
+        alignment_period   = var.k8s_containers_alerts_logs_alignment_period
+        per_series_aligner = var.k8s_containers_alerts_logs_per_series_aligner
+        group_by_fields    = ["resource.label.container_name"]
       }
     }
   }
@@ -35,9 +35,9 @@ EOT
       threshold_value = var.k8s_containers_alerts_cpu_memory_threshold_value
       comparison      = "COMPARISON_GT"
       aggregations {
-          alignment_period   = var.k8s_containers_alerts_cpu_memory_alignment_period
-          per_series_aligner = var.k8s_containers_alerts_cpu_memory_per_series_aligner
-          group_by_fields = ["resource.label.container_name"]
+        alignment_period   = var.k8s_containers_alerts_cpu_memory_alignment_period
+        per_series_aligner = var.k8s_containers_alerts_cpu_memory_per_series_aligner
+        group_by_fields    = ["resource.label.container_name"]
       }
     }
   }
@@ -54,9 +54,9 @@ EOT
       threshold_value = var.k8s_containers_alerts_cpu_memory_threshold_value
       comparison      = "COMPARISON_GT"
       aggregations {
-          alignment_period   = var.k8s_containers_alerts_cpu_memory_alignment_period
-          per_series_aligner = var.k8s_containers_alerts_cpu_memory_per_series_aligner
-          group_by_fields = ["resource.label.container_name"]
+        alignment_period   = var.k8s_containers_alerts_cpu_memory_alignment_period
+        per_series_aligner = var.k8s_containers_alerts_cpu_memory_per_series_aligner
+        group_by_fields    = ["resource.label.container_name"]
       }
     }
   }
@@ -74,9 +74,9 @@ EOT
       threshold_value = var.k8s_containers_alerts_restarts_threshold_value
       comparison      = "COMPARISON_GT"
       aggregations {
-          alignment_period   = var.k8s_containers_alerts_restarts_alignment_period
-          per_series_aligner = var.k8s_containers_alerts_restarts_per_series_aligner
-          group_by_fields = ["resource.label.container_name"]
+        alignment_period   = var.k8s_containers_alerts_restarts_alignment_period
+        per_series_aligner = var.k8s_containers_alerts_restarts_per_series_aligner
+        group_by_fields    = ["resource.label.container_name"]
       }
     }
   }
@@ -92,9 +92,9 @@ EOT
       threshold_value = var.k8s_containers_alerts_pod_logs_threshold_value
       comparison      = "COMPARISON_GT"
       aggregations {
-          alignment_period   = var.k8s_containers_alerts_pod_logs_alignment_period
-          per_series_aligner = var.k8s_containers_alerts_pod_logs_per_series_aligner
-          group_by_fields = ["resource.label.pod_name"]
+        alignment_period   = var.k8s_containers_alerts_pod_logs_alignment_period
+        per_series_aligner = var.k8s_containers_alerts_pod_logs_per_series_aligner
+        group_by_fields    = ["resource.label.pod_name"]
       }
     }
   }
@@ -108,7 +108,7 @@ EOT
 
 resource "google_logging_metric" "kube_event" {
   for_each = var.enable_k8s_containers_alerts ? var.k8s_containers_namespaces : []
-  name   = "containers/${each.key}/errors"
+  name     = "containers/${each.key}/errors"
 
   filter = <<EOT
 resource.type="k8s_container"
@@ -124,7 +124,7 @@ EOT
 
 resource "google_logging_metric" "kube_pod_event" {
   for_each = var.enable_k8s_containers_alerts ? var.k8s_containers_namespaces : []
-  name   = "pods/${each.key}/errors"
+  name     = "pods/${each.key}/errors"
 
   filter = <<EOT
 resource.type="k8s_pod"
@@ -141,7 +141,7 @@ resource "google_monitoring_notification_channel" "kube_event_slack_channel" {
   for_each = var.enable_k8s_containers_alerts && var.k8s_containers_alerts_type == "slack" ? var.k8s_containers_namespaces : []
 
   display_name = "${each.key} Kubernetes Containers Alert"
-  type = "slack"
+  type         = "slack"
   labels = {
     channel_name = var.k8s_container_alerts_slack_channel_name
   }

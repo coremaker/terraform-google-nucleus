@@ -7,15 +7,15 @@ variable "environment_name" {}
 # IAM
 
 variable "project_admins" {
-    type = set(string)
+  type = set(string)
 }
 
 variable "project_editors" {
-    type = set(string)
+  type = set(string)
 }
 
 variable "project_viewers" {
-    type = set(string)
+  type = set(string)
 }
 
 # Google Kubernetes Engine
@@ -23,148 +23,148 @@ variable "project_viewers" {
 variable "gke_cluster_name" {}
 
 variable "gke_release_channel" {
-    default = "UNSPECIFIED"
+  default = "UNSPECIFIED"
 }
 
 variable "gke_enable_shielded_nodes" {
-    type = bool
-    default = false
+  type    = bool
+  default = false
 }
 
 variable "gke_node_auto_upgrade" {
-    type = bool
-    default = false // false only works with UNSPECIFIED release channel 
+  type    = bool
+  default = false // false only works with UNSPECIFIED release channel 
 }
 
 variable "gke_node_auto_repair" {
-    type = bool
-    default = true
+  type    = bool
+  default = true
 }
 
 variable "gke_node_pools" {
-    type    = list(object({
-        name = string
-        min_node_count = number
-        max_node_count = number
-        machine_type = string
-        image_type = string
-        taints = list(object({
-            key = string
-            value = string
-            effect = string
-        }))
+  type = list(object({
+    name           = string
+    min_node_count = number
+    max_node_count = number
+    machine_type   = string
+    image_type     = string
+    taints = list(object({
+      key    = string
+      value  = string
+      effect = string
     }))
-    default = [{
-        name = "nodes"
-        min_node_count = 1
-        max_node_count = 3
-        machine_type = "n1-standard-1"
-        image_type = "cos_containerd"
-        taints = []
-    }]
+  }))
+  default = [{
+    name           = "nodes"
+    min_node_count = 1
+    max_node_count = 3
+    machine_type   = "n1-standard-1"
+    image_type     = "cos_containerd"
+    taints         = []
+  }]
 }
 
 variable "k8s_namespaces" {
-    type    = list(object({
-        name = string
-        has_public_ip = bool
-        dns_records = set(string)
+  type = list(object({
+    name          = string
+    has_public_ip = bool
+    dns_records   = set(string)
   }))
 }
 
 # FLUX
 variable "flux_enabled" {
-    type = bool
-    default = true
+  type    = bool
+  default = true
 }
 
 # Fluxv2
 variable "fluxv2_enabled" {
-    type = bool
-    default = false
+  type    = bool
+  default = false
 }
 # DNS
 variable "dns_domain" {}
 
 variable "dns_enabled" {
-    type = bool
-    default = false
+  type    = bool
+  default = false
 }
 
 # CERT-MANAGER
 variable "cert_manager_enabled" {
-    type = bool
-    default = true
+  type    = bool
+  default = true
 }
 
 # Sealed secrets
 variable "sealed_secrets_enabled" {
-    type = bool
-    default = true
+  type    = bool
+  default = true
 }
 
 # Alerting
 ## GCP Billing Alerts
 variable "enable_billing_alerts" {
-    type = bool
-    default = false
+  type    = bool
+  default = false
 }
 
 variable "google_billing_account_id" {
-    default = ""
+  default = ""
 }
 
 variable "billing_currency_code" {
-    default = "GBP"
+  default = "GBP"
 }
 
 variable "billing_project_units_amount" {
-    default = "500"
+  default = "500"
 }
 
 variable "billing_project_threshold_rules" {
-    type    = list(object({
-        threshold = number
-        spend_type = string
-    }))
-    default = [
-        {
-            threshold = 1.0
-            spend_type = "FORECASTED_SPEND"
-        },
-        {
-            threshold = 1.2
-            spend_type = "FORECASTED_SPEND"
-        }
-    ]
+  type = list(object({
+    threshold  = number
+    spend_type = string
+  }))
+  default = [
+    {
+      threshold  = 1.0
+      spend_type = "FORECASTED_SPEND"
+    },
+    {
+      threshold  = 1.2
+      spend_type = "FORECASTED_SPEND"
+    }
+  ]
 }
 
 variable "billing_email_address" {
-    type = list(string)
-    default = ["address@example.com"]
+  type    = list(string)
+  default = ["address@example.com"]
 }
 
 variable "billing_budgets_per_service" {
-    type    = list(object({
-        name = string
-        service_id = string
-        amount = number
-        threshold_percent = string
-        spend_basis = string
-    }))
-    default = []
+  type = list(object({
+    name              = string
+    service_id        = string
+    amount            = number
+    threshold_percent = string
+    spend_basis       = string
+  }))
+  default = []
 }
 
 ## Kubernetes Alerts
 ### These alerts are based on pod logs with severity ERROR
 variable "enable_k8s_containers_alerts" {
-    type = bool
-    default = false
+  type    = bool
+  default = false
 }
 
 variable "slack_auth_token" {
-    default = "token" # Needs to be replaced with a working token
-} 
+  default = "token" # Needs to be replaced with a working token
+}
 
 variable "k8s_containers_namespaces" {
   type    = set(string)
@@ -173,100 +173,100 @@ variable "k8s_containers_namespaces" {
 
 ### slack or email supported only
 variable "k8s_containers_alerts_type" {
-    type = string
-    default = "slack"
+  type    = string
+  default = "slack"
 }
 
 variable "k8s_container_alerts_slack_channel_name" {
-    type = string
-    default = ""
+  type    = string
+  default = ""
 }
 
 variable "k8s_containers_alerts_email_address" {
-    type = list(string)
-    default = ["address@example.com"]
+  type    = list(string)
+  default = ["address@example.com"]
 }
 
 #Logs
 variable "k8s_containers_alerts_logs_duration" {
-    type = string
-    default = "300s"
+  type    = string
+  default = "300s"
 }
 
 variable "k8s_containers_alerts_logs_threshold_value" {
-    type = number
-    default = 0
+  type    = number
+  default = 0
 }
 
 variable "k8s_containers_alerts_logs_alignment_period" {
-    type = string
-    default = "300s"
+  type    = string
+  default = "300s"
 }
 
 variable "k8s_containers_alerts_logs_per_series_aligner" {
-    type = string
-    default = "ALIGN_SUM"
+  type    = string
+  default = "ALIGN_SUM"
 }
 
 #CPU and MEMORY utilization
 variable "k8s_containers_alerts_cpu_memory_duration" {
-    type = string
-    default = "60s"
+  type    = string
+  default = "60s"
 }
 
 variable "k8s_containers_alerts_cpu_memory_threshold_value" {
-    type = number
-    default = 0.9
+  type    = number
+  default = 0.9
 }
 
 variable "k8s_containers_alerts_cpu_memory_alignment_period" {
-    type = string
-    default = "300s"  
+  type    = string
+  default = "300s"
 }
 
 variable "k8s_containers_alerts_cpu_memory_per_series_aligner" {
-    type = string
-    default = "ALIGN_MEAN"
+  type    = string
+  default = "ALIGN_MEAN"
 }
 
 #Container restarts
 variable "k8s_containers_alerts_restarts_duration" {
-    type = string
-    default = "60s"
+  type    = string
+  default = "60s"
 }
 
 variable "k8s_containers_alerts_restarts_threshold_value" {
-    type = number
-    default = 0
+  type    = number
+  default = 0
 }
 
 variable "k8s_containers_alerts_restarts_alignment_period" {
-    type = string
-    default = "300s"  
+  type    = string
+  default = "300s"
 }
 
 variable "k8s_containers_alerts_restarts_per_series_aligner" {
-    type = string
-    default = "ALIGN_DELTA"
+  type    = string
+  default = "ALIGN_DELTA"
 }
 
 #Pod warnings and errors
 variable "k8s_containers_alerts_pod_logs_duration" {
-    type = string
-    default = "300s"
+  type    = string
+  default = "300s"
 }
 
 variable "k8s_containers_alerts_pod_logs_threshold_value" {
-    type = number
-    default = 0
+  type    = number
+  default = 0
 }
 
 variable "k8s_containers_alerts_pod_logs_alignment_period" {
-    type = string
-    default = "300s"  
+  type    = string
+  default = "300s"
 }
 
 variable "k8s_containers_alerts_pod_logs_per_series_aligner" {
-    type = string
-    default = "ALIGN_SUM"
+  type    = string
+  default = "ALIGN_SUM"
 }
