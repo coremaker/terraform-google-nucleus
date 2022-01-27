@@ -1,6 +1,6 @@
 locals {
   billing_budget_per_service = {
-    for service_id in var.billing_budgets_per_service:
+    for service_id in var.billing_budgets_per_service :
     service_id.name => service_id
   }
 }
@@ -32,8 +32,8 @@ resource "google_billing_budget" "project_budget" {
 
   all_updates_rule {
     monitoring_notification_channels = google_monitoring_notification_channel.billing_email_alert.*.id
-    schema_version  = "1.0"
-    disable_default_iam_recipients = false
+    schema_version                   = "1.0"
+    disable_default_iam_recipients   = false
   }
 
   depends_on = [google_project_service.billing]
@@ -59,13 +59,13 @@ resource "google_billing_budget" "project_service_budget" {
 
   threshold_rules {
     threshold_percent = each.value.threshold_percent
-    spend_basis = each.value.spend_basis
+    spend_basis       = each.value.spend_basis
   }
 
   all_updates_rule {
     monitoring_notification_channels = google_monitoring_notification_channel.billing_email_alert.*.id
-    schema_version  = "1.0"
-    disable_default_iam_recipients = false
+    schema_version                   = "1.0"
+    disable_default_iam_recipients   = false
   }
 
   depends_on = [google_project_service.billing]

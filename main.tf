@@ -21,7 +21,7 @@ resource "google_project_service" "container" {
     google_project_service.storage_api,
     google_project_service.compute,
     google_project_service.containerregistry
-    ]
+  ]
 }
 
 resource "google_project_service" "containerregistry" {
@@ -30,7 +30,7 @@ resource "google_project_service" "containerregistry" {
   depends_on = [
     google_project_service.storage_api,
     google_project_service.serviceusage
-    ]
+  ]
 }
 
 resource "google_project_service" "storage_component" {

@@ -25,31 +25,31 @@ resource "google_project_iam_binding" "project_viewers" {
 }
 
 resource "google_project_iam_member" "cloudsql_editors_member" {
-  project = var.google_project_id
+  project  = var.google_project_id
   for_each = var.project_editors
 
-  role    = "roles/cloudsql.client"
-  member  = each.key
+  role   = "roles/cloudsql.client"
+  member = each.key
 
   depends_on = [google_project_service.iam]
 }
 
 resource "google_project_iam_member" "cloudsql_readers_member" {
-  project = var.google_project_id
+  project  = var.google_project_id
   for_each = var.project_viewers
 
-  role    = "roles/cloudsql.client"
+  role = "roles/cloudsql.client"
 
-  member  = each.key
+  member = each.key
 
   depends_on = [google_project_service.iam]
 }
 
 resource "google_project_iam_member" "container_admins" {
-  project = var.google_project_id
+  project  = var.google_project_id
   for_each = var.project_admins
 
-  role    = "roles/container.admin"
+  role = "roles/container.admin"
 
   member = each.key
 

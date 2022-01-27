@@ -1,4 +1,0 @@
-apiVersion: v1
-name: fluxv2
-version: 0.0.1
-description: This is the coremaker helm chart used to deploy fluxv2 main resources

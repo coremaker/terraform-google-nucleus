@@ -1,40 +1,26 @@
 locals {
-  k8s_namespaces = {
-    for namespace in var.k8s_namespaces:
-    namespace.name => namespace
-  }
-
-  k8s_node_pools = {
-    for node in var.k8s_node_pools:
+  gke_node_pools = {
+    for node in var.gke_node_pools :
     node.name => node
   }
 }
 
-resource "kubernetes_namespace" "k8s_namespace" {
-  for_each = local.k8s_namespaces
-
-  metadata {
-    name = each.key
-  }
-  depends_on = [google_container_cluster.kube, google_container_node_pool.kube_nodes]
-}
-
 resource "google_container_cluster" "kube" {
-  name     = var.k8s_cluster_name
+  name     = var.gke_cluster_name
   location = var.google_region
 
   release_channel {
-    channel = var.k8s_release_channel
+    channel = var.gke_release_channel
   }
 
   node_locations = ["europe-west2-a"]
-  network = google_compute_network.vpc.self_link
-  subnetwork = google_compute_subnetwork.container_subnetwork.name
+  network        = google_compute_network.vpc.self_link
+  subnetwork     = google_compute_subnetwork.container_subnetwork.name
 
   remove_default_node_pool = true
-  initial_node_count = 1
+  initial_node_count       = 1
 
-  enable_shielded_nodes = var.k8s_enable_shielded_nodes
+  enable_shielded_nodes = var.gke_enable_shielded_nodes
 
   ip_allocation_policy {
     cluster_ipv4_cidr_block  = "10.0.0.0/16"
@@ -62,12 +48,12 @@ resource "google_container_cluster" "kube" {
 }
 
 resource "google_container_node_pool" "kube_nodes" {
-  for_each = local.k8s_node_pools
+  for_each = local.gke_node_pools
 
-  location   = var.google_region
+  location = var.google_region
 
-  name       = each.key
-  cluster    = google_container_cluster.kube.name
+  name    = each.key
+  cluster = google_container_cluster.kube.name
 
   autoscaling {
     min_node_count = each.value.min_node_count
@@ -75,13 +61,13 @@ resource "google_container_node_pool" "kube_nodes" {
   }
 
   management {
-    auto_repair = var.k8s_node_auto_repair
-    auto_upgrade = var.k8s_node_auto_upgrade
+    auto_repair  = var.gke_node_auto_repair
+    auto_upgrade = var.gke_node_auto_upgrade
   }
 
   node_config {
     machine_type = each.value.machine_type
-    image_type = each.value.image_type
+    image_type   = each.value.image_type
 
     dynamic "taint" {
       for_each = each.value.taints
@@ -106,14 +92,4 @@ resource "google_container_node_pool" "kube_nodes" {
   }
 
   depends_on = [google_container_cluster.kube]
-}
-
-resource "kubernetes_storage_class" "ssd" {
-  metadata {
-    name = "ssd"
-  }
-  storage_provisioner = "kubernetes.io/gce-pd"
-  parameters = {
-    type = "pd-ssd"
-  }
 }
