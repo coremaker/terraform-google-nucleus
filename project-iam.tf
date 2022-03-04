@@ -73,3 +73,12 @@ resource "google_project_iam_binding" "container_readers" {
 
   depends_on = [google_project_service.iam]
 }
+
+resource "google_project_iam_binding" "billing_viewers" {
+  project = var.google_project_id
+  role    = "roles/billing.viewer"
+
+  members = var.project_billing_viewers
+
+  depends_on = [google_project_service.iam]
+}

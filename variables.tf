@@ -8,14 +8,22 @@ variable "environment_name" {}
 
 variable "project_admins" {
   type = set(string)
+  default = ""
 }
 
 variable "project_editors" {
   type = set(string)
+  default = ""
 }
 
 variable "project_viewers" {
   type = set(string)
+  default = ""
+}
+
+variable "project_billing_viewers" {
+  type = set(string)
+  default = ""
 }
 
 # Google Kubernetes Engine
