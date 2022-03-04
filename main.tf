@@ -74,3 +74,9 @@ resource "google_project_service" "network" {
 
   depends_on = [google_project_service.serviceusage]
 }
+
+resource "google_project_service" "billing" {
+  service = "cloudbilling.googleapis.com"
+
+  depends_on = [google_project_service.iam]
+}
