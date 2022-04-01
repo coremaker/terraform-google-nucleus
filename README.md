@@ -10,8 +10,8 @@ This module is fully configurable !
 
 | Name |
 |------|
-| <a name="provider_google"></a> [google](#provider\_google) |
-| <a name="provider_tls"></a> [tls](#provider\_tls) |
+| <a name="provider_google"></a> [google](https://registry.terraform.io/providers/hashicorp/google/4.0.0) |
+| <a name="provider_tls"></a> [tls](https://registry.terraform.io/providers/hashicorp/tls/3.1.0) |
 
 ## Resources
 
