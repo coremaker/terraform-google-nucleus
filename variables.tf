@@ -1,44 +1,61 @@
 # Google
 
-variable "google_project_id" {}
-variable "google_region" {}
-variable "google_zone" {}
-variable "environment_name" {}
+variable "google_project_id" {
+  description = "The ID of the project you want to create the resources within."
+}
+variable "google_region" {
+  description = "Region where to create the resources."
+}
+variable "google_zone" {
+  description = "Zone where to create the resources."
+}
+variable "environment_name" {
+  description = "Environment name, used in the name of main resources."
+}
 # IAM
 
 variable "project_admins" {
   type = set(string)
+  description = "List of project admins to be added."
 }
 
 variable "project_editors" {
   type = set(string)
+  description = "List of project editors to be added."
 }
 
 variable "project_viewers" {
   type = set(string)
+  description = "List of project viewers to be added."
 }
 
 # Google Kubernetes Engine
 
-variable "gke_cluster_name" {}
+variable "gke_cluster_name" {
+  description = "Name to be used for the cluster"
+}
 
 variable "gke_release_channel" {
   default = "UNSPECIFIED"
+  description = "Configuration options for the Release channel feature, which provide more control over automatic upgrades of your GKE clusters"
 }
 
 variable "gke_enable_shielded_nodes" {
   type    = bool
   default = false
+  description = "Enable Shielded Nodes features on all nodes in this cluster"
 }
 
 variable "gke_node_auto_upgrade" {
   type    = bool
-  default = false // false only works with UNSPECIFIED release channel 
+  default = false // false only works with UNSPECIFIED release channel
+  description = "Whether the nodes will be automatically upgraded."
 }
 
 variable "gke_node_auto_repair" {
   type    = bool
   default = true
+  description = "Whether the nodes will be automatically repaired."
 }
 
 variable "gke_node_pools" {
@@ -62,6 +79,7 @@ variable "gke_node_pools" {
     image_type     = "cos_containerd"
     taints         = []
   }]
+  description = "List of node pools to be created within the cluster."
 }
 
 variable "k8s_namespaces" {
@@ -70,37 +88,45 @@ variable "k8s_namespaces" {
     has_public_ip = bool
     dns_records   = set(string)
   }))
+  description = "List of namespaces to be created."
 }
 
 # FLUX
 variable "flux_enabled" {
   type    = bool
   default = true
+  description = "Enable the creation of flux resources."
 }
 
 # Fluxv2
 variable "fluxv2_enabled" {
   type    = bool
   default = false
+  description = "Enable the creation of fluxv2 resources."
 }
 # DNS
-variable "dns_domain" {}
-
 variable "dns_enabled" {
   type    = bool
   default = false
+  description = "Enable/Disable DNS resources"
+}
+
+variable "dns_domain" {
+  description = "The DNS name of the managed zone."
 }
 
 # CERT-MANAGER
 variable "cert_manager_enabled" {
   type    = bool
   default = true
+  description = "Enable the creation of cert-manager resources."
 }
 
 # Sealed secrets
 variable "sealed_secrets_enabled" {
   type    = bool
   default = true
+  description = "Enable the creation of sealed-secrets resources."
 }
 
 # Alerting

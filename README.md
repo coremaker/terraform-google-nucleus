@@ -6,11 +6,140 @@
 This repository contains a [Terraform](https://www.terraform.io) module for running the main services on Google Cloud Platform.
 This module is fully configurable !
 
-## Kubernetes - k8s-coremaker
+## Providers
 
-The k8s repository is based on [`Helm`] and it is used to install services in the [`Kubernetes`] cluster. In the k8s repo we are using three major tools [`flux`], [`kustomize`] and [`sealed-secrets`].
+| Name |
+|------|
+| <a name="provider_google"></a> [google](#provider\_google) |
+| <a name="provider_tls"></a> [tls](#provider\_tls) |
 
-### Flux
+## Resources
+
+| Name | Type |
+|------|------|
+| [google_billing_budget.project_budget](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/billing_budget) | resource |
+| [google_billing_budget.project_service_budget](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/billing_budget) | resource |
+| [google_compute_global_address.namespace_public_ip](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address) | resource |
+| [google_compute_global_address.private_ip_network](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address) | resource |
+| [google_compute_network.vpc](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network) | resource |
+| [google_compute_subnetwork.container_subnetwork](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork) | resource |
+| [google_container_cluster.kube](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster) | resource |
+| [google_container_node_pool.kube_nodes](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool) | resource |
+| [google_dns_managed_zone.dns_zone](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/dns_managed_zone) | resource |
+| [google_dns_record_set.dns_record](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/dns_record_set) | resource |
+| [google_logging_metric.kube_event](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/logging_metric) | resource |
+| [google_logging_metric.kube_pod_event](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/logging_metric) | resource |
+| [google_monitoring_alert_policy.kube_event](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/monitoring_alert_policy) | resource |
+| [google_monitoring_notification_channel.billing_email_alert](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/monitoring_notification_channel) | resource |
+| [google_monitoring_notification_channel.kube_event_email_channel](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/monitoring_notification_channel) | resource |
+| [google_monitoring_notification_channel.kube_event_slack_channel](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/monitoring_notification_channel) | resource |
+| [google_project_iam_binding.container_editors](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_binding) | resource |
+| [google_project_iam_binding.container_readers](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_binding) | resource |
+| [google_project_iam_binding.editors](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_binding) | resource |
+| [google_project_iam_binding.project_viewers](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_binding) | resource |
+| [google_project_iam_member.cert_manager_account_dns_admin](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_member) | resource |
+| [google_project_iam_member.cloudsql_editors_member](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_member) | resource |
+| [google_project_iam_member.cloudsql_readers_member](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_member) | resource |
+| [google_project_iam_member.container_admins](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_member) | resource |
+| [google_project_service.billing](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.compute](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.container](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.containerregistry](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.dns](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.iam](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.logging](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.monitoring](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.network](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.serviceusage](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.storage_api](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.storage_component](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_service_account.cert_manager_account](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
+| [google_service_account.fluxv2](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
+| [google_service_account_key.cert_manager_account_key](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account_key) | resource |
+| [google_service_account_key.fluxv2_container_registry](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account_key) | resource |
+| [google_service_networking_connection.private_vpc_connection](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_networking_connection) | resource |
+| [tls_private_key.flux_secret](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
+| [tls_private_key.fluxv2_secret](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
+| [tls_private_key.sealed_secrets](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
+| [tls_self_signed_cert.sealed_secrets](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert) | resource |
+| [google_client_config.default](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/client_config) | data source |
+| [google_project.project](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/project) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_billing_budgets_per_service"></a> [billing\_budgets\_per\_service](#input\_billing\_budgets\_per\_service) | n/a | <pre>list(object({<br>    name              = string<br>    service_id        = string<br>    amount            = number<br>    threshold_percent = string<br>    spend_basis       = string<br>  }))</pre> | `[]` | no |
+| <a name="input_billing_currency_code"></a> [billing\_currency\_code](#input\_billing\_currency\_code) | n/a | `string` | `"GBP"` | no |
+| <a name="input_billing_email_address"></a> [billing\_email\_address](#input\_billing\_email\_address) | n/a | `list(string)` | <pre>[<br>  "address@example.com"<br>]</pre> | no |
+| <a name="input_billing_project_threshold_rules"></a> [billing\_project\_threshold\_rules](#input\_billing\_project\_threshold\_rules) | n/a | <pre>list(object({<br>    threshold  = number<br>    spend_type = string<br>  }))</pre> | <pre>[<br>  {<br>    "spend_type": "FORECASTED_SPEND",<br>    "threshold": 1<br>  },<br>  {<br>    "spend_type": "FORECASTED_SPEND",<br>    "threshold": 1.2<br>  }<br>]</pre> | no |
+| <a name="input_billing_project_units_amount"></a> [billing\_project\_units\_amount](#input\_billing\_project\_units\_amount) | n/a | `string` | `"500"` | no |
+| <a name="input_cert_manager_enabled"></a> [cert\_manager\_enabled](#input\_cert\_manager\_enabled) | Enable the creation of cert-manager resources. | `bool` | `true` | no |
+| <a name="input_dns_domain"></a> [dns\_domain](#input\_dns\_domain) | The DNS name of the managed zone. | `any` | n/a | yes |
+| <a name="input_dns_enabled"></a> [dns\_enabled](#input\_dns\_enabled) | Enable/Disable DNS resources | `bool` | `false` | no |
+| <a name="input_enable_billing_alerts"></a> [enable\_billing\_alerts](#input\_enable\_billing\_alerts) | Alerting # GCP Billing Alerts | `bool` | `false` | no |
+| <a name="input_enable_k8s_containers_alerts"></a> [enable\_k8s\_containers\_alerts](#input\_enable\_k8s\_containers\_alerts) | # Kubernetes Alerts ## These alerts are based on pod logs with severity ERROR | `bool` | `false` | no |
+| <a name="input_environment_name"></a> [environment\_name](#input\_environment\_name) | Environment name, used in the name of main resources. | `any` | n/a | yes |
+| <a name="input_flux_enabled"></a> [flux\_enabled](#input\_flux\_enabled) | Enable the creation of flux resources. | `bool` | `true` | no |
+| <a name="input_fluxv2_enabled"></a> [fluxv2\_enabled](#input\_fluxv2\_enabled) | Enable the creation of fluxv2 resources. | `bool` | `false` | no |
+| <a name="input_gke_cluster_name"></a> [gke\_cluster\_name](#input\_gke\_cluster\_name) | Name to be used for the cluster | `any` | n/a | yes |
+| <a name="input_gke_enable_shielded_nodes"></a> [gke\_enable\_shielded\_nodes](#input\_gke\_enable\_shielded\_nodes) | Enable Shielded Nodes features on all nodes in this cluster | `bool` | `false` | no |
+| <a name="input_gke_node_auto_repair"></a> [gke\_node\_auto\_repair](#input\_gke\_node\_auto\_repair) | Whether the nodes will be automatically repaired. | `bool` | `true` | no |
+| <a name="input_gke_node_auto_upgrade"></a> [gke\_node\_auto\_upgrade](#input\_gke\_node\_auto\_upgrade) | Whether the nodes will be automatically upgraded. | `bool` | `false` | no |
+| <a name="input_gke_node_pools"></a> [gke\_node\_pools](#input\_gke\_node\_pools) | List of node pools to be created within the cluster. | <pre>list(object({<br>    name           = string<br>    min_node_count = number<br>    max_node_count = number<br>    machine_type   = string<br>    image_type     = string<br>    taints = list(object({<br>      key    = string<br>      value  = string<br>      effect = string<br>    }))<br>  }))</pre> | <pre>[<br>  {<br>    "image_type": "cos_containerd",<br>    "machine_type": "n1-standard-1",<br>    "max_node_count": 3,<br>    "min_node_count": 1,<br>    "name": "nodes",<br>    "taints": []<br>  }<br>]</pre> | no |
+| <a name="input_gke_release_channel"></a> [gke\_release\_channel](#input\_gke\_release\_channel) | Configuration options for the Release channel feature, which provide more control over automatic upgrades of your GKE clusters | `string` | `"UNSPECIFIED"` | no |
+| <a name="input_google_billing_account_id"></a> [google\_billing\_account\_id](#input\_google\_billing\_account\_id) | n/a | `string` | `""` | no |
+| <a name="input_google_project_id"></a> [google\_project\_id](#input\_google\_project\_id) | The ID of the project you want to create the resources within. | `any` | n/a | yes |
+| <a name="input_google_region"></a> [google\_region](#input\_google\_region) | Region where to create the resources. | `any` | n/a | yes |
+| <a name="input_google_zone"></a> [google\_zone](#input\_google\_zone) | Zone where to create the resources. | `any` | n/a | yes |
+| <a name="input_k8s_container_alerts_slack_channel_name"></a> [k8s\_container\_alerts\_slack\_channel\_name](#input\_k8s\_container\_alerts\_slack\_channel\_name) | n/a | `string` | `""` | no |
+| <a name="input_k8s_containers_alerts_cpu_memory_alignment_period"></a> [k8s\_containers\_alerts\_cpu\_memory\_alignment\_period](#input\_k8s\_containers\_alerts\_cpu\_memory\_alignment\_period) | n/a | `string` | `"300s"` | no |
+| <a name="input_k8s_containers_alerts_cpu_memory_duration"></a> [k8s\_containers\_alerts\_cpu\_memory\_duration](#input\_k8s\_containers\_alerts\_cpu\_memory\_duration) | CPU and MEMORY utilization | `string` | `"60s"` | no |
+| <a name="input_k8s_containers_alerts_cpu_memory_per_series_aligner"></a> [k8s\_containers\_alerts\_cpu\_memory\_per\_series\_aligner](#input\_k8s\_containers\_alerts\_cpu\_memory\_per\_series\_aligner) | n/a | `string` | `"ALIGN_MEAN"` | no |
+| <a name="input_k8s_containers_alerts_cpu_memory_threshold_value"></a> [k8s\_containers\_alerts\_cpu\_memory\_threshold\_value](#input\_k8s\_containers\_alerts\_cpu\_memory\_threshold\_value) | n/a | `number` | `0.9` | no |
+| <a name="input_k8s_containers_alerts_email_address"></a> [k8s\_containers\_alerts\_email\_address](#input\_k8s\_containers\_alerts\_email\_address) | n/a | `list(string)` | <pre>[<br>  "address@example.com"<br>]</pre> | no |
+| <a name="input_k8s_containers_alerts_logs_alignment_period"></a> [k8s\_containers\_alerts\_logs\_alignment\_period](#input\_k8s\_containers\_alerts\_logs\_alignment\_period) | n/a | `string` | `"300s"` | no |
+| <a name="input_k8s_containers_alerts_logs_duration"></a> [k8s\_containers\_alerts\_logs\_duration](#input\_k8s\_containers\_alerts\_logs\_duration) | Logs | `string` | `"300s"` | no |
+| <a name="input_k8s_containers_alerts_logs_per_series_aligner"></a> [k8s\_containers\_alerts\_logs\_per\_series\_aligner](#input\_k8s\_containers\_alerts\_logs\_per\_series\_aligner) | n/a | `string` | `"ALIGN_SUM"` | no |
+| <a name="input_k8s_containers_alerts_logs_threshold_value"></a> [k8s\_containers\_alerts\_logs\_threshold\_value](#input\_k8s\_containers\_alerts\_logs\_threshold\_value) | n/a | `number` | `0` | no |
+| <a name="input_k8s_containers_alerts_pod_logs_alignment_period"></a> [k8s\_containers\_alerts\_pod\_logs\_alignment\_period](#input\_k8s\_containers\_alerts\_pod\_logs\_alignment\_period) | n/a | `string` | `"300s"` | no |
+| <a name="input_k8s_containers_alerts_pod_logs_duration"></a> [k8s\_containers\_alerts\_pod\_logs\_duration](#input\_k8s\_containers\_alerts\_pod\_logs\_duration) | Pod warnings and errors | `string` | `"300s"` | no |
+| <a name="input_k8s_containers_alerts_pod_logs_per_series_aligner"></a> [k8s\_containers\_alerts\_pod\_logs\_per\_series\_aligner](#input\_k8s\_containers\_alerts\_pod\_logs\_per\_series\_aligner) | n/a | `string` | `"ALIGN_SUM"` | no |
+| <a name="input_k8s_containers_alerts_pod_logs_threshold_value"></a> [k8s\_containers\_alerts\_pod\_logs\_threshold\_value](#input\_k8s\_containers\_alerts\_pod\_logs\_threshold\_value) | n/a | `number` | `0` | no |
+| <a name="input_k8s_containers_alerts_restarts_alignment_period"></a> [k8s\_containers\_alerts\_restarts\_alignment\_period](#input\_k8s\_containers\_alerts\_restarts\_alignment\_period) | n/a | `string` | `"300s"` | no |
+| <a name="input_k8s_containers_alerts_restarts_duration"></a> [k8s\_containers\_alerts\_restarts\_duration](#input\_k8s\_containers\_alerts\_restarts\_duration) | Container restarts | `string` | `"60s"` | no |
+| <a name="input_k8s_containers_alerts_restarts_per_series_aligner"></a> [k8s\_containers\_alerts\_restarts\_per\_series\_aligner](#input\_k8s\_containers\_alerts\_restarts\_per\_series\_aligner) | n/a | `string` | `"ALIGN_DELTA"` | no |
+| <a name="input_k8s_containers_alerts_restarts_threshold_value"></a> [k8s\_containers\_alerts\_restarts\_threshold\_value](#input\_k8s\_containers\_alerts\_restarts\_threshold\_value) | n/a | `number` | `0` | no |
+| <a name="input_k8s_containers_alerts_type"></a> [k8s\_containers\_alerts\_type](#input\_k8s\_containers\_alerts\_type) | ## slack or email supported only | `string` | `"slack"` | no |
+| <a name="input_k8s_containers_namespaces"></a> [k8s\_containers\_namespaces](#input\_k8s\_containers\_namespaces) | n/a | `set(string)` | <pre>[<br>  "default"<br>]</pre> | no |
+| <a name="input_k8s_namespaces"></a> [k8s\_namespaces](#input\_k8s\_namespaces) | List of namespaces to be created. | <pre>list(object({<br>    name          = string<br>    has_public_ip = bool<br>    dns_records   = set(string)<br>  }))</pre> | n/a | yes |
+| <a name="input_project_admins"></a> [project\_admins](#input\_project\_admins) | List of project admins to be added. | `set(string)` | n/a | yes |
+| <a name="input_project_editors"></a> [project\_editors](#input\_project\_editors) | List of project editors to be added. | `set(string)` | n/a | yes |
+| <a name="input_project_viewers"></a> [project\_viewers](#input\_project\_viewers) | List of project viewers to be added. | `set(string)` | n/a | yes |
+| <a name="input_sealed_secrets_enabled"></a> [sealed\_secrets\_enabled](#input\_sealed\_secrets\_enabled) | Enable the creation of sealed-secrets resources. | `bool` | `true` | no |
+| <a name="input_slack_auth_token"></a> [slack\_auth\_token](#input\_slack\_auth\_token) | n/a | `string` | `"token"` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_cert_manager_service_key"></a> [cert\_manager\_service\_key](#output\_cert\_manager\_service\_key) | Service account key with the right permissions for DNS used by cert-manager. |
+| <a name="output_cluster_name"></a> [cluster\_name](#output\_cluster\_name) | Cluster Name |
+| <a name="output_dns_name_servers"></a> [dns\_name\_servers](#output\_dns\_name\_servers) | List of the DNS servers. |
+| <a name="output_flux_private_key_pem"></a> [flux\_private\_key\_pem](#output\_flux\_private\_key\_pem) | Private key to be used for github integration. |
+| <a name="output_fluxv2_gcr_service_key"></a> [fluxv2\_gcr\_service\_key](#output\_fluxv2\_gcr\_service\_key) | Service account key with the right permissions for GCR  used by fluxv2. |
+| <a name="output_fluxv2_private_key_pem"></a> [fluxv2\_private\_key\_pem](#output\_fluxv2\_private\_key\_pem) | Private key to be used for github integration. |
+| <a name="output_fluxv2_public_key_pem"></a> [fluxv2\_public\_key\_pem](#output\_fluxv2\_public\_key\_pem) | Public key to be used for github integration. |
+| <a name="output_gke_certificate"></a> [gke\_certificate](#output\_gke\_certificate) | Base64 encoded public certificate that is the root of trust for the cluster. |
+| <a name="output_gke_endpoint"></a> [gke\_endpoint](#output\_gke\_endpoint) | The IP address of this cluster's Kubernetes master. |
+| <a name="output_gke_token"></a> [gke\_token](#output\_gke\_token) | GKE cluster token. |
+| <a name="output_google_compute_network_vpc_id"></a> [google\_compute\_network\_vpc\_id](#output\_google\_compute\_network\_vpc\_id) | an identifier for the VPC resource with format projects/{{project}}/global/networks/{{name}} |
+| <a name="output_google_compute_network_vpc_self_link"></a> [google\_compute\_network\_vpc\_self\_link](#output\_google\_compute\_network\_vpc\_self\_link) | The URI of the created VPC. |
+| <a name="output_project_id"></a> [project\_id](#output\_project\_id) | Returns the project id. |
+| <a name="output_sealed_secrets_cert_pem"></a> [sealed\_secrets\_cert\_pem](#output\_sealed\_secrets\_cert\_pem) | Self-signed cert to be used for the encryption/decryption of secrets. |
+| <a name="output_sealed_secrets_private_key"></a> [sealed\_secrets\_private\_key](#output\_sealed\_secrets\_private\_key) | Private key used for the encryption of secrets. |
+
+# Flux
 
 Continuous delivery is a term that encapsulates a set of best practices that surround building, deploying and monitoring applications. The goal is to provide a sustainable model for maintaining and improving an application.
 
@@ -20,7 +149,7 @@ Flux’s main feature is the automated synchronisation between a version control
 
 More information about [`flux`].
 
-### Sealed-secrets
+# Sealed-secrets
 
 Encrypt your Secret into a SealedSecret, which is safe to store - even to a public repository. The SealedSecret can be decrypted only by the controller running in the target cluster and nobody else (not even the original author) is able to obtain the original Secret from the SealedSecret.
 
@@ -28,75 +157,8 @@ The certificates are stored in sealedsecret-keys folder, every k8s cluster has i
 
 More information about [`sealed-secrets`].
 
-Sealing example
-
-#### Install kubeseal
-
-```bash
-brew install kubeseal
-```
-
-local/secret.yaml
-```bash
-apiVersion: v1
-data:
-    dbUrl: base64 encoded value
-kind: Secret
-metadata:
-  creationTimestamp: null
-  name: secretName
-  namespace: coremaker
-```
-#### Seal the secrets
-
-```bash
-kubeseal --format=yaml --cert=sealedsecret-keys/dev.pem < local/secret.yaml > environments/qa/coremaker/sealed-secret-patch.yaml
-```
-
-## Dockerhub
-### terraform-root
-
-Docker Hub is a cloud-based repository in which we create, test, store and distribute container images.
-
-## Terraform
-### terraform-platform
-
-Within this repository we install the terraform nucleus module and any other additionally terraform based resource.
-
-All enviornments are controlled by [`Terraform Cloud`]
-
-[`Terraform Cloud`] is an application that helps teams use Terraform together. It manages Terraform runs in a consistent and reliable environment, and includes easy access to shared state and secret data, access controls for approving changes to infrastructure, a private registry for sharing Terraform modules, detailed policy controls for governing the contents of Terraform configurations, and more.
-
-## CI Pipelines and secrets management
-### CI Pipelines
-Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early.
-
-[`Concourse`] is a pipeline-based continuous thing-doer.
-
-The word "pipeline" is all the rage in CI these days, so being more specific about this term is kind of important; Concourse's pipelines are significantly different from the rest.
-
-Pipelines are built around Resources, which represent all external state, and Jobs, which interact with them. Concourse pipelines represent a dependency flow, kind of like distributed Makefiles. Pipelines are designed to be self-contained so as to minimize server-wide configuration. Maximizing portability also mitigates risk, making it easier for projects to recover from CI disasters.
-
-More information about [`concourse`].
-
-### Secrets management
-
-[`Vault`] is a tool for securely accessing secrets. A secret is anything that you want to tightly control access to, such as API keys, passwords, or certificates. [`Vault`] provides a unified interface to any secret, while providing tight access control and recording a detailed audit log.
-
-A modern system requires access to a multitude of secrets: database credentials, API keys for external services, credentials for service-oriented architecture communication, etc. Understanding who is accessing what secrets is already very difficult and platform-specific. Adding on key rolling, secure storage, and detailed audit logs is almost impossible without a custom solution. This is where [`Vault`] steps in.
-
-Storing secrets in vault allows concourse to access git repositories and the dockerhub project.
-
-More information about [`vault`].
-
-[`vault`]: https://www.vaultproject.io/docs/what-is-vault/
-[`concourse`]: https://concourse-ci.org/
 [`terraform`]: https://www.terraform.io
 [`helm`]: https://helm.sh/
 [`kubernetes`]: https://kubernetes.io/
 [`sealed-secrets`]: https://github.com/bitnami-labs/sealed-secrets
-[`kustomize`]: https://kustomize.io/
 [`flux`]: https://docs.fluxcd.io/en/1.18.0/introduction.html
-[`make`]: https://www.gnu.org/software/make
-[`sed`]: https://www.gnu.org/software/sed
-[`Terraform Cloud`]: https://www.terraform.io/docs/cloud/index.html
