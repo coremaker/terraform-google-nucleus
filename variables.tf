@@ -82,6 +82,17 @@ variable "gke_node_pools" {
   description = "List of node pools to be created within the cluster."
 }
 
+variable "gke_node_locations" {
+  type    = set(string)
+  default = ["europe-west2-a"]
+}
+
+variable "gke_cluster_resource_labels" {
+  type        = map(string)
+  description = "The GCE resource labels (a map of key/value pairs) to be applied to the cluster"
+  default     = {}
+}
+
 variable "k8s_namespaces" {
   type = list(object({
     name          = string

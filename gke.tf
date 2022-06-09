@@ -8,12 +8,13 @@ locals {
 resource "google_container_cluster" "kube" {
   name     = var.gke_cluster_name
   location = var.google_region
+  resource_labels = var.gke_cluster_resource_labels
 
   release_channel {
     channel = var.gke_release_channel
   }
 
-  node_locations = ["europe-west2-a"]
+  node_locations = var.gke_node_locations
   network        = google_compute_network.vpc.self_link
   subnetwork     = google_compute_subnetwork.container_subnetwork.name
 
