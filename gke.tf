@@ -3,6 +3,9 @@ locals {
     for node in var.gke_node_pools :
     node.name => node
   }
+  cidr_blocks = { 
+    for cidr_block in var.cidr_blocks: 
+    cidr_block.display_name => cidr_block }
 }
 
 resource "google_container_cluster" "kube" {
@@ -31,6 +34,22 @@ resource "google_container_cluster" "kube" {
   master_auth {
     client_certificate_config {
       issue_client_certificate = false
+    }
+  }
+
+  private_cluster_config {
+    enable_private_nodes = true
+    master_ipv4_cidr_block = "172.16.0.0/28"
+    enable_private_endpoint = false
+  }
+
+  master_authorized_networks_config {
+    dynamic "cidr_blocks" {
+      for_each = local.cidr_blocks
+      content {
+      display_name = cidr_blocks.value.display_name
+      cidr_block = cidr_blocks.value.cidr_block
+      }
     }
   }
 

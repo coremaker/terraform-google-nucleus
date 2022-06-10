@@ -82,6 +82,18 @@ variable "gke_node_pools" {
   description = "List of node pools to be created within the cluster."
 }
 
+variable "cidr_blocks" {
+  type = list(object({
+    display_name  = string
+    cidr_block    = string
+  }))
+  default = [{
+    display_name  = "Master IP"
+    cidr_block    = "172.16.0.0/32"
+  }]
+  description = "Allowed IP to access Master"
+}
+
 variable "gke_node_locations" {
   type    = set(string)
   default = ["europe-west2-a"]
