@@ -65,6 +65,8 @@ variable "gke_node_pools" {
     max_node_count = number
     machine_type   = string
     image_type     = string
+    disk_size_gb = string
+    disk_type = string
     taints = list(object({
       key    = string
       value  = string
@@ -77,6 +79,8 @@ variable "gke_node_pools" {
     max_node_count = 3
     machine_type   = "n1-standard-1"
     image_type     = "cos_containerd"
+    disk_size_gb   = "100"
+    disk_type      = "pd-ssd"
     taints         = []
   }]
   description = "List of node pools to be created within the cluster."
