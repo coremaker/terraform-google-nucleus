@@ -79,7 +79,7 @@ variable "gke_node_pools" {
     max_node_count = 3
     machine_type   = "n1-standard-1"
     image_type     = "cos_containerd"
-    disk_size_gb   = "100GB"
+    disk_size_gb   = "100"
     disk_type      = "pd-ssd"
     taints         = []
   }]
