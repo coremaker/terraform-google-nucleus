@@ -1,60 +1,62 @@
 # Google
 
 variable "google_project_id" {
+  type        = string
   description = "The ID of the project you want to create the resources within."
 }
 variable "google_region" {
+  type        = string
   description = "Region where to create the resources."
 }
-variable "google_zone" {
-  description = "Zone where to create the resources."
-}
 variable "environment_name" {
+  type        = string
   description = "Environment name, used in the name of main resources."
 }
 # IAM
 
 variable "project_admins" {
-  type = set(string)
+  type        = set(string)
   description = "List of project admins to be added."
 }
 
 variable "project_editors" {
-  type = set(string)
+  type        = set(string)
   description = "List of project editors to be added."
 }
 
 variable "project_viewers" {
-  type = set(string)
+  type        = set(string)
   description = "List of project viewers to be added."
 }
 
 # Google Kubernetes Engine
 
 variable "gke_cluster_name" {
+  type        = string
   description = "Name to be used for the cluster"
 }
 
 variable "gke_release_channel" {
-  default = "UNSPECIFIED"
+  type        = string
+  default     = "UNSPECIFIED"
   description = "Configuration options for the Release channel feature, which provide more control over automatic upgrades of your GKE clusters"
 }
 
 variable "gke_enable_shielded_nodes" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable Shielded Nodes features on all nodes in this cluster"
 }
 
 variable "gke_node_auto_upgrade" {
-  type    = bool
-  default = false // false only works with UNSPECIFIED release channel
+  type        = bool
+  default     = false // false only works with UNSPECIFIED release channel
   description = "Whether the nodes will be automatically upgraded."
 }
 
 variable "gke_node_auto_repair" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
   description = "Whether the nodes will be automatically repaired."
 }
 
@@ -65,8 +67,8 @@ variable "gke_node_pools" {
     max_node_count = number
     machine_type   = string
     image_type     = string
-    disk_size_gb = string
-    disk_type = string
+    disk_size_gb   = string
+    disk_type      = string
     taints = list(object({
       key    = string
       value  = string
@@ -108,39 +110,40 @@ variable "k8s_namespaces" {
 
 # FLUX
 variable "flux_enabled" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
   description = "Enable the creation of flux resources."
 }
 
 # Fluxv2
 variable "fluxv2_enabled" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable the creation of fluxv2 resources."
 }
 # DNS
 variable "dns_enabled" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Enable/Disable DNS resources"
 }
 
 variable "dns_domain" {
+  type        = string
   description = "The DNS name of the managed zone."
 }
 
 # CERT-MANAGER
 variable "cert_manager_enabled" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
   description = "Enable the creation of cert-manager resources."
 }
 
 # Sealed secrets
 variable "sealed_secrets_enabled" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
   description = "Enable the creation of sealed-secrets resources."
 }
 
@@ -152,14 +155,17 @@ variable "enable_billing_alerts" {
 }
 
 variable "google_billing_account_id" {
+  type    = string
   default = ""
 }
 
 variable "billing_currency_code" {
+  type    = string
   default = "GBP"
 }
 
 variable "billing_project_units_amount" {
+  type    = string
   default = "500"
 }
 
@@ -204,6 +210,7 @@ variable "enable_k8s_containers_alerts" {
 }
 
 variable "slack_auth_token" {
+  type    = string
   default = "token" # Needs to be replaced with a working token
 }
 

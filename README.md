@@ -1,17 +1,25 @@
 [![Maintained by coremaker.io](https://img.shields.io/badge/maintained%20by-coremaker.io-green)](https://coremaker.io/)
-[![Coremaker Docs](https://img.shields.io/badge/coremaker-docs-green)](https://coremaker.io/)
 
 # Terraform Google Nucleus
 
 This repository contains a [Terraform](https://www.terraform.io) module for running the main services on Google Cloud Platform.
-This module is fully configurable !
+This module is fully configurable!
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
 
 ## Providers
 
-| Name |
-|------|
-| <a name="provider_google"></a> [google](https://registry.terraform.io/providers/hashicorp/google/4.0.0) |
-| <a name="provider_tls"></a> [tls](https://registry.terraform.io/providers/hashicorp/tls/3.1.0) |
+| Name | Version |
+|------|---------|
+| <a name="provider_google"></a> [google](#provider\_google) | 4.31.0 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.1 |
+
+## Modules
+
+No modules.
 
 ## Resources
 
@@ -75,23 +83,24 @@ This module is fully configurable !
 | <a name="input_billing_project_threshold_rules"></a> [billing\_project\_threshold\_rules](#input\_billing\_project\_threshold\_rules) | n/a | <pre>list(object({<br>    threshold  = number<br>    spend_type = string<br>  }))</pre> | <pre>[<br>  {<br>    "spend_type": "FORECASTED_SPEND",<br>    "threshold": 1<br>  },<br>  {<br>    "spend_type": "FORECASTED_SPEND",<br>    "threshold": 1.2<br>  }<br>]</pre> | no |
 | <a name="input_billing_project_units_amount"></a> [billing\_project\_units\_amount](#input\_billing\_project\_units\_amount) | n/a | `string` | `"500"` | no |
 | <a name="input_cert_manager_enabled"></a> [cert\_manager\_enabled](#input\_cert\_manager\_enabled) | Enable the creation of cert-manager resources. | `bool` | `true` | no |
-| <a name="input_dns_domain"></a> [dns\_domain](#input\_dns\_domain) | The DNS name of the managed zone. | `any` | n/a | yes |
+| <a name="input_dns_domain"></a> [dns\_domain](#input\_dns\_domain) | The DNS name of the managed zone. | `string` | n/a | yes |
 | <a name="input_dns_enabled"></a> [dns\_enabled](#input\_dns\_enabled) | Enable/Disable DNS resources | `bool` | `false` | no |
 | <a name="input_enable_billing_alerts"></a> [enable\_billing\_alerts](#input\_enable\_billing\_alerts) | Alerting # GCP Billing Alerts | `bool` | `false` | no |
 | <a name="input_enable_k8s_containers_alerts"></a> [enable\_k8s\_containers\_alerts](#input\_enable\_k8s\_containers\_alerts) | # Kubernetes Alerts ## These alerts are based on pod logs with severity ERROR | `bool` | `false` | no |
-| <a name="input_environment_name"></a> [environment\_name](#input\_environment\_name) | Environment name, used in the name of main resources. | `any` | n/a | yes |
+| <a name="input_environment_name"></a> [environment\_name](#input\_environment\_name) | Environment name, used in the name of main resources. | `string` | n/a | yes |
 | <a name="input_flux_enabled"></a> [flux\_enabled](#input\_flux\_enabled) | Enable the creation of flux resources. | `bool` | `true` | no |
 | <a name="input_fluxv2_enabled"></a> [fluxv2\_enabled](#input\_fluxv2\_enabled) | Enable the creation of fluxv2 resources. | `bool` | `false` | no |
-| <a name="input_gke_cluster_name"></a> [gke\_cluster\_name](#input\_gke\_cluster\_name) | Name to be used for the cluster | `any` | n/a | yes |
+| <a name="input_gke_cluster_name"></a> [gke\_cluster\_name](#input\_gke\_cluster\_name) | Name to be used for the cluster | `string` | n/a | yes |
+| <a name="input_gke_cluster_resource_labels"></a> [gke\_cluster\_resource\_labels](#input\_gke\_cluster\_resource\_labels) | The GCE resource labels (a map of key/value pairs) to be applied to the cluster | `map(string)` | `{}` | no |
 | <a name="input_gke_enable_shielded_nodes"></a> [gke\_enable\_shielded\_nodes](#input\_gke\_enable\_shielded\_nodes) | Enable Shielded Nodes features on all nodes in this cluster | `bool` | `false` | no |
 | <a name="input_gke_node_auto_repair"></a> [gke\_node\_auto\_repair](#input\_gke\_node\_auto\_repair) | Whether the nodes will be automatically repaired. | `bool` | `true` | no |
 | <a name="input_gke_node_auto_upgrade"></a> [gke\_node\_auto\_upgrade](#input\_gke\_node\_auto\_upgrade) | Whether the nodes will be automatically upgraded. | `bool` | `false` | no |
-| <a name="input_gke_node_pools"></a> [gke\_node\_pools](#input\_gke\_node\_pools) | List of node pools to be created within the cluster. | <pre>list(object({<br>    name           = string<br>    min_node_count = number<br>    max_node_count = number<br>    machine_type   = string<br>    image_type     = string<br>    taints = list(object({<br>      key    = string<br>      value  = string<br>      effect = string<br>    }))<br>  }))</pre> | <pre>[<br>  {<br>    "image_type": "cos_containerd",<br>    "machine_type": "n1-standard-1",<br>    "max_node_count": 3,<br>    "min_node_count": 1,<br>    "name": "nodes",<br>    "taints": []<br>  }<br>]</pre> | no |
+| <a name="input_gke_node_locations"></a> [gke\_node\_locations](#input\_gke\_node\_locations) | n/a | `set(string)` | <pre>[<br>  "europe-west2-a"<br>]</pre> | no |
+| <a name="input_gke_node_pools"></a> [gke\_node\_pools](#input\_gke\_node\_pools) | List of node pools to be created within the cluster. | <pre>list(object({<br>    name           = string<br>    min_node_count = number<br>    max_node_count = number<br>    machine_type   = string<br>    image_type     = string<br>    disk_size_gb   = string<br>    disk_type      = string<br>    taints = list(object({<br>      key    = string<br>      value  = string<br>      effect = string<br>    }))<br>  }))</pre> | <pre>[<br>  {<br>    "disk_size_gb": "100",<br>    "disk_type": "pd-ssd",<br>    "image_type": "cos_containerd",<br>    "machine_type": "n1-standard-1",<br>    "max_node_count": 3,<br>    "min_node_count": 1,<br>    "name": "nodes",<br>    "taints": []<br>  }<br>]</pre> | no |
 | <a name="input_gke_release_channel"></a> [gke\_release\_channel](#input\_gke\_release\_channel) | Configuration options for the Release channel feature, which provide more control over automatic upgrades of your GKE clusters | `string` | `"UNSPECIFIED"` | no |
 | <a name="input_google_billing_account_id"></a> [google\_billing\_account\_id](#input\_google\_billing\_account\_id) | n/a | `string` | `""` | no |
-| <a name="input_google_project_id"></a> [google\_project\_id](#input\_google\_project\_id) | The ID of the project you want to create the resources within. | `any` | n/a | yes |
-| <a name="input_google_region"></a> [google\_region](#input\_google\_region) | Region where to create the resources. | `any` | n/a | yes |
-| <a name="input_google_zone"></a> [google\_zone](#input\_google\_zone) | Zone where to create the resources. | `any` | n/a | yes |
+| <a name="input_google_project_id"></a> [google\_project\_id](#input\_google\_project\_id) | The ID of the project you want to create the resources within. | `string` | n/a | yes |
+| <a name="input_google_region"></a> [google\_region](#input\_google\_region) | Region where to create the resources. | `string` | n/a | yes |
 | <a name="input_k8s_container_alerts_slack_channel_name"></a> [k8s\_container\_alerts\_slack\_channel\_name](#input\_k8s\_container\_alerts\_slack\_channel\_name) | n/a | `string` | `""` | no |
 | <a name="input_k8s_containers_alerts_cpu_memory_alignment_period"></a> [k8s\_containers\_alerts\_cpu\_memory\_alignment\_period](#input\_k8s\_containers\_alerts\_cpu\_memory\_alignment\_period) | n/a | `string` | `"300s"` | no |
 | <a name="input_k8s_containers_alerts_cpu_memory_duration"></a> [k8s\_containers\_alerts\_cpu\_memory\_duration](#input\_k8s\_containers\_alerts\_cpu\_memory\_duration) | CPU and MEMORY utilization | `string` | `"60s"` | no |
@@ -138,12 +147,13 @@ This module is fully configurable !
 | <a name="output_project_id"></a> [project\_id](#output\_project\_id) | Returns the project id. |
 | <a name="output_sealed_secrets_cert_pem"></a> [sealed\_secrets\_cert\_pem](#output\_sealed\_secrets\_cert\_pem) | Self-signed cert to be used for the encryption/decryption of secrets. |
 | <a name="output_sealed_secrets_private_key"></a> [sealed\_secrets\_private\_key](#output\_sealed\_secrets\_private\_key) | Private key used for the encryption of secrets. |
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 # Flux
 
 Continuous delivery is a term that encapsulates a set of best practices that surround building, deploying and monitoring applications. The goal is to provide a sustainable model for maintaining and improving an application.
 
-Flux is a tool that automates the deployment of containers to Kubernetes. It fills the automation void that exists between building and monitoring
+Flux is a tool that automates the deployment of containers to Kubernetes. It fills the automation void that exists between building and monitoring.
 
 Flux’s main feature is the automated synchronisation between a version control repository and a cluster. If you make any changes to your repository, those changes are automatically deployed to your cluster.
 

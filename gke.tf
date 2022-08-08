@@ -6,8 +6,8 @@ locals {
 }
 
 resource "google_container_cluster" "kube" {
-  name     = var.gke_cluster_name
-  location = var.google_region
+  name            = var.gke_cluster_name
+  location        = var.google_region
   resource_labels = var.gke_cluster_resource_labels
 
   release_channel {
@@ -70,7 +70,7 @@ resource "google_container_node_pool" "kube_nodes" {
     machine_type = each.value.machine_type
     image_type   = each.value.image_type
     disk_size_gb = each.value.disk_size_gb
-    disk_type = each.value.disk_type
+    disk_type    = each.value.disk_type
 
     dynamic "taint" {
       for_each = each.value.taints
