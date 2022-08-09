@@ -3,6 +3,11 @@ output "project_id" {
   description = "Returns the project id."
 }
 
+output "project_number" {
+  value       = data.google_project.project.number
+  description = "Returns the project number."
+}
+
 output "dns_name_servers" {
   value       = var.dns_enabled ? google_dns_managed_zone.dns_zone.0.name_servers : []
   description = "List of the DNS servers."
