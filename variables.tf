@@ -104,6 +104,12 @@ variable "gke_cluster_resource_labels" {
   default     = {}
 }
 
+variable "k8s_workload_identity" {
+  description = "The workload pool to attach all Kubernetes service accounts to. (Default value of `enabled` automatically sets project-based pool `[project_id].svc.id.goog`)"
+  type        = string
+  default     = ""
+}
+
 variable "k8s_namespaces" {
   type = list(object({
     name          = string
