@@ -8,6 +8,11 @@ variable "google_region" {
   type        = string
   description = "Region where to create the resources."
 }
+
+variable "google_zone" {
+  description = "Zone where to create the resources."
+}
+
 variable "environment_name" {
   type        = string
   description = "Environment name, used in the name of main resources."
