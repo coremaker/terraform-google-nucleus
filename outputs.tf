@@ -19,6 +19,11 @@ output "cluster_name" {
   description = "Cluster Name"
 }
 
+output "gke_cluster_id" {
+  value       = google_container_cluster.kube.id
+  description = "Cluster ID"
+}
+
 output "gke_endpoint" {
   value       = google_container_cluster.kube.endpoint
   sensitive   = true
