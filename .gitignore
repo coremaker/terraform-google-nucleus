@@ -11,7 +11,6 @@
 
 # Others
 *.json
-fluxv2-test
 local
 .local
 .terraform
