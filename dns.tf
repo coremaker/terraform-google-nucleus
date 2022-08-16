@@ -13,6 +13,7 @@ locals {
   dns_records = {
     for dns_record in local.dns_record_pairs :
     dns_record.dns_record => dns_record.namespace
+    if dns_record.namespace.regional_ip
   }
 }
 
@@ -23,7 +24,7 @@ resource "google_dns_record_set" "dns_record" {
   type         = "A"
   ttl          = 1800
   managed_zone = google_dns_managed_zone.dns_zone.0.name
-  rrdatas      = each.value.regional_ip == "true" ? ["10.130.1.1"] : [google_compute_global_address.namespace_public_ip[each.value].address]
+  rrdatas      = [google_compute_address.namespace_regional_public_ip[each.value].address]
 
   depends_on = [google_dns_managed_zone.dns_zone]
 }
