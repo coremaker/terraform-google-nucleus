@@ -22,7 +22,7 @@ resource "google_dns_record_set" "dns_record" {
   ttl          = 1800
   managed_zone = google_dns_managed_zone.dns_zone.0.name
   // rrdatas      = [google_compute_global_address.namespace_public_ip[each.value].address]
-  rrdatas      = each.key == "istio-ingress" ? var.anthos_enabled ? [google_compute_global_address.istio_gateway_ip[each.value].address] : [google_compute_global_address.namespace_public_ip[each.value].address] : [google_compute_global_address.namespace_public_ip[each.value].address]
+  rrdatas      = each.key == "istio-ingress" ? var.anthos_enabled ? [google_compute_address.istio_gateway_ip[each.value].address] : [google_compute_global_address.namespace_public_ip[each.value].address] : [google_compute_global_address.namespace_public_ip[each.value].address]
 
   depends_on = [google_dns_managed_zone.dns_zone]
 }
