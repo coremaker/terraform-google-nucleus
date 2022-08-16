@@ -35,7 +35,7 @@ resource "google_compute_global_address" "namespace_public_ip" {
 }
 
 resource "google_compute_address" "istio_gateway_ip" {
-  for_each = var.anthos_enabled ? local.istio_ingress_ip : []
+  count = var.anthos_enabled ? local.istio_ingress_ip ? 1 : 0 : 0
 
   name = "istio-ingress-public-ip"
   address_type = "EXTERNAL"
