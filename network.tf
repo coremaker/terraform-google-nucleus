@@ -1,8 +1,14 @@
 locals {
-  public_ip_namespaces = {
+  global_public_ip_namespaces = {
     for namespace in var.k8s_namespaces :
     namespace.name => namespace
-    if namespace.has_public_ip && namespace.name != "istio-ingress"
+    if namespace.has_public_ip && !namespace.regional_ip
+  }
+
+  regional_public_ip_namespaces = {
+    for namespace in var.k8s_namespaces :
+    namespace.name => namespace
+    if namespace.has_public_ip && namespace.regional_ip
   }
 }
 
@@ -21,17 +27,18 @@ resource "google_compute_subnetwork" "container_subnetwork" {
 }
 
 resource "google_compute_global_address" "namespace_public_ip" {
-  for_each = local.public_ip_namespaces
+  for_each = local.global_public_ip_namespaces
 
   name = "${each.key}-public-ip"
 
   depends_on = [google_project_service.compute]
 }
 
-resource "google_compute_address" "istio_gateway_ip" {
-  count = var.anthos_enabled ? 1 : 0
+resource "google_compute_address" "namespace_regional_public_ip" {
+  for_each = local.regional_public_ip_namespaces
 
-  name = "istio-ingress-public-ip"
+  name = "${each.key}-public-ip"
+
   address_type = "EXTERNAL"
   region = var.google_region
 }

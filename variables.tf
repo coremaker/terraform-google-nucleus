@@ -114,6 +114,7 @@ variable "k8s_namespaces" {
   type = list(object({
     name          = string
     has_public_ip = bool
+    regional_ip     = bool
     dns_records   = set(string)
   }))
   description = "List of namespaces to be created."
