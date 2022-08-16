@@ -329,3 +329,9 @@ variable "k8s_containers_alerts_pod_logs_per_series_aligner" {
   type    = string
   default = "ALIGN_SUM"
 }
+
+# Anthos
+variable "anthos_enabled" {
+  type    = bool
+  default = false
+}

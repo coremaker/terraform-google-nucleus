@@ -83,5 +83,7 @@ resource "google_monitoring_notification_channel" "billing_email_alert" {
 }
 
 resource "google_project_service" "billing" {
+  count = var.enable_billing_alerts ? 1 : 0
+  
   service = "billingbudgets.googleapis.com"
 }

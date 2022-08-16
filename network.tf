@@ -28,6 +28,14 @@ resource "google_compute_global_address" "namespace_public_ip" {
   depends_on = [google_project_service.compute]
 }
 
+resource "google_compute_address" "istio_gateway_ip" {
+  for_each = var.anthos_enabled ? local.public_ip_namespaces == "istio-ingress" ? 1 : 0 : 0
+
+  name = "istio-ingress-public-ip"
+  address_type = "EXTERNAL"
+  region = var.google_region
+}
+
 resource "google_compute_global_address" "private_ip_network" {
   name          = "private-ip-network"
   purpose       = "VPC_PEERING"
