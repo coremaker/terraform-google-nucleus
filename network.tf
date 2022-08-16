@@ -2,13 +2,13 @@ locals {
   public_ip_namespaces = {
     for namespace in var.k8s_namespaces :
     namespace.name => namespace
-    if namespace.has_public_ip && namespace != "istio-ingress"
+    if namespace.has_public_ip && namespace.name != "istio-ingress"
   }
 
   istio_ingress_ip = {
     for ingress_namespace in var.k8s_namespaces :
-    ingress_namespace.name => namespace
-    if namespace.has_public_ip && namespace == "istio-ingress"
+    ingress_namespace.name => ingress_namespace
+    if ingress_namespace.has_public_ip && ingress_namespace == "istio-ingress"
   }
 }
 
