@@ -2,7 +2,13 @@ locals {
   public_ip_namespaces = {
     for namespace in var.k8s_namespaces :
     namespace.name => namespace
-    if namespace.has_public_ip
+    if namespace.has_public_ip && namespace != "istio-ingress"
+  }
+
+  istio_ingress_ip = {
+    for ingress_namespace in var.k8s_namespaces :
+    ingress_namespace.name => namespace
+    if namespace.has_public_ip && namespace == "istio-ingress"
   }
 }
 
@@ -29,7 +35,7 @@ resource "google_compute_global_address" "namespace_public_ip" {
 }
 
 resource "google_compute_address" "istio_gateway_ip" {
-  for_each = var.anthos_enabled ? local.public_ip_namespaces == "istio-ingress" ? 1 : 0 : 0
+  for_each = var.anthos_enabled ? local.istio_ingress_ip : []
 
   name = "istio-ingress-public-ip"
   address_type = "EXTERNAL"
