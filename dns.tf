@@ -13,7 +13,7 @@ locals {
   dns_records = {
     for dns_record in local.dns_record_pairs :
     dns_record.dns_record => dns_record.namespace
-    if dns_record.namespace.regional_ip
+    if dns_record.regional_ip
   }
 }
 
