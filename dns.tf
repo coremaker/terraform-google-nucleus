@@ -23,7 +23,7 @@ resource "google_dns_record_set" "dns_record" {
   type         = "A"
   ttl          = 1800
   managed_zone = google_dns_managed_zone.dns_zone.0.name
-  rrdatas      = each.value.regional_ip ? ["10.130.1.1"] : ["10.130.1.2"]
+  rrdatas      = ["10.130.1.1"]
 
   depends_on = [google_dns_managed_zone.dns_zone]
 }
