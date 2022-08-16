@@ -13,7 +13,7 @@ locals {
       for dns_record in namespace.dns_records: {
         dns_record = dns_record
         namespace  = namespace.name
-        regional_ip = regional_ip
+        regional_ip = namespace.regional_ip
       }
     ]
     if namespace.has_public_ip
