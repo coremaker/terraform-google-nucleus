@@ -1,10 +1,19 @@
 locals {
-  dns_record_pairs = flatten([for namespace in var.k8s_namespaces : [
-    for dns_record in namespace.dns_records : {
-      dns_record = dns_record
-      namespace  = namespace.name
-      regional_ip = dns_record["regional_ip"]
-    }
+  // dns_record_pairs = flatten([for namespace in var.k8s_namespaces : [
+  //   for dns_record in namespace.dns_records : {
+  //     dns_record = dns_record
+  //     namespace  = namespace.name
+  //   }
+  //   ]
+  //   if namespace.has_public_ip
+  // ])
+
+  dns_record_pairs = flatten([
+    for namespace in var.k8s_namespaces: [
+      for dns_record in namespace.dns_records: {
+        dns_record = dns_record
+        namespace  = namespace.name
+      }
     ]
     if namespace.has_public_ip
   ])
