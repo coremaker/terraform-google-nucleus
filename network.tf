@@ -4,12 +4,6 @@ locals {
     namespace.name => namespace
     if namespace.has_public_ip && namespace.name != "istio-ingress"
   }
-
-  istio_ingress_ip = {
-    for ingress_namespace in var.k8s_namespaces :
-    ingress_namespace.name => ingress_namespace
-    if ingress_namespace.has_public_ip && ingress_namespace == "istio-ingress"
-  }
 }
 
 resource "google_compute_network" "vpc" {
@@ -35,7 +29,7 @@ resource "google_compute_global_address" "namespace_public_ip" {
 }
 
 resource "google_compute_address" "istio_gateway_ip" {
-  count = var.anthos_enabled ? local.istio_ingress_ip ? 1 : 0 : 0
+  count = var.anthos_enabled ? 1 : 0
 
   name = "istio-ingress-public-ip"
   address_type = "EXTERNAL"
