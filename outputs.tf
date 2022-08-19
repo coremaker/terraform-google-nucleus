@@ -16,12 +16,12 @@ output "dns_name_servers" {
 }
 
 output "regional_public_ips" {
-  value       = zipmap([for r in local.regional_public_ip_namespaces : "r.name"], values(google_compute_address.namespace_regional_public_ip)[*].address)
+  value       = zipmap([for r in local.regional_public_ip_namespaces : r.name], values(google_compute_address.namespace_regional_public_ip)[*].address)
   description = "Map with regional namespace-ip pairs"
 }
 
 output "global_public_ips" {
-  value       = zipmap([for r in local.global_public_ip_namespaces : "r.name"], values(google_compute_global_address.namespace_public_ip)[*].address)
+  value       = zipmap([for r in local.global_public_ip_namespaces : r.name], values(google_compute_global_address.namespace_public_ip)[*].address)
   description = "Map with global namespace-ip pairs"
 }
 # GKE
