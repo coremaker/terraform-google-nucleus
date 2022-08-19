@@ -40,7 +40,7 @@ resource "google_compute_address" "namespace_regional_public_ip" {
   name = "${each.key}-public-ip"
 
   address_type = "EXTERNAL"
-  region = var.google_region
+  region       = var.google_region
 }
 
 resource "google_compute_global_address" "private_ip_network" {

@@ -14,7 +14,8 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | 4.31.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | 4.32.0 |
+| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | 4.32.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.1 |
 
 ## Modules
@@ -25,8 +26,11 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [google-beta_google_gke_hub_feature.mesh](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/google_gke_hub_feature) | resource |
+| [google-beta_google_gke_hub_membership.membership](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/google_gke_hub_membership) | resource |
 | [google_billing_budget.project_budget](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/billing_budget) | resource |
 | [google_billing_budget.project_service_budget](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/billing_budget) | resource |
+| [google_compute_address.namespace_regional_public_ip](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_address) | resource |
 | [google_compute_global_address.namespace_public_ip](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address) | resource |
 | [google_compute_global_address.private_ip_network](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address) | resource |
 | [google_compute_network.vpc](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network) | resource |
@@ -49,6 +53,7 @@ No modules.
 | [google_project_iam_member.cloudsql_editors_member](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_member) | resource |
 | [google_project_iam_member.cloudsql_readers_member](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_member) | resource |
 | [google_project_iam_member.container_admins](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_member) | resource |
+| [google_project_service.anthos](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
 | [google_project_service.billing](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
 | [google_project_service.compute](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
 | [google_project_service.container](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
@@ -56,6 +61,7 @@ No modules.
 | [google_project_service.dns](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
 | [google_project_service.iam](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
 | [google_project_service.logging](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.mesh](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
 | [google_project_service.monitoring](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
 | [google_project_service.network](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
 | [google_project_service.serviceusage](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
@@ -77,6 +83,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_anthos_enabled"></a> [anthos\_enabled](#input\_anthos\_enabled) | Anthos | `bool` | `false` | no |
 | <a name="input_billing_budgets_per_service"></a> [billing\_budgets\_per\_service](#input\_billing\_budgets\_per\_service) | n/a | <pre>list(object({<br>    name              = string<br>    service_id        = string<br>    amount            = number<br>    threshold_percent = string<br>    spend_basis       = string<br>  }))</pre> | `[]` | no |
 | <a name="input_billing_currency_code"></a> [billing\_currency\_code](#input\_billing\_currency\_code) | n/a | `string` | `"GBP"` | no |
 | <a name="input_billing_email_address"></a> [billing\_email\_address](#input\_billing\_email\_address) | n/a | `list(string)` | <pre>[<br>  "address@example.com"<br>]</pre> | no |
@@ -121,7 +128,8 @@ No modules.
 | <a name="input_k8s_containers_alerts_restarts_threshold_value"></a> [k8s\_containers\_alerts\_restarts\_threshold\_value](#input\_k8s\_containers\_alerts\_restarts\_threshold\_value) | n/a | `number` | `0` | no |
 | <a name="input_k8s_containers_alerts_type"></a> [k8s\_containers\_alerts\_type](#input\_k8s\_containers\_alerts\_type) | ## slack or email supported only | `string` | `"slack"` | no |
 | <a name="input_k8s_containers_namespaces"></a> [k8s\_containers\_namespaces](#input\_k8s\_containers\_namespaces) | n/a | `set(string)` | <pre>[<br>  "default"<br>]</pre> | no |
-| <a name="input_k8s_namespaces"></a> [k8s\_namespaces](#input\_k8s\_namespaces) | List of namespaces to be created. | <pre>list(object({<br>    name          = string<br>    has_public_ip = bool<br>    dns_records   = set(string)<br>  }))</pre> | n/a | yes |
+| <a name="input_k8s_namespaces"></a> [k8s\_namespaces](#input\_k8s\_namespaces) | List of namespaces to be created. | <pre>list(object({<br>    name          = string<br>    has_public_ip = bool<br>    regional_ip   = bool<br>    dns_records   = set(string)<br>  }))</pre> | n/a | yes |
+| <a name="input_k8s_workload_identity"></a> [k8s\_workload\_identity](#input\_k8s\_workload\_identity) | The workload pool to attach all Kubernetes service accounts to. (Default value of `enabled` automatically sets project-based pool `[project_id].svc.id.goog`) | `string` | `""` | no |
 | <a name="input_project_admins"></a> [project\_admins](#input\_project\_admins) | List of project admins to be added. | `set(string)` | n/a | yes |
 | <a name="input_project_editors"></a> [project\_editors](#input\_project\_editors) | List of project editors to be added. | `set(string)` | n/a | yes |
 | <a name="input_project_viewers"></a> [project\_viewers](#input\_project\_viewers) | List of project viewers to be added. | `set(string)` | n/a | yes |
@@ -140,11 +148,15 @@ No modules.
 | <a name="output_fluxv2_private_key_pem"></a> [fluxv2\_private\_key\_pem](#output\_fluxv2\_private\_key\_pem) | Private key to be used for github integration. |
 | <a name="output_fluxv2_public_key_pem"></a> [fluxv2\_public\_key\_pem](#output\_fluxv2\_public\_key\_pem) | Public key to be used for github integration. |
 | <a name="output_gke_certificate"></a> [gke\_certificate](#output\_gke\_certificate) | Base64 encoded public certificate that is the root of trust for the cluster. |
+| <a name="output_gke_cluster_id"></a> [gke\_cluster\_id](#output\_gke\_cluster\_id) | Cluster ID |
 | <a name="output_gke_endpoint"></a> [gke\_endpoint](#output\_gke\_endpoint) | The IP address of this cluster's Kubernetes master. |
 | <a name="output_gke_token"></a> [gke\_token](#output\_gke\_token) | GKE cluster token. |
+| <a name="output_global_public_ips"></a> [global\_public\_ips](#output\_global\_public\_ips) | Map with global namespace-ip pairs |
 | <a name="output_google_compute_network_vpc_id"></a> [google\_compute\_network\_vpc\_id](#output\_google\_compute\_network\_vpc\_id) | an identifier for the VPC resource with format projects/{{project}}/global/networks/{{name}} |
 | <a name="output_google_compute_network_vpc_self_link"></a> [google\_compute\_network\_vpc\_self\_link](#output\_google\_compute\_network\_vpc\_self\_link) | The URI of the created VPC. |
 | <a name="output_project_id"></a> [project\_id](#output\_project\_id) | Returns the project id. |
+| <a name="output_project_number"></a> [project\_number](#output\_project\_number) | Returns the project number. |
+| <a name="output_regional_public_ips"></a> [regional\_public\_ips](#output\_regional\_public\_ips) | Map with regional namespace-ip pairs |
 | <a name="output_sealed_secrets_cert_pem"></a> [sealed\_secrets\_cert\_pem](#output\_sealed\_secrets\_cert\_pem) | Self-signed cert to be used for the encryption/decryption of secrets. |
 | <a name="output_sealed_secrets_private_key"></a> [sealed\_secrets\_private\_key](#output\_sealed\_secrets\_private\_key) | Private key used for the encryption of secrets. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
