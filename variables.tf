@@ -8,6 +8,7 @@ variable "google_region" {
   type        = string
   description = "Region where to create the resources."
 }
+
 variable "environment_name" {
   type        = string
   description = "Environment name, used in the name of main resources."
@@ -99,10 +100,17 @@ variable "gke_cluster_resource_labels" {
   default     = {}
 }
 
+variable "k8s_workload_identity" {
+  description = "The workload pool to attach all Kubernetes service accounts to. (Default value of `enabled` automatically sets project-based pool `[project_id].svc.id.goog`)"
+  type        = string
+  default     = ""
+}
+
 variable "k8s_namespaces" {
   type = list(object({
     name          = string
     has_public_ip = bool
+    regional_ip   = bool
     dns_records   = set(string)
   }))
   description = "List of namespaces to be created."
@@ -317,4 +325,10 @@ variable "k8s_containers_alerts_pod_logs_alignment_period" {
 variable "k8s_containers_alerts_pod_logs_per_series_aligner" {
   type    = string
   default = "ALIGN_SUM"
+}
+
+# Anthos
+variable "anthos_enabled" {
+  type    = bool
+  default = false
 }

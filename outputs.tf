@@ -3,15 +3,37 @@ output "project_id" {
   description = "Returns the project id."
 }
 
+output "project_number" {
+  value       = data.google_project.project.number
+  description = "Returns the project number."
+}
+
+# Neworking
+
 output "dns_name_servers" {
   value       = var.dns_enabled ? google_dns_managed_zone.dns_zone.0.name_servers : []
   description = "List of the DNS servers."
+}
+
+output "regional_public_ips" {
+  value       = zipmap([for r in local.regional_public_ip_namespaces : r.name], values(google_compute_address.namespace_regional_public_ip)[*].address)
+  description = "Map with regional namespace-ip pairs"
+}
+
+output "global_public_ips" {
+  value       = zipmap([for r in local.global_public_ip_namespaces : r.name], values(google_compute_global_address.namespace_public_ip)[*].address)
+  description = "Map with global namespace-ip pairs"
 }
 # GKE
 
 output "cluster_name" {
   value       = google_container_cluster.kube.name
   description = "Cluster Name"
+}
+
+output "gke_cluster_id" {
+  value       = google_container_cluster.kube.id
+  description = "Cluster ID"
 }
 
 output "gke_endpoint" {

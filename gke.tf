@@ -28,6 +28,13 @@ resource "google_container_cluster" "kube" {
     services_ipv4_cidr_block = "10.1.0.0/16"
   }
 
+  dynamic "workload_identity_config" {
+    for_each = var.k8s_workload_identity != "" ? [1] : []
+    content {
+      workload_pool = var.k8s_workload_identity
+    }
+  }
+
   master_auth {
     client_certificate_config {
       issue_client_certificate = false
