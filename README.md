@@ -154,6 +154,9 @@ No modules.
 | <a name="output_global_public_ips"></a> [global\_public\_ips](#output\_global\_public\_ips) | Map with global namespace-ip pairs |
 | <a name="output_google_compute_network_vpc_id"></a> [google\_compute\_network\_vpc\_id](#output\_google\_compute\_network\_vpc\_id) | an identifier for the VPC resource with format projects/{{project}}/global/networks/{{name}} |
 | <a name="output_google_compute_network_vpc_self_link"></a> [google\_compute\_network\_vpc\_self\_link](#output\_google\_compute\_network\_vpc\_self\_link) | The URI of the created VPC. |
+| <a name="output_google_compute_subnetwork_id"></a> [google\_compute\_subnetwork\_id](#output\_google\_compute\_subnetwork\_id) | an identifier for the Subnet resource with format projects/{{project}}/regions/{{region}}/subnetworks/{{name}} |
+| <a name="output_google_compute_subnetwork_name"></a> [google\_compute\_subnetwork\_name](#output\_google\_compute\_subnetwork\_name) | The name of the subnetwork |
+| <a name="output_google_compute_subnetwork_region"></a> [google\_compute\_subnetwork\_region](#output\_google\_compute\_subnetwork\_region) | The GCP region for the subnetwork |
 | <a name="output_project_id"></a> [project\_id](#output\_project\_id) | Returns the project id. |
 | <a name="output_project_number"></a> [project\_number](#output\_project\_number) | Returns the project number. |
 | <a name="output_regional_public_ips"></a> [regional\_public\_ips](#output\_regional\_public\_ips) | Map with regional namespace-ip pairs |
