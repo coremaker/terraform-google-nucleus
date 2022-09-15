@@ -108,3 +108,23 @@ output "google_compute_network_vpc_self_link" {
   sensitive   = true
   description = "The URI of the created VPC."
 }
+
+# Subnets
+
+output "google_compute_subnetwork_id" {
+  value       = google_compute_subnetwork.container_subnetwork.id
+  sensitive   = true
+  description = "an identifier for the Subnet resource with format projects/{{project}}/regions/{{region}}/subnetworks/{{name}}"
+}
+
+output "google_compute_subnetwork_name" {
+  value       = google_compute_subnetwork.container_subnetwork.name
+  sensitive   = true
+  description = "The name of the subnetwork"
+}
+
+output "google_compute_subnetwork_region" {
+  value       = google_compute_subnetwork.container_subnetwork.region
+  sensitive   = true
+  description = "The GCP region for the subnetwork"
+}
