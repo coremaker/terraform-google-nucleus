@@ -112,8 +112,6 @@ variable "k8s_namespaces" {
     has_public_ip = optional(bool, false)
     regional_ip   = optional(bool, false)
     dns_records   = optional(set(string))
-    labels        = optional(map(string))
-    annotations   = optional(map(string))
   }))
   description = "List of namespaces to be created."
 }
