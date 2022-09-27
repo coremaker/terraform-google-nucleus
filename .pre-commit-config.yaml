@@ -7,10 +7,10 @@ repos:
           args:
             - --args=--config=hooks/.terraform-docs.yml
             - --hook-config=--create-file-if-not-exist=true
-        - id: terraform_tflint
-          description: Validates all Terraform configuration files with TFLint.   
-          args:
-            - --args=--config=__GIT_WORKING_DIR__/hooks/.tflint.hcl
+        # - id: terraform_tflint
+        #   description: Validates all Terraform configuration files with TFLint.   
+        #   args:
+        #     - --args=--config=__GIT_WORKING_DIR__/hooks/.tflint.hcl
         - id: terraform_fmt
           description: Rewrites all Terraform configuration files to a standard format.
           args:

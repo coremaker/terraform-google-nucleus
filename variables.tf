@@ -109,9 +109,9 @@ variable "k8s_workload_identity" {
 variable "k8s_namespaces" {
   type = list(object({
     name          = string
-    has_public_ip = bool
-    regional_ip   = bool
-    dns_records   = set(string)
+    has_public_ip = optional(bool, false)
+    regional_ip   = optional(bool, false)
+    dns_records   = optional(set(string))
   }))
   description = "List of namespaces to be created."
 }
