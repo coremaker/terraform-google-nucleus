@@ -14,8 +14,8 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | 4.32.0 |
-| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | 4.32.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | 4.31.0 |
+| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | 4.39.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.1 |
 
 ## Modules

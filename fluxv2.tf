@@ -8,7 +8,7 @@ resource "google_service_account" "fluxv2" {
 resource "google_service_account_key" "fluxv2_container_registry" {
   count = var.fluxv2_enabled ? 1 : 0
 
-  service_account_id = google_service_account.fluxv2.0.id
+  service_account_id = google_service_account.fluxv2[0].id
   public_key_type    = "TYPE_X509_PEM_FILE"
   private_key_type   = "TYPE_GOOGLE_CREDENTIALS_FILE"
 }
