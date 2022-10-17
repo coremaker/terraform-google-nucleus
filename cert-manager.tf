@@ -10,7 +10,7 @@ resource "google_service_account" "cert_manager_account" {
 resource "google_service_account_key" "cert_manager_account_key" {
   count = var.cert_manager_enabled ? 1 : 0
 
-  service_account_id = google_service_account.cert_manager_account.0.name
+  service_account_id = google_service_account.cert_manager_account[0].name
   public_key_type    = "TYPE_X509_PEM_FILE"
   private_key_type   = "TYPE_GOOGLE_CREDENTIALS_FILE"
 }
@@ -20,5 +20,5 @@ resource "google_project_iam_member" "cert_manager_account_dns_admin" {
   count   = var.cert_manager_enabled ? 1 : 0
 
   role   = "roles/dns.admin"
-  member = "serviceAccount:${google_service_account.cert_manager_account.0.email}"
+  member = "serviceAccount:${google_service_account.cert_manager_account[0].email}"
 }
