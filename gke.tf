@@ -80,7 +80,7 @@ resource "google_container_node_pool" "kube_nodes" {
     disk_type    = each.value.disk_type
 
     dynamic "taint" {
-      for_each = each.value.taints
+      for_each = each.value.taints != null ? each.value.taints : []
 
       content {
         key    = taint.value.key

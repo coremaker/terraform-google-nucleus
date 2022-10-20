@@ -66,26 +66,17 @@ variable "gke_node_pools" {
     name           = string
     min_node_count = number
     max_node_count = number
-    machine_type   = string
-    image_type     = string
-    disk_size_gb   = string
-    disk_type      = string
-    taints = list(object({
+    machine_type   = optional(string, "n1-standard-1")
+    image_type     = optional(string, "cos_containerd")
+    disk_size_gb   = optional(string, "100")
+    disk_type      = optional(string, "pd-ssd")
+    taints = optional(list(object({
       key    = string
       value  = string
       effect = string
-    }))
+    })))
   }))
-  default = [{
-    name           = "nodes"
-    min_node_count = 1
-    max_node_count = 3
-    machine_type   = "n1-standard-1"
-    image_type     = "cos_containerd"
-    disk_size_gb   = "100"
-    disk_type      = "pd-ssd"
-    taints         = []
-  }]
+  default     = []
   description = "List of node pools to be created within the cluster."
 }
 
@@ -109,9 +100,9 @@ variable "k8s_workload_identity" {
 variable "k8s_namespaces" {
   type = list(object({
     name          = string
-    has_public_ip = bool
-    regional_ip   = bool
-    dns_records   = set(string)
+    has_public_ip = optional(bool, false)
+    regional_ip   = optional(bool, false)
+    dns_records   = optional(set(string))
   }))
   description = "List of namespaces to be created."
 }
