@@ -70,6 +70,7 @@ variable "gke_node_pools" {
     image_type     = optional(string, "cos_containerd")
     disk_size_gb   = optional(string, "100")
     disk_type      = optional(string, "pd-ssd")
+    spot           = optional(string, "false")
     taints = optional(list(object({
       key    = string
       value  = string
