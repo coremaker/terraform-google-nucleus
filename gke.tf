@@ -78,6 +78,7 @@ resource "google_container_node_pool" "kube_nodes" {
     image_type   = each.value.image_type
     disk_size_gb = each.value.disk_size_gb
     disk_type    = each.value.disk_type
+    spot         = each.value.spot
 
     dynamic "taint" {
       for_each = each.value.taints != null ? each.value.taints : []
