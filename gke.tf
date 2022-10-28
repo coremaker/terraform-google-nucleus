@@ -9,6 +9,7 @@ locals {
 }
 
 resource "google_container_cluster" "kube" {
+  count           = var.gke_enabled ? 1 : 0
   name            = var.gke_cluster_name
   location        = local.location
   resource_labels = var.gke_cluster_resource_labels
@@ -59,13 +60,13 @@ resource "google_container_cluster" "kube" {
 }
 
 resource "google_container_node_pool" "kube_nodes" {
-  for_each = local.gke_node_pools
+  for_each = var.gke_enabled ? local.gke_node_pools : {}
 
   location       = local.location
   node_locations = length(each.value.node_locations) != 0 ? each.value.node_locations : null
 
   name    = each.key
-  cluster = google_container_cluster.kube.name
+  cluster = google_container_cluster.kube[0].name
 
   autoscaling {
     min_node_count = each.value.min_node_count

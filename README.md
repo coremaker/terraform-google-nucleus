@@ -100,6 +100,7 @@ No modules.
 | <a name="input_gke_cluster_name"></a> [gke\_cluster\_name](#input\_gke\_cluster\_name) | Name to be used for the cluster | `string` | n/a | yes |
 | <a name="input_gke_cluster_resource_labels"></a> [gke\_cluster\_resource\_labels](#input\_gke\_cluster\_resource\_labels) | The GCE resource labels (a map of key/value pairs) to be applied to the cluster | `map(string)` | `{}` | no |
 | <a name="input_gke_enable_shielded_nodes"></a> [gke\_enable\_shielded\_nodes](#input\_gke\_enable\_shielded\_nodes) | Enable Shielded Nodes features on all nodes in this cluster | `bool` | `false` | no |
+| <a name="input_gke_enabled"></a> [gke\_enabled](#input\_gke\_enabled) | Enable/Disable GKE resources creation | `bool` | `true` | no |
 | <a name="input_gke_node_auto_repair"></a> [gke\_node\_auto\_repair](#input\_gke\_node\_auto\_repair) | Whether the nodes will be automatically repaired. | `bool` | `true` | no |
 | <a name="input_gke_node_auto_upgrade"></a> [gke\_node\_auto\_upgrade](#input\_gke\_node\_auto\_upgrade) | Whether the nodes will be automatically upgraded. | `bool` | `false` | no |
 | <a name="input_gke_node_locations"></a> [gke\_node\_locations](#input\_gke\_node\_locations) | n/a | `list(string)` | <pre>[<br>  "europe-west2-a"<br>]</pre> | no |
