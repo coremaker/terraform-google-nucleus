@@ -62,7 +62,7 @@ resource "google_container_node_pool" "kube_nodes" {
   for_each = local.gke_node_pools
 
   location       = local.location
-  node_locations = var.gke_regional ? each.value.node_locations : null
+  node_locations = length(each.value.node_locations) != 0 ? each.value.node_locations : null
 
   name    = each.key
   cluster = google_container_cluster.kube.name
