@@ -4,8 +4,8 @@ locals {
     node.name => node
   }
 
-  location       = var.gke_regional ? var.google_region : var.gke_node_default_locations[0]
-  node_locations = var.gke_regional ? var.gke_node_default_locations : slice(var.gke_node_default_locations, 1, length(var.gke_node_default_locations))
+  location       = var.gke_regional ? var.google_region : var.gke_node_locations[0]
+  node_locations = var.gke_regional ? var.gke_node_locations : slice(var.gke_node_locations, 1, length(var.gke_node_locations))
 }
 
 resource "google_container_cluster" "kube" {

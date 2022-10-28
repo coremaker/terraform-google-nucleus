@@ -88,7 +88,7 @@ variable "gke_node_pools" {
   description = "List of node pools to be created within the cluster."
 }
 
-variable "gke_node_default_locations" {
+variable "gke_node_locations" {
   type    = list(string)
   default = ["europe-west2-a"]
 }
