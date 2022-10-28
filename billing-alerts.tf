@@ -31,7 +31,7 @@ resource "google_billing_budget" "project_budget" {
   }
 
   all_updates_rule {
-    monitoring_notification_channels = google_monitoring_notification_channel.billing_email_alert.*.id
+    monitoring_notification_channels = google_monitoring_notification_channel.billing_email_alert[*].id
     schema_version                   = "1.0"
     disable_default_iam_recipients   = false
   }
@@ -63,7 +63,7 @@ resource "google_billing_budget" "project_service_budget" {
   }
 
   all_updates_rule {
-    monitoring_notification_channels = google_monitoring_notification_channel.billing_email_alert.*.id
+    monitoring_notification_channels = google_monitoring_notification_channel.billing_email_alert[*].id
     schema_version                   = "1.0"
     disable_default_iam_recipients   = false
   }

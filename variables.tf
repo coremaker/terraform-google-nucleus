@@ -31,6 +31,11 @@ variable "project_viewers" {
 }
 
 # Google Kubernetes Engine
+variable "gke_enabled" {
+  type        = bool
+  default     = true
+  description = "Enable/Disable GKE resources creation"
+}
 
 variable "gke_cluster_name" {
   type        = string

@@ -29,12 +29,12 @@ resource "google_gke_hub_membership" "membership" {
   membership_id = var.gke_cluster_name
   endpoint {
     gke_cluster {
-      resource_link = "//container.googleapis.com/${google_container_cluster.kube.id}"
+      resource_link = "//container.googleapis.com/${google_container_cluster.kube[0].id}"
     }
   }
 
   authority {
-    issuer = "https://container.googleapis.com/v1/${google_container_cluster.kube.id}"
+    issuer = "https://container.googleapis.com/v1/${google_container_cluster.kube[0].id}"
   }
 
   depends_on = [google_gke_hub_feature.mesh]
