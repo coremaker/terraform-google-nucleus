@@ -3,19 +3,22 @@ locals {
     for node in var.gke_node_pools :
     node.name => node
   }
+
+  location       = var.gke_regional ? var.google_region : var.gke_node_locations[0]
+  node_locations = var.gke_regional ? var.gke_node_locations : slice(var.gke_node_locations, 1, length(var.gke_node_locations))
 }
 
 resource "google_container_cluster" "kube" {
   count           = var.gke_enabled ? 1 : 0
   name            = var.gke_cluster_name
-  location        = var.google_region
+  location        = local.location
   resource_labels = var.gke_cluster_resource_labels
 
   release_channel {
     channel = var.gke_release_channel
   }
 
-  node_locations = var.gke_node_locations
+  node_locations = local.node_locations
   network        = google_compute_network.vpc.self_link
   subnetwork     = google_compute_subnetwork.container_subnetwork.name
 
@@ -59,7 +62,8 @@ resource "google_container_cluster" "kube" {
 resource "google_container_node_pool" "kube_nodes" {
   for_each = var.gke_enabled ? local.gke_node_pools : {}
 
-  location = var.google_region
+  location       = local.location
+  node_locations = length(each.value.node_locations) != 0 ? each.value.node_locations : null
 
   name    = each.key
   cluster = google_container_cluster.kube[0].name
