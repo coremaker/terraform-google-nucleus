@@ -32,6 +32,12 @@ variable "project_viewers" {
 
 # Google Kubernetes Engine
 
+variable "gke_regional" {
+  type        = bool
+  description = "Whether is a regional cluster (zonal cluster if set false)."
+  default     = true
+}
+
 variable "gke_cluster_name" {
   type        = string
   description = "Name to be used for the cluster"
@@ -71,6 +77,7 @@ variable "gke_node_pools" {
     disk_size_gb   = optional(string, "100")
     disk_type      = optional(string, "pd-ssd")
     spot           = optional(string, "false")
+    node_locations = optional(list(string))
     taints = optional(list(object({
       key    = string
       value  = string
@@ -81,8 +88,8 @@ variable "gke_node_pools" {
   description = "List of node pools to be created within the cluster."
 }
 
-variable "gke_node_locations" {
-  type    = set(string)
+variable "gke_node_default_locations" {
+  type    = list(string)
   default = ["europe-west2-a"]
 }
 

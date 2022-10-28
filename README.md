@@ -14,8 +14,8 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | 4.31.0 |
-| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | 4.39.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | 4.32.0 |
+| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | 4.32.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.1 |
 
 ## Modules
@@ -102,8 +102,9 @@ No modules.
 | <a name="input_gke_enable_shielded_nodes"></a> [gke\_enable\_shielded\_nodes](#input\_gke\_enable\_shielded\_nodes) | Enable Shielded Nodes features on all nodes in this cluster | `bool` | `false` | no |
 | <a name="input_gke_node_auto_repair"></a> [gke\_node\_auto\_repair](#input\_gke\_node\_auto\_repair) | Whether the nodes will be automatically repaired. | `bool` | `true` | no |
 | <a name="input_gke_node_auto_upgrade"></a> [gke\_node\_auto\_upgrade](#input\_gke\_node\_auto\_upgrade) | Whether the nodes will be automatically upgraded. | `bool` | `false` | no |
-| <a name="input_gke_node_locations"></a> [gke\_node\_locations](#input\_gke\_node\_locations) | n/a | `set(string)` | <pre>[<br>  "europe-west2-a"<br>]</pre> | no |
-| <a name="input_gke_node_pools"></a> [gke\_node\_pools](#input\_gke\_node\_pools) | List of node pools to be created within the cluster. | <pre>list(object({<br>    name           = string<br>    min_node_count = number<br>    max_node_count = number<br>    machine_type   = optional(string, "n1-standard-1")<br>    image_type     = optional(string, "cos_containerd")<br>    disk_size_gb   = optional(string, "100")<br>    disk_type      = optional(string, "pd-ssd")<br>    taints = optional(list(object({<br>      key    = string<br>      value  = string<br>      effect = string<br>    })))<br>  }))</pre> | `[]` | no |
+| <a name="input_gke_node_default_locations"></a> [gke\_node\_default\_locations](#input\_gke\_node\_default\_locations) | n/a | `list(string)` | <pre>[<br>  "europe-west2-a"<br>]</pre> | no |
+| <a name="input_gke_node_pools"></a> [gke\_node\_pools](#input\_gke\_node\_pools) | List of node pools to be created within the cluster. | <pre>list(object({<br>    name           = string<br>    min_node_count = number<br>    max_node_count = number<br>    machine_type   = optional(string, "n1-standard-1")<br>    image_type     = optional(string, "cos_containerd")<br>    disk_size_gb   = optional(string, "100")<br>    disk_type      = optional(string, "pd-ssd")<br>    spot           = optional(string, "false")<br>    node_locations = optional(list(string))<br>    taints = optional(list(object({<br>      key    = string<br>      value  = string<br>      effect = string<br>    })))<br>  }))</pre> | `[]` | no |
+| <a name="input_gke_regional"></a> [gke\_regional](#input\_gke\_regional) | Whether is a regional cluster (zonal cluster if set false). | `bool` | `true` | no |
 | <a name="input_gke_release_channel"></a> [gke\_release\_channel](#input\_gke\_release\_channel) | Configuration options for the Release channel feature, which provide more control over automatic upgrades of your GKE clusters | `string` | `"UNSPECIFIED"` | no |
 | <a name="input_google_billing_account_id"></a> [google\_billing\_account\_id](#input\_google\_billing\_account\_id) | n/a | `string` | `""` | no |
 | <a name="input_google_project_id"></a> [google\_project\_id](#input\_google\_project\_id) | The ID of the project you want to create the resources within. | `string` | n/a | yes |
