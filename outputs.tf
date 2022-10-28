@@ -27,29 +27,29 @@ output "global_public_ips" {
 # GKE
 
 output "cluster_name" {
-  value       = google_container_cluster.kube.name
+  value       = var.gke_enabled ? google_container_cluster.kube[0].name : ""
   description = "Cluster Name"
 }
 
 output "gke_cluster_id" {
-  value       = google_container_cluster.kube.id
+  value       = var.gke_enabled ? google_container_cluster.kube[0].id : ""
   description = "Cluster ID"
 }
 
 output "gke_endpoint" {
-  value       = google_container_cluster.kube.endpoint
+  value       = var.gke_enabled ? google_container_cluster.kube[0].endpoint : ""
   sensitive   = true
   description = "The IP address of this cluster's Kubernetes master."
 }
 
 output "gke_certificate" {
-  value       = google_container_cluster.kube.master_auth[0].cluster_ca_certificate
+  value       = var.gke_enabled ? google_container_cluster.kube[0].master_auth[0].cluster_ca_certificate : ""
   sensitive   = true
   description = "Base64 encoded public certificate that is the root of trust for the cluster."
 }
 
 output "gke_token" {
-  value       = data.google_client_config.default.access_token
+  value       = var.gke_enabled ? data.google_client_config.default.access_token : ""
   sensitive   = true
   description = "GKE cluster token."
 }
