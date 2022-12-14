@@ -64,13 +64,17 @@ resource "google_container_node_pool" "kube_nodes" {
 
   location       = local.location
   node_locations = each.value.node_locations != null ? each.value.node_locations : null
+  node_count     = each.value.autoscaling != true ? each.value.node_count : null
 
   name    = each.key
   cluster = google_container_cluster.kube[0].name
 
-  autoscaling {
-    min_node_count = each.value.min_node_count
-    max_node_count = each.value.max_node_count
+  dynamic "autoscaling" {
+    for_each = each.value.autoscaling == true ? [1] : []
+    content {
+      min_node_count = each.value.min_node_count
+      max_node_count = each.value.max_node_count
+    }
   }
 
   management {
