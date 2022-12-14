@@ -75,8 +75,10 @@ variable "gke_node_auto_repair" {
 variable "gke_node_pools" {
   type = list(object({
     name           = string
-    min_node_count = number
-    max_node_count = number
+    node_count     = optional(number, 1)
+    autoscaling    = optional(bool, true)
+    min_node_count = optional(number)
+    max_node_count = optional(number)
     machine_type   = optional(string, "n1-standard-1")
     image_type     = optional(string, "cos_containerd")
     disk_size_gb   = optional(string, "100")
