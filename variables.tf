@@ -216,6 +216,12 @@ variable "billing_budgets_per_service" {
   default = []
 }
 
+variable "billing_disable_default_iam_recipients" {
+  type        = bool
+  default     = false
+  description = "Default recipients are those with Billing Account Administrators and Billing Account Users IAM roles for the target account."
+}
+
 ## Kubernetes Alerts
 ### These alerts are based on pod logs with severity ERROR
 variable "enable_k8s_containers_alerts" {
