@@ -33,7 +33,7 @@ resource "google_billing_budget" "project_budget" {
   all_updates_rule {
     monitoring_notification_channels = google_monitoring_notification_channel.billing_email_alert[*].id
     schema_version                   = "1.0"
-    disable_default_iam_recipients   = false
+    disable_default_iam_recipients   = var.billing_disable_default_iam_recipients
   }
 
   depends_on = [google_project_service.billing]
@@ -65,7 +65,7 @@ resource "google_billing_budget" "project_service_budget" {
   all_updates_rule {
     monitoring_notification_channels = google_monitoring_notification_channel.billing_email_alert[*].id
     schema_version                   = "1.0"
-    disable_default_iam_recipients   = false
+    disable_default_iam_recipients   = var.billing_disable_default_iam_recipients
   }
 
   depends_on = [google_project_service.billing]
