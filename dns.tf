@@ -35,5 +35,9 @@ resource "google_dns_managed_zone" "dns_zone" {
   dns_name    = "${var.dns_domain}."
   description = "${var.dns_domain} root DNS zone"
 
+  lifecycle {
+    ignore_changes = [dnssec_config]
+  }
+
   depends_on = [google_project_service.dns]
 }
