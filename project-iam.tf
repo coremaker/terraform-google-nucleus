@@ -1,4 +1,6 @@
 resource "google_project_iam_binding" "editors" {
+  count = var.iam_binding_enabled ? 1 : 0
+
   project = var.google_project_id
   role    = "roles/editor"
 
@@ -12,6 +14,7 @@ resource "google_project_iam_binding" "editors" {
 }
 
 resource "google_project_iam_binding" "project_viewers" {
+  count   = var.iam_binding_enabled ? 1 : 0
   project = var.google_project_id
   role    = "roles/viewer"
 
@@ -57,6 +60,7 @@ resource "google_project_iam_member" "container_admins" {
 }
 
 resource "google_project_iam_binding" "container_editors" {
+  count   = var.iam_binding_enabled ? 1 : 0
   project = var.google_project_id
   role    = "roles/container.developer"
 
@@ -66,6 +70,7 @@ resource "google_project_iam_binding" "container_editors" {
 }
 
 resource "google_project_iam_binding" "container_readers" {
+  count   = var.iam_binding_enabled ? 1 : 0
   project = var.google_project_id
   role    = "roles/container.viewer"
 

@@ -14,9 +14,9 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | 4.32.0 |
-| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | 4.32.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.1 |
+| <a name="provider_google"></a> [google](#provider\_google) | 6.6.0 |
+| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | 6.6.0 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.6 |
 
 ## Modules
 
@@ -98,6 +98,7 @@ No modules.
 | <a name="input_environment_name"></a> [environment\_name](#input\_environment\_name) | Environment name, used in the name of main resources. | `string` | n/a | yes |
 | <a name="input_flux_enabled"></a> [flux\_enabled](#input\_flux\_enabled) | Enable the creation of flux resources. | `bool` | `true` | no |
 | <a name="input_fluxv2_enabled"></a> [fluxv2\_enabled](#input\_fluxv2\_enabled) | Enable the creation of fluxv2 resources. | `bool` | `false` | no |
+| <a name="input_gcp_services_enabled"></a> [gcp\_services\_enabled](#input\_gcp\_services\_enabled) | Enable/Disable GCP services | `bool` | `true` | no |
 | <a name="input_gke_cluster_name"></a> [gke\_cluster\_name](#input\_gke\_cluster\_name) | Name to be used for the cluster | `string` | n/a | yes |
 | <a name="input_gke_cluster_resource_labels"></a> [gke\_cluster\_resource\_labels](#input\_gke\_cluster\_resource\_labels) | The GCE resource labels (a map of key/value pairs) to be applied to the cluster | `map(string)` | `{}` | no |
 | <a name="input_gke_enable_shielded_nodes"></a> [gke\_enable\_shielded\_nodes](#input\_gke\_enable\_shielded\_nodes) | Enable Shielded Nodes features on all nodes in this cluster | `bool` | `false` | no |
@@ -111,6 +112,7 @@ No modules.
 | <a name="input_google_billing_account_id"></a> [google\_billing\_account\_id](#input\_google\_billing\_account\_id) | n/a | `string` | `""` | no |
 | <a name="input_google_project_id"></a> [google\_project\_id](#input\_google\_project\_id) | The ID of the project you want to create the resources within. | `string` | n/a | yes |
 | <a name="input_google_region"></a> [google\_region](#input\_google\_region) | Region where to create the resources. | `string` | n/a | yes |
+| <a name="input_iam_binding_enabled"></a> [iam\_binding\_enabled](#input\_iam\_binding\_enabled) | Enable/Disable GCP services | `bool` | `true` | no |
 | <a name="input_k8s_container_alerts_slack_channel_name"></a> [k8s\_container\_alerts\_slack\_channel\_name](#input\_k8s\_container\_alerts\_slack\_channel\_name) | n/a | `string` | `""` | no |
 | <a name="input_k8s_containers_alerts_cpu_memory_alignment_period"></a> [k8s\_containers\_alerts\_cpu\_memory\_alignment\_period](#input\_k8s\_containers\_alerts\_cpu\_memory\_alignment\_period) | n/a | `string` | `"300s"` | no |
 | <a name="input_k8s_containers_alerts_cpu_memory_duration"></a> [k8s\_containers\_alerts\_cpu\_memory\_duration](#input\_k8s\_containers\_alerts\_cpu\_memory\_duration) | CPU and MEMORY utilization | `string` | `"60s"` | no |

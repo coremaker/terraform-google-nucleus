@@ -345,3 +345,16 @@ variable "anthos_enabled" {
   type    = bool
   default = false
 }
+
+# GCP Services
+variable "gcp_services_enabled" {
+  type        = bool
+  default     = true
+  description = "Enable/Disable GCP services"
+}
+
+variable "iam_binding_enabled" {
+  type        = bool
+  default     = true
+  description = "Enable/Disable GCP services"
+}
