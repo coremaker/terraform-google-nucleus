@@ -13,7 +13,6 @@ resource "google_container_cluster" "kube" {
   name            = var.gke_cluster_name
   location        = local.location
   resource_labels = var.gke_cluster_resource_labels
-
   release_channel {
     channel = var.gke_release_channel
   }
@@ -88,6 +87,9 @@ resource "google_container_node_pool" "kube_nodes" {
     disk_size_gb = each.value.disk_size_gb
     disk_type    = each.value.disk_type
     spot         = each.value.spot
+    linux_node_config {
+      cgroup_mode = each.value.linux_node_config
+    }
 
     dynamic "taint" {
       for_each = each.value.taints != null ? each.value.taints : []
