@@ -87,8 +87,12 @@ resource "google_container_node_pool" "kube_nodes" {
     disk_size_gb = each.value.disk_size_gb
     disk_type    = each.value.disk_type
     spot         = each.value.spot
-    linux_node_config {
-      cgroup_mode = each.value.linux_node_config.cgroup_mode
+    dynamic "linux_node_config" {
+      for_each = each.value.linux_node_config != null ? each.value.linux_node_config : []
+
+      content {
+        cgroup_mode = linux_node_config.value.cgroup_mode
+      }
     }
 
     dynamic "taint" {
@@ -112,12 +116,5 @@ resource "google_container_node_pool" "kube_nodes" {
       "https://www.googleapis.com/auth/monitoring",
     ], each.value.node_additional_oauth_scopes)
   }
-
-  lifecycle {
-    ignore_changes = [
-      node_config[0].linux_node_config
-    ]
-  }
-
   depends_on = [google_container_cluster.kube]
 }
