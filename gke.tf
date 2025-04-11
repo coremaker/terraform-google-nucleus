@@ -88,7 +88,7 @@ resource "google_container_node_pool" "kube_nodes" {
     disk_type    = each.value.disk_type
     spot         = each.value.spot
     linux_node_config {
-      cgroup_mode = each.value.cgroup_mode
+      cgroup_mode = each.value.linux_node_config.cgroup_mode
     }
 
     dynamic "taint" {
