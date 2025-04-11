@@ -113,5 +113,11 @@ resource "google_container_node_pool" "kube_nodes" {
     ], each.value.node_additional_oauth_scopes)
   }
 
+  lifecycle {
+    ignore_changes = [
+      node_config[0].linux_node_config
+    ]
+  }
+
   depends_on = [google_container_cluster.kube]
 }
