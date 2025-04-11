@@ -84,9 +84,9 @@ variable "gke_node_pools" {
     disk_size_gb   = optional(string, "100")
     disk_type      = optional(string, "pd-ssd")
     spot           = optional(string, "false")
-    linux_node_config = object({
+    linux_node_config = optional(object({
       cgroup_mode = optional(string)
-    })
+    }))
     node_locations               = optional(list(string))
     node_additional_oauth_scopes = optional(list(string), [])
     taints = optional(list(object({
