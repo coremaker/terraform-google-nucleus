@@ -88,7 +88,7 @@ resource "google_container_node_pool" "kube_nodes" {
     disk_type    = each.value.disk_type
     spot         = each.value.spot
     dynamic "linux_node_config" {
-      for_each = each.value.linux_node_config != null ? each.value.linux_node_config : []
+      for_each = each.value.linux_node_config != null ? each.value.linux_node_config : {}
 
       content {
         cgroup_mode = linux_node_config.value.cgroup_mode
