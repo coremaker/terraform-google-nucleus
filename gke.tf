@@ -13,7 +13,6 @@ resource "google_container_cluster" "kube" {
   name            = var.gke_cluster_name
   location        = local.location
   resource_labels = var.gke_cluster_resource_labels
-
   release_channel {
     channel = var.gke_release_channel
   }
@@ -88,6 +87,12 @@ resource "google_container_node_pool" "kube_nodes" {
     disk_size_gb = each.value.disk_size_gb
     disk_type    = each.value.disk_type
     spot         = each.value.spot
+    dynamic "linux_node_config" {
+      for_each = each.value.linux_node_config != null ? each.value.linux_node_config : {}
+      content {
+        cgroup_mode = each.value.linux_node_config.cgroup_mode
+      }
+    }
 
     dynamic "taint" {
       for_each = each.value.taints != null ? each.value.taints : []
@@ -110,6 +115,5 @@ resource "google_container_node_pool" "kube_nodes" {
       "https://www.googleapis.com/auth/monitoring",
     ], each.value.node_additional_oauth_scopes)
   }
-
   depends_on = [google_container_cluster.kube]
 }
