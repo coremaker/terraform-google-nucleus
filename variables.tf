@@ -86,7 +86,7 @@ variable "gke_node_pools" {
     spot           = optional(string, "false")
     linux_node_config = optional(object({
       cgroup_mode = optional(string)
-    }))
+    }), null)
     node_locations               = optional(list(string))
     node_additional_oauth_scopes = optional(list(string), [])
     taints = optional(list(object({
