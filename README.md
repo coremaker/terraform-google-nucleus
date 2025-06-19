@@ -98,6 +98,8 @@ No modules.
 | <a name="input_environment_name"></a> [environment\_name](#input\_environment\_name) | Environment name, used in the name of main resources. | `string` | n/a | yes |
 | <a name="input_flux_enabled"></a> [flux\_enabled](#input\_flux\_enabled) | Enable the creation of flux resources. | `bool` | `true` | no |
 | <a name="input_fluxv2_enabled"></a> [fluxv2\_enabled](#input\_fluxv2\_enabled) | Enable the creation of fluxv2 resources. | `bool` | `false` | no |
+| <a name="input_gke_autoscaling_profile"></a> [gke\_autoscaling\_profile](#input\_gke\_autoscaling\_profile) | The autoscaling profile for the cluster. This is only used if cluster\_autoscaling is true. | `string` | `"BALANCED"` | no |
+| <a name="input_gke_cluster_autoscaling"></a> [gke\_cluster\_autoscaling](#input\_gke\_cluster\_autoscaling) | Whether the cluster autoscaler is enabled for this cluster. | `bool` | `false` | no |
 | <a name="input_gke_cluster_name"></a> [gke\_cluster\_name](#input\_gke\_cluster\_name) | Name to be used for the cluster | `string` | n/a | yes |
 | <a name="input_gke_cluster_resource_labels"></a> [gke\_cluster\_resource\_labels](#input\_gke\_cluster\_resource\_labels) | The GCE resource labels (a map of key/value pairs) to be applied to the cluster | `map(string)` | `{}` | no |
 | <a name="input_gke_enable_shielded_nodes"></a> [gke\_enable\_shielded\_nodes](#input\_gke\_enable\_shielded\_nodes) | Enable Shielded Nodes features on all nodes in this cluster | `bool` | `false` | no |
