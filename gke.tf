@@ -31,6 +31,15 @@ resource "google_container_cluster" "kube" {
     autoscaling_profile = var.gke_autoscaling_profile
   }
 
+  dynamic "maintenance_policy" {
+    for_each = var.gke_maintenance_start_time != null ? [1] : []
+    content {
+      daily_maintenance_window {
+        start_time = var.gke_maintenance_start_time
+      }
+    }
+  }
+
   ip_allocation_policy {
     cluster_ipv4_cidr_block  = "10.0.0.0/16"
     services_ipv4_cidr_block = "10.1.0.0/16"

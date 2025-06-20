@@ -65,6 +65,12 @@ variable "gke_autoscaling_profile" {
   description = "The autoscaling profile for the cluster. This is only used if cluster_autoscaling is true."
 }
 
+variable "gke_maintenance_start_time" {
+  type        = string
+  default     = null
+  description = "The start time of the daily maintenance window in UTC. The format is HH:MM, where HH is the hour (00-23) and MM is the minute (00-59)."
+}
+
 variable "gke_enable_shielded_nodes" {
   type        = bool
   default     = false
