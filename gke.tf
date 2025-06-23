@@ -27,7 +27,7 @@ resource "google_container_cluster" "kube" {
   enable_shielded_nodes = var.gke_enable_shielded_nodes
 
   dynamic "cluster_autoscaling" {
-    for_each = var.gke_autoscaling_profile != null ? [1] : []
+    for_each = var.gke_autoscaling_profile != "BALANCED" ? [1] : []
     content {
       autoscaling_profile = var.gke_autoscaling_profile
     }
