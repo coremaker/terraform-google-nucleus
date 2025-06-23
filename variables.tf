@@ -53,12 +53,6 @@ variable "gke_release_channel" {
   default     = "UNSPECIFIED"
   description = "Configuration options for the Release channel feature, which provide more control over automatic upgrades of your GKE clusters"
 }
-
-variable "gke_cluster_autoscaling" {
-  type        = bool
-  default     = false
-  description = "Whether the cluster autoscaler is enabled for this cluster."
-}
 variable "gke_autoscaling_profile" {
   type        = string
   default     = "BALANCED"
