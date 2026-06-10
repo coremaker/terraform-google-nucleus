@@ -29,6 +29,7 @@ resource "google_container_cluster" "kube" {
   dynamic "cluster_autoscaling" {
     for_each = var.gke_autoscaling_profile != "BALANCED" ? [1] : []
     content {
+      enabled             = false
       autoscaling_profile = var.gke_autoscaling_profile
     }
   }
@@ -104,10 +105,18 @@ resource "google_container_node_pool" "kube_nodes" {
     disk_type    = each.value.disk_type
     spot         = each.value.spot
     dynamic "linux_node_config" {
-      for_each = each.value.linux_node_config != null ? each.value.linux_node_config : {}
+      for_each = each.value.linux_node_config != null ? [each.value.linux_node_config] : []
+
       content {
-        cgroup_mode = each.value.linux_node_config.cgroup_mode
+        cgroup_mode = linux_node_config.value.cgroup_mode
       }
+    }
+
+    kubelet_config {
+      cpu_cfs_quota        = false
+      cpu_cfs_quota_period = ""
+      cpu_manager_policy   = ""
+      pod_pids_limit       = 0
     }
 
     dynamic "taint" {
